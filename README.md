@@ -32,4 +32,5 @@ This site is part of my transition into front-end development and AI workflow sy
 I focus on clean structure, usability, and practical tooling.
 
 ## Screenshot
-![PromptKit](assets/Screen Shot 2026-02-14 at 21.46.06.png)
+<img width="1679" height="922" alt="Screen Shot 2026-02-14 at 21 46 06" src="https://github.com/user-attachments/assets/60307863-b19f-4127-934a-d98822e27c6b" />
+
