@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Batmagnai Ganbaatar — Portfolio</title>
+  <meta name="description" content="Minimalist portfolio with selected projects and contact info." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Batmagnai Ganbaatar — Portfolio" />
+  <meta property="og:description" content="Minimalist portfolio with selected projects and contact info." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-site-url.example" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>BATMAGNAI GANBAATAR</strong>
+        <span>/ Front End • AI Prompts</span>
+      </a>
+
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="navLinks">
+        Menu
+      </button>
+
+      <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
+        <a href="index.html" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="projects.html" data-nav-link>Projects</a>
+        <a href="promptkit.html" data-nav-link>PromptKit</a>
+        <a href="contact.html" data-nav-link>Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="gridlines" aria-hidden="true"></div>
+      <div class="angles" aria-hidden="true">
+        <div class="angle a1"></div>
+        <div class="angle a2"></div>
+      </div>
+
+      <div class="container hero-inner">
+        <div>
+          <div class="kicker"><i></i> clean • sharp • fast</div>
+          <h1>Batmagnai Ganbaatar</h1>
+          <p class="lead">
+           <p>
+  I build small, practical front-end tools and structured AI prompt workflows focused on clarity and usability.
+</p>
+
+          </p>
+
+          <div class="cta-row">
+            <a class="btn primary" href="projects.html">View Projects →</a>
+            <a class="btn" href="contact.html">Contact</a>
+            <a class="btn" href="https://linkedin.com/">LinkedIn</a>
+            <a class="btn" href="https://github.com/">GitHub</a>
+          </div>
+        </div>
+
+        <aside class="quickcard" aria-label="Highlights">
+          <div class="label">HIGHLIGHTS</div>
+          <h2>What I bring</h2>
+          <ul>
+            <li class="chip">
+              <span>Front end</span>
+              <code>HTML • CSS • JS</code>
+            </li>
+            <li class="chip">
+              <span>UI focus</span>
+              <code>clean + responsive</code>
+            </li>
+            <li class="chip">
+              <span>AI prompts</span>
+              <code>workflows • iteration</code>
+            </li>
+            <li class="chip">
+              <span>Outputs</span>
+              <code>docs • templates</code>
+            </li>
+</ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Projects</h2>
+        <p>Minimal summaries. Clean outcomes. Proof when ready.</p>
+
+       <article class="card">
+  <div class="meta">
+    <span class="badge">Front End</span>
+    <span class="opacity-6">Complete</span>
+  </div>
+
+  <h3>PromptKit</h3>
+  <p>
+    A small front-end tool that turns rough notes into structured project summaries.
+    Built to practice clarity, validation, and user feedback.
+  </p>
+
+  <div class="links">
+    <a class="link" href="promptkit.html">Open tool</a>
+    <a class="link" href="projects.html">View details</a>
+  </div>
+</article>
+
+
+
+    <section class="section">
+      <div class="container">
+        <h2>Now</h2>
+        <p>
+          Building a minimalist portfolio, front-end projects, and reusable AI prompt workflows.
+        </p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container row">
+        <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+        <div class="tiny">minimal / angular / redline</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
