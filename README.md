@@ -30,3 +30,6 @@ It converts rough notes into structured project summaries using a clean UI and c
 ## Notes
 This site is part of my transition into front-end development and AI workflow systems.  
 I focus on clean structure, usability, and practical tooling.
+
+## Screenshot
+![PromptKit](assets/Screen Shot 2026-02-14 at 21.46.06.png)
