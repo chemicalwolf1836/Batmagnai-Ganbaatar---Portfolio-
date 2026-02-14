@@ -2,7 +2,7 @@
 
 Minimalist portfolio website built using HTML, CSS, and Vanilla JavaScript.
 
-Live site: (paste your deployed URL here)
+Live site: https://batmagnai-portfolio.netlify.app/
 
 ---
 
