@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptKit — Batmagnai Ganbaatar</title>
+  <meta name="description" content="Generate a strict, minimalist prompt for portfolio project cards." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>BATMAGNAI GANBAATAR</strong>
+        <span>/ PromptKit</span>
+      </a>
+
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="navLinks">Menu</button>
+
+      <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
+        <a href="index.html" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="projects.html" data-nav-link>Projects</a>
+        <a href="promptkit.html" data-nav-link>PromptKit</a>
+        <a href="contact.html" data-nav-link>Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="page-title">
+      <h1>PromptKit - Learning Mode</h1>
+      <section class="section">
+  <p>
+    PromptKit turns rough notes into a structured project summary. Use it to write clear portfolio cards while you learn.
+  </p>
+  <p>
+    Steps: write 3–6 action lines → generate → review the preview → save to Projects.
+  </p>
+</section>
+
+      <p class="sub">
+        A small front-end tool that generates a strict prompt for creating minimalist project cards.
+        Paste the generated prompt into ChatGPT.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Input</h2>
+
+      <div class="formish" aria-label="PromptKit inputs">
+        <div class="field">
+          <label for="badge">Badge</label>
+          <input id="badge" name="badge" list="badgeOptions" placeholder="Front End" />
+          <datalist id="badgeOptions">
+            <option value="Front End"></option>
+            <option value="AI"></option>
+            <option value="Workflow"></option>
+          </datalist>
+        </div>
+
+        <div class="field">
+          <label for="title">Title</label>
+          <input id="title" name="title" placeholder="Project title" />
+        </div>
+
+        <div class="field">
+          <label for="problem">Problem</label>
+          <textarea id="problem" name="problem" placeholder="What problem were you solving?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="actions">Actions (3–6 bullets, one per line)</label>
+          <p class="muted">Actions: one per line (3–6 lines).</p>
+
+          <textarea id="actions" name="actions" placeholder="- Did X&#10;- Did Y&#10;- Did Z"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="result">Result</label>
+          <textarea id="result" name="result" placeholder="What changed? What was the outcome?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="tools">Tools (comma-separated)</label>
+          <input id="tools" name="tools" placeholder="HTML, CSS, JavaScript" />
+        </div>
+
+        <div class="field">
+          <label for="repo">Reference: Repo URL (optional)</label>
+          <input id="repo" name="repo" placeholder="https://github.com/..." />
+        </div>
+
+        <div class="field">
+          <label for="demo">Reference: Demo URL (optional)</label>
+          <input id="demo" name="demo" placeholder="https://..." />
+        </div>
+
+        <div class="field">
+          <label for="writeup">Reference: Write-up URL (optional)</label>
+          <input id="writeup" name="writeup" placeholder="https://..." />
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn primary" type="button" data-generate>Generate Prompt →</button>
+          <button class="btn" type="button" data-clear>Clear</button>
+          <p class="muted">Tip: if you click twice while generating, you’ll see “Please wait…”.</p>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Generated prompt</h2>
+      <p>Copy this prompt and paste it into ChatGPT.</p>
+
+      <div class="formish">
+        <div class="field">
+          <label for="output">Prompt</label>
+          <textarea id="output" readonly placeholder="Your generated prompt will appear here."></textarea>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="btn primary" type="button" data-copy>Copy Prompt</button>
+          <span id="copyStatus" style="color: var(--muted); font-size: 13px;"></span>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="section">
+      <h2>Preview</h2>
+      <p>Front-end preview of the card layout (no AI). This is what you’ll paste later.</p>
+
+      <div id="previewMount"></div>
+    </section>
+
+<footer class="footer">
+      <div class="row">
+        <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+        <div class="tiny">tool / prompt workflow</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

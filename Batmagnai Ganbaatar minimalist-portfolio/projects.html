@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Batmagnai Ganbaatar</title>
+  <meta name="description" content="Projects, case studies, and proof of work." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>BATMAGNAI GANBAATAR</strong>
+        <span>/ Projects</span>
+      </a>
+
+      <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="navLinks">Menu</button>
+
+      <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
+        <a href="index.html" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="projects.html" data-nav-link>Projects</a>
+        <a href="promptkit.html" data-nav-link>PromptKit</a>
+        <a href="contact.html" data-nav-link>Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="page-title">
+      <h1>Projects</h1>
+      <section class="section">
+  <p>
+    This page shows small, practical projects I built while learning front-end development and structured problem-solving.
+  </p>
+  <p>
+    Each project focuses on clarity, usability, and explaining what was done — not just showing code.
+  </p>
+</section>
+
+      <p class="sub">Minimal cards, direct outcomes. Proof when ready.</p>
+    </section>
+
+    <section class="section">
+      <h2>Case studies</h2>
+
+      <div class="cards">
+       <article class="card" id="promptkit">
+  <div class="meta">
+    <span class="badge">Front End</span>
+    <span class="opacity-6">Complete</span>
+  </div>
+
+  <p class="muted">
+  Projects are presented as problem → actions → result to keep each case easy to scan.
+</p>
+
+  <h3>PromptKit</h3>
+  <p>
+    A small front-end tool that turns rough notes into structured project summaries.
+    Built to practice clarity, validation, and user feedback while learning.
+  </p>
+
+  <div class="links">
+    <a class="link" href="promptkit.html">Open tool</a>
+  </div>
+</article>
+
+
+        <article class="card">
+  <div class="meta">
+    <span class="badge">Front End / AI</span>
+    <span class="opacity-6">In progress</span>
+  </div>
+
+  <h3>AI Prompt Engineering — Workflow Notes</h3>
+  <p>
+    Ongoing work focused on designing repeatable prompt workflows and documenting how small changes affect output quality.
+  </p>
+
+  <p class="muted">
+    This work supports PromptKit and informs future front-end tooling decisions.
+  </p>
+</article>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="row">
+        <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+        <div class="tiny">projects / proof</div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
