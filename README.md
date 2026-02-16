@@ -42,13 +42,19 @@ PromptKit:
 - Provides a live preview
 - Improves structure and clarity
 
-### Key Features
+## 🚀 Features
 
-- Draft persistence using localStorage
-- Clear Draft reset flow
-- DOM event-driven UI updates
-- Structured prompt generation logic
-- Defensive handling of empty inputs
+✔ Autosave on typing  
+✔ Clear Draft Reset  
+✔ Live UX feedback  
+✔ Local storage draft restore
+
+## ✨ What I Learned
+
+- Managing UI state
+- DOM event listeners
+- UX feedback patterns
+- Clean project structure and documentation
 
 ---
 
