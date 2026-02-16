@@ -30,6 +30,18 @@ It converts rough project notes into structured summaries using:
 - Result
 - Tools
 
+## 🧠 Problem
+
+When preparing portfolio prompts or documenting projects, raw notes aren’t organized.
+
+## 💡 Solution
+
+PromptKit:
+- Accepts problem, actions, results, tools
+- Saves input in localStorage
+- Provides a live preview
+- Improves structure and clarity
+
 ### Key Features
 
 - Draft persistence using localStorage
