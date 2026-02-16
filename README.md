@@ -58,7 +58,7 @@ PromptKit:
 
 ---
 
-## Tech Stack
+## 🧰 Tech Stack
 
 - HTML
 - CSS
@@ -67,7 +67,7 @@ PromptKit:
 
 ---
 
-## File Structure
+## 📂 File Structure
 
 ```
 index.html
