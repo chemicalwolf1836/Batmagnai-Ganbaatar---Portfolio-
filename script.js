@@ -5,7 +5,7 @@
   const navLinks = document.querySelector("[data-nav-links]");
 
   if (menuBtn && navLinks) {
-    menuBtn.addEventListener("click", () => { 
+    menuBtn.addEventListener("click", () => {
       const open = navLinks.classList.toggle("open");
       menuBtn.setAttribute("aria-expanded", String(open));
     });
@@ -158,6 +158,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const problemEl = document.getElementById("problem");
     const actionsEl = document.getElementById("actions");
     const resultEl = document.getElementById("result");
+    const saveStatusEl = document.getElementById("saveStatus");
+
+    function showSaveStatus(msg) {
+        if (!saveStatusEl) return;
+        saveStatusEl.textContent = "Saved ✓.";
+        if (msg) setTimeout(() => { saveStatusEl.textContent = ""; }, 2000);
+    }
+
 
     if (!problemEl || !actionsEl || !resultEl) {console.warn("Missing one or more fields in PromptKit page."); return;}
 
@@ -169,14 +177,17 @@ document.addEventListener("DOMContentLoaded", function () {
     //Save when typing
     problemEl.addEventListener("input", () => {
         localStorage.setItem("problem", problemEl.value);
+        showSaveStatus("Saved ✓");
     });
 
     actionsEl.addEventListener("input", () => {
         localStorage.setItem("actions", actionsEl.value);
+        showSaveStatus("Saved ✓");
     });
 
     resultEl.addEventListener("input", () => {
         localStorage.setItem("result", resultEl.value);
+        showSaveStatus("Saved ✓");
     });
 
     console.log("Draft auto-save enabled for Problem, Actions, and Result fields.");
