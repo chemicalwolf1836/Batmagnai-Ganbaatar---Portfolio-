@@ -425,6 +425,7 @@ input:focus, textarea:focus{
   .quickcard{ position: relative; top: 0; }
   .cards{ grid-template-columns: 1fr; }
   .menu-btn{ display:inline-flex; }
+
   .nav-links{
     display:none;
     position:absolute;
@@ -446,3 +447,7 @@ input:focus, textarea:focus{
   html{ scroll-behavior: auto; }
   .btn, .card{ transition: none; }
 }
+
+/* Mobile: hide decorative red lines on smaller screens */
+@media (max-width: 600px){
+  .angle{ display:none; }
