@@ -343,6 +343,8 @@ h1{
   color: var(--text);
   border-bottom: 1px solid rgba(255,45,45,0.35);
   padding-bottom: 2px;
+  margin-top: auto;
+  font-weight: 500;
 }
 .link:hover{ border-bottom-color: var(--accent); }
 
@@ -456,6 +458,10 @@ input:focus, textarea:focus{
 
 .card{
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
+
 
 
