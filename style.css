@@ -208,6 +208,14 @@ h1{
   flex-wrap: wrap;
   margin-top: 18px;
 }
+
+.cta-buttons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
 .btn{
   display:inline-flex;
   align-items:center;
@@ -293,19 +301,22 @@ h1{
 .cards{
   margin-top: 18px;
   display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
+  grid-template-columns: repeat (auto-fit, minmax(300px,380px));
+  grid-template-columns: repeat(2,1fr);
+  gap: 22px;
+  justify-content: start;
 }
 .card{
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 16px;
   background: white;
-  transition: transform 180ms var(--ease), border-color 180ms var(--ease);
+  transition: transform 180ms var(--ease), border-color 180ms var(--ease); box-shadow: 180ms var(--ease);
 }
 .card:hover{
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   border-color: rgba(255,45,45,0.35);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.07);
 }
 .card .meta{
   display:flex;
@@ -462,6 +473,8 @@ input:focus, textarea:focus{
   flex-direction: column;
   height: 100%;
 }
+
+
 
 
 
