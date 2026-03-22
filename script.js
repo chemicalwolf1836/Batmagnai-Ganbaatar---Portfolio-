@@ -18,6 +18,7 @@
       });
     });
 
+
     // close on outside click
     document.addEventListener("click", (e) => {
       if (!navLinks.classList.contains("open")) return;
@@ -159,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const actionsEl = document.getElementById("actions");
     const resultEl = document.getElementById("result");
     const saveStatusEl = document.getElementById("saveStatus");
-
+    
   
     function showSaveStatus(msg) {
         if (!saveStatusEl) return;
