@@ -248,6 +248,12 @@ h1{
   box-shadow: 0 16px 30px rgba(255,45,45,0.18);
 }
 
+form button,
+.btn.primary {
+  margin-bottom: 56pxg;
+}
+
+
 .quickcard{
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -305,12 +311,13 @@ h1{
 }
 
 .cards{
-  margin-top: 18px;
+  margin-top: 24px;
   display:grid;
   grid-template-columns: repeat (auto-fit, minmax(300px,380px));
   grid-template-columns: repeat(2,1fr);
   gap: 22px;
   justify-content: start;
+  margin-bottom: 56px;
 }
 .card{
   border: 1px solid var(--line);
@@ -569,6 +576,56 @@ input:focus, textarea:focus{
   line-height: 1.2;
   margin: 0;
 }
+
+
+
+/* Stack & Architecture styling */
+
+.stack-list {
+  margin-top: 8px;
+  padding-left: 18px;
+}
+
+.stack-list li {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.stack-list strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Key features styling */
+
+.feature-list {
+  margin-top: 8px;
+  padding-left: 18px;
+}
+
+.feature-list li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.feature-list strong {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.section:first-of-type {
+  margin-top: 40px;
+  border-top: none;
+}
+
+
+
+
+
+
+
 
 
 
