@@ -250,7 +250,7 @@ h1{
 
 form button,
 .btn.primary {
-  margin-bottom: 56pxg;
+  margin-bottom: 50px;
 }
 
 
@@ -619,6 +619,10 @@ input:focus, textarea:focus{
   margin-top: 40px;
   border-top: none;
 }
+
+
+
+
 
 
 
