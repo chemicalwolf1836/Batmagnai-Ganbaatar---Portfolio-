@@ -248,11 +248,9 @@ h1{
   box-shadow: 0 16px 30px rgba(255,45,45,0.18);
 }
 
-form button,
-.btn.primary {
-  margin-bottom: 50px;
+.formish .btn.primary {
+  margin-bottom: 56px;
 }
-
 
 .quickcard{
   border: 1px solid var(--line);
