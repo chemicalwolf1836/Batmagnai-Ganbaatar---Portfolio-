@@ -127,6 +127,7 @@
     const repo = valueOrBlank(repoEl);
     const demo = valueOrBlank(demoEl);
     const writeup = valueOrBlank(writeupEl);
+    const status = result ? "Ready" : "Draft"; // can be changed later
 
     const links = [];
     if (repo) links.push({ label: "Repo", href: repo });
@@ -145,7 +146,7 @@
       `<article class="card">` +
         `<div class="meta">` +
           `<span class="badge">${escapeHtml(badge)}</span>` +
-          `<span>In progress</span>` +
+          `<span class="badge muted">${status}</span>`+
         `</div>` +
         `<h3>${escapeHtml(title)}</h3>` +
         `<p>${escapeHtml(result)}</p>` +

@@ -105,8 +105,9 @@
           <input id="writeup" name="writeup" placeholder="https://..." />
         </div>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap;align-items:center">
+        <div class="btn-group">
           <button class="btn primary" type="button" data-generate>Generate Prompt →</button>
+          <button class="btn" type="button" data-save-prompt>Save Prompt</button>
           <button class="btn" type="button" data-clear>Clear</button>
           <button class="btn" type="button" data-clear-draft>Clear Saved Draft</button>
           <span id="saveStatus" style="font-size: 12px;color:red;margin-left: 10px;"></span>
@@ -136,7 +137,7 @@
 
     <section class="section">
       <h2>Preview</h2>
-      <p>Front-end preview of the card layout (no AI). This is what you’ll paste later.</p>
+      <p>Preview of how your prompt will be structured.</p>
 
       <div id="previewMount">
   <div class="card">
@@ -147,8 +148,18 @@
     <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
   </div>
 </div>
+   </section>
 
+
+    <section class="section">
+    <h2>Saved Prompts</h2>
+    <p class="sub">Save, reload, and reuse structured prompts.</p>
+
+    <div id="savedPrompts" class="saved-prompts-grid">
+      <p class="empty-state">No saved prompts yet.</p>
+    </div>
     </section>
+
 
 <footer class="footer">
       <div class="row">

@@ -359,6 +359,65 @@ h1{
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.saved-prompts-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.saved-prompt-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  background: white;
+  transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
+}
+
+.saved-prompt-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,45,45,0.25);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+
+.saved-prompt-card h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.saved-prompt-preview {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.saved-prompt-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.saved-prompt-actions button {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.saved-prompt-actions button:hover {
+  border-color: rgba(255,45,45,0.25);
+}
+
+.empty-state {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+
 .link{
   font-family: var(--mono);
   font-size: 12px;
@@ -618,6 +677,29 @@ input:focus, textarea:focus{
   border-top: none;
 }
 
+/*Promptkit buttons*/
+.btn:not(.primary) {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+
+.btn:not(.primary):hover {
+  background: rgba(0,0,0,0.06);
+  border-color: var(--accent);
+ 
+  .btn-group {
+    gap: 8px;
+    padding: 6px;
+    border-radius: 12px;
+  }
+}
+
+.badge.muted {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
 
 
 
