@@ -161,6 +161,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const actionsEl = document.getElementById("actions");
     const resultEl = document.getElementById("result");
     const saveStatusEl = document.getElementById("saveStatus");
+    const badgeEl = document.getElementById("badge");
+ const titleEl = document.getElementById("title");
+ const toolsEl = document.getElementById("tools");
+ const savePromptBtn = document.querySelector("[data-save-prompt]");
+ const savedPromptsEl = document.getElementById("savedPrompts");
+ const savedPromptsKey = "promptkit_saved_prompts_v2";
+
     
   
     function showSaveStatus(msg) {
@@ -169,6 +176,75 @@ document.addEventListener("DOMContentLoaded", function () {
         if (msg) setTimeout(() => { saveStatusEl.textContent = ""; }, 2000);
     }
 
+    function getSavedPrompts() {
+  try {
+    return JSON.parse(localStorage.getItem(savedPromptsKey)) || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function setSavedPrompts(prompts) {
+  localStorage.setItem(savedPromptsKey, JSON.stringify(prompts));
+}
+
+function renderSavedPrompts() {
+  const prompts = getSavedPrompts();
+
+  if (!savedPromptsEl) return;
+
+  if (prompts.length === 0) {
+    savedPromptsEl.innerHTML = `
+      <p class="empty-state">No saved prompts yet.</p>
+    `;
+    return;
+  }
+
+  savedPromptsEl.innerHTML = prompts.map(p => `
+    <div class="card">
+      <div class="meta">
+        <span class="badge">${p.badge}</span>
+      </div>
+      <h3>${p.title}</h3>
+      <p>${p.result || "No outcome yet."}</p>
+      <p class="muted">${p.tools || ""}</p>
+    </div>
+  `).join("");
+}
+
+
+function buildSavedPrompt() {
+  return {
+    id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+    badge: badgeEl?.value.trim() || "Workflow",
+    title: titleEl?.value.trim() || "Untitled project",
+    problem: problemEl?.value.trim() || "",
+    actions: actionsEl?.value.trim() || "",
+    result: resultEl?.value.trim() || "",
+    tools: toolsEl?.value.trim() || "",
+    createdAt: new Date().toISOString()
+  };
+}
+
+if (savePromptBtn) {
+  savePromptBtn.addEventListener("click", function () {
+    const savedPrompt = buildSavedPrompt();
+
+    if (!savedPrompt.title && !savedPrompt.problem && !savedPrompt.result) {
+      showSaveStatus("Add some content first.");
+      return;
+    }
+
+    const prompts = getSavedPrompts();
+    prompts.push(savedPrompt);
+    setSavedPrompts(prompts);
+    renderSavedPrompts();
+    showSaveStatus("Prompt saved.");
+  });
+}
+
+
+
 
     if (!problemEl || !actionsEl || !resultEl) {console.warn("Missing one or more fields in PromptKit page."); return;}
 
@@ -176,6 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
     problemEl.value = localStorage.getItem("problem") || "";
     actionsEl.value = localStorage.getItem("actions") || "";
     resultEl.value = localStorage.getItem("result") || "";
+
+    renderSavedPrompts();
 
     //Save when typing
     problemEl.addEventListener("input", () => {
@@ -227,6 +305,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if(typeof renderPreviewCard === "function") renderPreviewCard();
         //10) Small user feedback (reuses your  status line)
         if(typeof setStatus === "function") setStatus("Draft cleared. Start typing to create a new one.");
+
+
     });
 });
 
