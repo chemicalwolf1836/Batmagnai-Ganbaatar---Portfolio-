@@ -393,6 +393,14 @@ h1{
   line-height: 1.5;
 }
 
+.saved-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+
 .saved-prompt-actions {
   display: flex;
   gap: 10px;

@@ -208,9 +208,54 @@ function renderSavedPrompts() {
       <h3>${p.title}</h3>
       <p>${p.result || "No outcome yet."}</p>
       <p class="muted">${p.tools || ""}</p>
+
+      <div class="saved-actions">
+  <button class="btn" type="button" data-load-id="${p.id}">Load</button>
+  <button class="btn" type="button" data-delete-id="${p.id}">Delete</button>
+</div>
+
+
+
     </div>
   `).join("");
+
+  savedPromptsEl.querySelectorAll("[data-load-id]").forEach((button) => {
+  button.addEventListener("click", function () {
+    const id = button.getAttribute("data-load-id");
+    const prompts = getSavedPrompts();
+    const prompt = prompts.find((item) => item.id === id);
+
+    if (!prompt) return;
+
+    if (badgeEl) badgeEl.value = prompt.badge || "";
+    if (titleEl) titleEl.value = prompt.title || "";
+    if (problemEl) problemEl.value = prompt.problem || "";
+    if (actionsEl) actionsEl.value = prompt.actions || "";
+    if (resultEl) resultEl.value = prompt.result || "";
+    if (toolsEl) toolsEl.value = prompt.tools || "";
+
+    if (typeof renderPreviewCard === "function") {
+      renderPreviewCard();
+    }
+
+    showSaveStatus("Prompt loaded.");
+  });
+});
+
+savedPromptsEl.querySelectorAll("[data-delete-id]").forEach((button) => {
+  button.addEventListener("click", function () {
+    const id = button.getAttribute("data-delete-id");
+    const prompts = getSavedPrompts().filter((item) => item.id !== id);
+
+    setSavedPrompts(prompts);
+    renderSavedPrompts();
+    showSaveStatus("Prompt deleted.");
+  });
+});
+
 }
+
+
 
 
 function buildSavedPrompt() {
