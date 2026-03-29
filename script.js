@@ -155,6 +155,9 @@
       `</article>`;
   }
 
+  let editingId = null;
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     const problemEl = document.getElementById("problem");
@@ -211,8 +214,10 @@ function renderSavedPrompts() {
 
       <div class="saved-actions">
   <button class="btn" type="button" data-load-id="${p.id}">Load</button>
+  <button class="btn" type="button" data-copy-id="${p.id}">Copy</button>
   <button class="btn" type="button" data-delete-id="${p.id}">Delete</button>
 </div>
+
 
 
 
@@ -224,6 +229,7 @@ function renderSavedPrompts() {
     const id = button.getAttribute("data-load-id");
     const prompts = getSavedPrompts();
     const prompt = prompts.find((item) => item.id === id);
+
 
     if (!prompt) return;
 
@@ -241,6 +247,44 @@ function renderSavedPrompts() {
     showSaveStatus("Prompt loaded.");
   });
 });
+
+savedPromptsEl.querySelectorAll("[data-copy-id]").forEach((button) => {
+  button.addEventListener("click", async function () {
+    const id = button.getAttribute("data-copy-id");
+    const prompts = getSavedPrompts();
+    const prompt = prompts.find((item) => item.id === id);
+
+    if (!prompt) return;
+
+    editingId = prompt.id;
+
+
+    const text = [
+      `Badge: ${prompt.badge || ""}`,
+      `Title: ${prompt.title || ""}`,
+      "",
+      "Problem:",
+      prompt.problem || "",
+      "",
+      "Actions:",
+      prompt.actions || "",
+      "",
+      "Result:",
+      prompt.result || "",
+      "",
+      "Tools:",
+      prompt.tools || ""
+    ].join("\n");
+
+    try {
+      await navigator.clipboard.writeText(text);
+      showSaveStatus("Copied to clipboard.");
+    } catch (error) {
+      showSaveStatus("Copy failed.");
+    }
+  });
+});
+
 
 savedPromptsEl.querySelectorAll("[data-delete-id]").forEach((button) => {
   button.addEventListener("click", function () {
@@ -281,10 +325,19 @@ if (savePromptBtn) {
     }
 
     const prompts = getSavedPrompts();
-    prompts.push(savedPrompt);
+    if (editingId) {
+  const index = prompts.findIndex((p) => p.id === editingId);
+  if (index !== -1) {
+    prompts[index] = { ...savedPrompt, id: editingId };
+  }
+  editingId = null;
+} else {
+  prompts.push(savedPrompt);
+}
+
     setSavedPrompts(prompts);
     renderSavedPrompts();
-    showSaveStatus("Prompt saved.");
+    showSaveStatus(editingId ? "Prompt updated." : "Prompt saved.");g
   });
 }
 
