@@ -164,6 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const actionsEl = document.getElementById("actions");
     const resultEl = document.getElementById("result");
     const saveStatusEl = document.getElementById("saveStatus");
+    const editingStatusEl = document.getElementById("editingStatus");
     const badgeEl = document.getElementById("badge");
  const titleEl = document.getElementById("title");
  const toolsEl = document.getElementById("tools");
@@ -178,6 +179,20 @@ document.addEventListener("DOMContentLoaded", function () {
         saveStatusEl.textContent = "Saved ✓.";
         if (msg) setTimeout(() => { saveStatusEl.textContent = ""; }, 2000);
     }
+
+    function updateEditingUI() {
+  if (!savePromptBtn || !editingStatusEl) return;
+
+  if (editingId) {
+    const currentTitle = titleEl?.value.trim() || "Untitled project";
+    savePromptBtn.textContent = "Update Prompt";
+    editingStatusEl.textContent = `Editing: ${currentTitle}`;
+  } else {
+    savePromptBtn.textContent = "Save Prompt";
+    editingStatusEl.textContent = "";
+  }
+}
+
 
     function getSavedPrompts() {
   try {
@@ -227,6 +242,10 @@ function renderSavedPrompts() {
   savedPromptsEl.querySelectorAll("[data-load-id]").forEach((button) => {
   button.addEventListener("click", function () {
     const id = button.getAttribute("data-load-id");
+
+    editingId = id; // Set the global editingId to this prompt's ID
+    updateEditingUI(); // Update the UI to reflect that we're editing
+
     const prompts = getSavedPrompts();
     const prompt = prompts.find((item) => item.id === id);
 
@@ -243,6 +262,9 @@ function renderSavedPrompts() {
     if (typeof renderPreviewCard === "function") {
       renderPreviewCard();
     }
+
+    updateEditingUI();
+
 
     showSaveStatus("Prompt loaded.");
   });
@@ -325,19 +347,22 @@ if (savePromptBtn) {
     }
 
     const prompts = getSavedPrompts();
+    const wasEditing = Boolean(editingId);
     if (editingId) {
   const index = prompts.findIndex((p) => p.id === editingId);
   if (index !== -1) {
     prompts[index] = { ...savedPrompt, id: editingId };
   }
-  editingId = null;
 } else {
   prompts.push(savedPrompt);
 }
 
+editingId = null;
+
     setSavedPrompts(prompts);
     renderSavedPrompts();
-    showSaveStatus(editingId ? "Prompt updated." : "Prompt saved.");g
+    updateEditingUI();
+    showSaveStatus(wasEditing ? "Prompt updated." : "Prompt saved.");
   });
 }
 
@@ -352,6 +377,8 @@ if (savePromptBtn) {
     resultEl.value = localStorage.getItem("result") || "";
 
     renderSavedPrompts();
+    updateEditingUI();
+
 
     //Save when typing
     problemEl.addEventListener("input", () => {
@@ -421,6 +448,23 @@ if (savePromptBtn) {
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
   }
+
+  function updateEditingUI() {
+  const saveBtn = document.querySelector("[data-save]");
+  const editingLabel = document.getElementById("editingLabel");
+
+  if (!saveBtn || !editingLabel) return;
+
+  if (editingId) {
+    saveBtn.textContent = "Update Prompt";
+    editingLabel.textContent = "Editing mode";
+  } else {
+    saveBtn.textContent = "Save Prompt";
+    editingLabel.textContent = "";
+  }
+}
+
+
   function escapeAttr(str) {
     return escapeHtml(str).replace(/\s/g, "%20");
   }
