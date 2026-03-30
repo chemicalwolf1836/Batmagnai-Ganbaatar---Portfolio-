@@ -207,7 +207,23 @@ function setSavedPrompts(prompts) {
 }
 
 function renderSavedPrompts() {
-  const prompts = getSavedPrompts();
+  const searchInput = document.getElementById("searchInput");
+const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
+
+const allPrompts = getSavedPrompts();
+
+const prompts = allPrompts.filter((p) => {
+  const text = [
+    p.title,
+    p.badge,
+    p.problem,
+    p.result,
+    p.tools
+  ].join(" ").toLowerCase();
+
+  return text.includes(query);
+});
+
 
   if (!savedPromptsEl) return;
 
@@ -364,6 +380,14 @@ editingId = null;
     updateEditingUI();
     showSaveStatus(wasEditing ? "Prompt updated." : "Prompt saved.");
   });
+
+  if (searchInput) {
+  searchInput.addEventListener("input", function () {
+    renderSavedPrompts();
+  });
+}
+
+
 }
 
 
