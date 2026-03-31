@@ -171,6 +171,9 @@ document.addEventListener("DOMContentLoaded", function () {
  const savePromptBtn = document.querySelector("[data-save-prompt]");
  const savedPromptsEl = document.getElementById("savedPrompts");
  const savedPromptsKey = "promptkit_saved_prompts_v2";
+ const exportBtn = document.getElementById("exportBtn");
+ const importInput = document.getElementById("importInput");
+
 
     
   
@@ -421,6 +424,70 @@ editingId = null;
     });
 
     console.log("Draft auto-save enabled for Problem, Actions, and Result fields.");
+
+    if (exportBtn) {
+  exportBtn.addEventListener("click", function () {
+    const prompts = getSavedPrompts();
+
+    const blob = new Blob([JSON.stringify(prompts, null, 2)], {
+      type: "application/json"
+    });
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = "promptkit-backup.json";
+    link.click();
+
+    URL.revokeObjectURL(url);
+    showSaveStatus("Prompts exported.");
+  });
+}
+
+if (importInput) {
+  importInput.addEventListener("change", function (event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function () {
+      try {
+        const imported = JSON.parse(reader.result);
+
+        if (!Array.isArray(imported)) {
+          showSaveStatus("Invalid JSON file.");
+          return;
+        }
+
+        const cleaned = imported.map((item) => ({
+          id: item.id || (crypto.randomUUID ? crypto.randomUUID() : String(Date.now() + Math.random())),
+          badge: item.badge || "Workflow",
+          title: item.title || "Untitled project",
+          problem: item.problem || "",
+          actions: item.actions || "",
+          result: item.result || "",
+          tools: item.tools || "",
+          createdAt: item.createdAt || new Date().toISOString()
+        }));
+
+        setSavedPrompts(cleaned);
+        renderSavedPrompts();
+        updateEditingUI();
+        showSaveStatus("Prompts imported.");
+      } catch (error) {
+        showSaveStatus("Import failed.");
+      }
+
+      importInput.value = "";
+    };
+
+    reader.readAsText(file);
+  });
+}
+
+
 
     // --Clear Saved Draft button
     clearDraftBtn.addEventListener("click", () => {

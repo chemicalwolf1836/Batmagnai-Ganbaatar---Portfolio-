@@ -720,6 +720,14 @@ input:focus, textarea:focus{
   background: white;
 }
 
+.saved-tools {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 0 0 18px;
+}
+
+
 
 
 
