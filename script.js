@@ -78,6 +78,8 @@
   const writeupEl = document.getElementById("writeup");
   const outputEl = document.getElementById("output");
 
+  const savedCountEl = document.getElementById("savedCount");
+
   let isGenerating  = false;
 
   function onPromptKitPage() {
@@ -175,8 +177,10 @@ document.addEventListener("DOMContentLoaded", function () {
  const importInput = document.getElementById("importInput");
 
 
-    
-  
+
+
+
+
     function showSaveStatus(msg) {
         if (!saveStatusEl) return;
         saveStatusEl.textContent = "Saved ✓.";
@@ -189,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (editingId) {
     const currentTitle = titleEl?.value.trim() || "Untitled project";
     savePromptBtn.textContent = "Update Prompt";
-    editingStatusEl.textContent = `Editing: ${currentTitle}`;
+    editingStatusEl.textContent = `✏️ Editing: ${currentTitle}`;
   } else {
     savePromptBtn.textContent = "Save Prompt";
     editingStatusEl.textContent = "";
@@ -227,15 +231,30 @@ const prompts = allPrompts.filter((p) => {
   return text.includes(query);
 });
 
+if (exportBtn) {
+  exportBtn.disabled = prompts.length === 0;
+}
 
-  if (!savedPromptsEl) return;
 
-  if (prompts.length === 0) {
-    savedPromptsEl.innerHTML = `
-      <p class="empty-state">No saved prompts yet.</p>
-    `;
-    return;
-  }
+
+  if (savedCountEl) {
+  savedCountEl.textContent = `Saved Prompts (${prompts.length})`;
+
+}
+
+if (!savedPromptsEl) return;
+
+
+  if (!prompts.length) {
+  savedPromptsEl.innerHTML = `
+    <p class="empty-state">
+      No saved prompts yet.<br/>
+      Start by creating your first workflow 👇
+    </p>
+  `;
+  return;
+}
+
 
   savedPromptsEl.innerHTML = prompts.map(p => `
     <div class="card">
@@ -381,7 +400,7 @@ editingId = null;
     setSavedPrompts(prompts);
     renderSavedPrompts();
     updateEditingUI();
-    showSaveStatus(wasEditing ? "Prompt updated." : "Prompt saved.");
+    showSaveStatus(wasEditing ? "🔄 Prompt updated." : "✅ Prompt saved.");
   });
 
   if (searchInput) {
@@ -441,7 +460,7 @@ editingId = null;
     link.click();
 
     URL.revokeObjectURL(url);
-    showSaveStatus("Prompts exported.");
+    showSaveStatus("📤 Prompts exported.");
   });
 }
 
@@ -475,9 +494,9 @@ if (importInput) {
         setSavedPrompts(cleaned);
         renderSavedPrompts();
         updateEditingUI();
-        showSaveStatus("Prompts imported.");
+        showSaveStatus("📥 Prompts imported.");
       } catch (error) {
-        showSaveStatus("Import failed.");
+        showSaveStatus("❌ Import failed.");
       }
 
       importInput.value = "";
