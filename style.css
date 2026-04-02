@@ -297,6 +297,7 @@ h1{
 .section{
   padding: 42px 0;
   border-top: 1px solid var(--line);
+
 }
 .section h2{
   margin: 0 0 10px;
@@ -727,7 +728,12 @@ input:focus, textarea:focus{
   margin: 0 0 18px;
 }
 
-
+.actions {
+  display: auto;
+  gap: 10px;
+  flex-wrap: auto;
+  margin-top: 10px;
+}
 
 
 
