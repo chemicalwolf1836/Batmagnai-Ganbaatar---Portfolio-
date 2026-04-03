@@ -735,7 +735,22 @@ input:focus, textarea:focus{
   margin-top: 10px;
 }
 
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
 
+.project-card {
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.highlight {
+  color: #dc2626;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
 
 
 
