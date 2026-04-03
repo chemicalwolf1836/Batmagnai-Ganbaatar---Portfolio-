@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PromptKit v2 — Batmagnai Ganbaatar</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>BATMAGNAI GANBAATAR</strong>
+        <span>/ PromptKit v2</span>
+      </a>
+
+      <button class="menu-toggle" data-menu-btn aria-expanded="false">
+        Menu
+      </button>
+
+      <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
+        <a href="index.html" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="projects.html" data-nav-link>Projects</a>
+        <a href="promptkit.html" data-nav-link>PromptKit</a>
+        <a href="contact.html" data-nav-link>Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="section">
+      <p class="kicker"><i></i> case study • front end</p>
+      <h1>PromptKit v2</h1>
+      <p class="lead">
+        A browser-based workflow tool designed to make prompt writing reusable,
+        structured, and easy to manage.
+      </p>
+
+      <div class="hero-actions">
+  <a href="promptkit.html" class="btn primary">Open Tool ↗</a>
+  <a href="projects.html" class="btn secondary">Back to Projects</a>
+   </div>
+
+    </section>
+
+    <section class="section">
+      <div class="cards">
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Overview</span>
+          </div>
+          <h3>Project Overview</h3>
+          <p>
+            PromptKit v2 is a browser-based workflow tool designed to make prompt
+            writing reusable, structured, and easy to manage. It goes beyond a
+            simple form by introducing persistent state, dynamic UI rendering,
+            and workflow-focused features.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Stack</span>
+          </div>
+          <h3>Tech Stack</h3>
+          <ul class="stack-list">
+            <li><strong>HTML</strong> — structure</li>
+            <li><strong>CSS</strong> — layout and UI styling</li>
+            <li><strong>JavaScript</strong> — interactivity and state logic</li>
+            <li><strong>localStorage</strong> — persistent browser data</li>
+            <li><strong>FileReader API</strong> — JSON import</li>
+            <li><strong>Blob API</strong> — JSON export</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Focus</span>
+          </div>
+          <h3>What It Demonstrates</h3>
+          <p>
+            This project demonstrates front-end state management, CRUD-style UI
+            behavior, dynamic DOM rendering, and workflow-oriented product thinking.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Problem</h2>
+      <p>
+        Users often create useful prompts once but lose them or rewrite them
+        repeatedly. There is no lightweight tool to manage prompt workflows in a
+        structured and reusable way.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Solution</h2>
+      <p>
+        I built PromptKit v2 as a front-end application that allows users to
+        create structured prompts, save and reload them using local storage,
+        edit existing entries with clear UI state, search saved prompts in real
+        time, copy them instantly, and export or import prompt libraries as JSON.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Key Features</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Feature</span>
+          </div>
+          <h3>Structured Prompt Builder</h3>
+          <p>
+            A guided form for turning rough notes into more organized, reusable
+            prompt content.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Feature</span>
+          </div>
+          <h3>Saved Prompt System</h3>
+          <p>
+            Users can save, load, update, and delete prompts with persistent
+            local storage and dynamic card rendering.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Feature</span>
+          </div>
+          <h3>Edit Mode UX</h3>
+          <p>
+            Loaded prompts switch the interface into editing mode with clear UI
+            feedback and update behavior instead of duplicate creation.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Feature</span>
+          </div>
+          <h3>Search and Reuse</h3>
+          <p>
+            Saved prompts can be searched, filtered, copied, and reused quickly,
+            making the tool more practical for repeat workflows.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="meta">
+            <span class="badge">Feature</span>
+          </div>
+          <h3>Export / Import</h3>
+          <p>
+            Prompt libraries can be exported as JSON and restored later,
+            providing portability and backup support.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What I Learned</h2>
+      <p>
+        This project helped me practice managing UI state in vanilla JavaScript,
+        building CRUD-style functionality without frameworks, structuring dynamic
+        rendering logic, improving UX through small feedback systems, and
+        handling browser storage with file export/import features.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2>Result</h2>
+      <p>
+        PromptKit evolved from a simple form into a small workflow tool with
+        real usability. It demonstrates front-end fundamentals, persistent state,
+        dynamic UI rendering, and product-oriented thinking in a practical way.
+      </p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container row">
+      <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+      <div class="tiny">case study / promptkit-v2</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
