@@ -752,6 +752,42 @@ input:focus, textarea:focus{
   letter-spacing: 0.2px;
 }
 
+/* Paragraph spacing */
+p {
+  margin: 0 0 12px;
+}
+
+/* Workflow row */
+.workflow {
+  margin-top: 12px;
+  font-size: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Red highlight (already used elsewhere) */
+.highlight {
+  color: #dc2626;
+  font-weight: 500;
+}
+
+/* Step highlight */
+.step-highlight {
+  color: #dc2626;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/* Arrow style */
+.arrow {
+  color: #999;
+}
+
+
 
 
 

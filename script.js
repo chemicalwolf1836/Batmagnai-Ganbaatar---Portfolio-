@@ -232,7 +232,7 @@ const prompts = allPrompts.filter((p) => {
 });
 
 if (exportBtn) {
-  exportBtn.disabled = prompts.length === 0;
+  exportBtn.disabled = allPrompts.length === 0;
 }
 
 
@@ -245,7 +245,7 @@ if (exportBtn) {
 if (!savedPromptsEl) return;
 
 
-  if (!prompts.length) {
+  if (!allPrompts.length) {
   savedPromptsEl.innerHTML = `
     <p class="empty-state">
       No saved prompts yet.<br/>
@@ -254,6 +254,17 @@ if (!savedPromptsEl) return;
   `;
   return;
 }
+
+if (!prompts.length) {
+  savedPromptsEl.innerHTML = `
+    <p class="empty-state">
+      No matching prompts found.<br/>
+      Try a different keyword.
+    </p>
+  `;
+  return;
+}
+
 
 
   savedPromptsEl.innerHTML = prompts.map(p => `
@@ -303,6 +314,8 @@ if (!savedPromptsEl) return;
 
     updateEditingUI();
 
+    titleEl.focus();
+    titleEl.select();
 
     showSaveStatus("Prompt loaded.");
   });
@@ -672,7 +685,7 @@ if (importInput) {
    genBtn.textContent = "Generating...";
     outputEl.value = buildPrompt();
     renderPreviewCard();
-    setStatus("Prompt generated."); setTimeout(() => { genBtn.textContent = "Generate Prompt ->"; isGenerating = false;}, 1000);} );
+    setStatus("Prompt generated."); setTimeout(() => { genBtn.textContent = "Generate Prompt"; isGenerating = false;}, 1000);} );
 
 
   clearBtn?.addEventListener("click", () => {
@@ -687,17 +700,30 @@ if (importInput) {
   });
 
   copyBtn?.addEventListener("click", async () => {
-    const text = outputEl.value.trim();
-    if (!text) return setStatus("Nothing to copy.");
-    try {
-      await navigator.clipboard.writeText(text);
-      setStatus("Copied.");
-    } catch (e) {
-      outputEl.focus();
-      outputEl.select();
-      document.execCommand("copy");
-      setStatus("Copied.");
+  const text = outputEl.value.trim();
+  if (!text) return setStatus("Nothing to copy.");
 
-    }
-  });
+  try {
+    await navigator.clipboard.writeText(text);
+
+    copyBtn.textContent = "Copied ✓";
+    setStatus("Prompt copied to clipboard.");
+
+    setTimeout(() => {
+      copyBtn.textContent = "Copy Prompt";
+    }, 2000);
+
+  } catch (e) {
+    outputEl.focus();
+    outputEl.select();
+    document.execCommand("copy");
+
+    copyBtn.textContent = "Copied ✓";
+    setStatus("Copied.");
+
+    setTimeout(() => {
+      copyBtn.textContent = "Copy Prompt";
+    }, 2000);
+  }
+});
 })();

@@ -33,20 +33,46 @@
   <main id="main" class="container">
     <section class="page-title">
       <h1>PromptKit</h1>
-      <section class="section">
+
   <p>
-    PromptKit turns rough notes into a structured project summary. Use it to write clear portfolio cards while you learn.
-  </p>
-  <p>
-    Steps: write 3–6 action lines → generate → review the preview → save to Projects.
-  </p>
+  PromptKit is a browser-based workflow tool for turning rough ideas into
+  <span class="highlight">structured prompts</span> and portfolio-ready outputs.
+  It helps create clearer inputs that can be reused across AI platforms such as
+  <span class="highlight">ChatGPT</span> and <span class="highlight">Claude</span>.
+</p>
+
+<p>
+  Instead of writing from scratch each time, PromptKit helps organize your goal,
+  problem, actions, result, and references into a more consistent format.
+</p>
+
+<p>
+  The result is a prompt that is easier to review, refine, and reuse across
+  different AI tools.
+</p>
+
+<p>
+  Use PromptKit to structure your idea first, then send the generated prompt to
+  the AI platform of your choice.
+</p>
+
+<h3>Workflow</h3>
+
+<p class="workflow">
+  <span class="step-highlight">Input</span>
+  <span class="arrow">→</span>
+  <span class="step-highlight">Generate</span>
+  <span class="arrow">→</span>
+  <span class="step-highlight">Review</span>
+  <span class="arrow">→</span>
+  <span class="step-highlight">Save</span>
+  <span class="arrow">→</span>
+  <span class="step-highlight">Use</span>
+</p>
+
+
 </section>
 
-      <p class="sub">
-        A small front-end tool that generates a strict prompt for creating minimalist project cards.
-        Paste the generated prompt into ChatGPT.
-      </p>
-    </section>
 
     <section class="section">
       <h2>Input</h2>
@@ -112,7 +138,7 @@
           <div id="editingLabel" class="editing-status"></div>
 
           <div class="actions">
-          <button class="btn primary" type="button" data-generate>Generate Prompt →</button>
+          <button class="btn primary" type="button" data-generate>Generate Prompt</button>
           <button class="btn" type="button" data-save-prompt>Save Prompt</button>
           <button class="btn" type="button" data-clear>Clear</button>
           <button class="btn" type="button" data-clear-draft>Clear Saved Draft</button>
