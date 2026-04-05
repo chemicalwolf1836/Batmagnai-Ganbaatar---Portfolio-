@@ -90,8 +90,8 @@ header.site-header{
 .brand span{
   font-family: var(--mono);
   font-size: 12px;
-  color: var(--muted)
-  line-height 1.35;
+  color: var(--muted);
+  line-height: 1.35;
 }
 
 .nav-links{
@@ -125,10 +125,8 @@ header.site-header{
 /* Hero */
 .hero{
   position: relative;
-  padding: 68px 0 28px;
+  padding: 140px 0 110px;
   overflow: hidden;
-  padding-top: 12px;
-  padding-bottom: 8px;
 }
 
 .gridlines{
@@ -309,6 +307,7 @@ h1{
   color: var(--muted);
 }
 
+
 .cards{
   margin-top: 24px;
   display:grid;
@@ -461,11 +460,27 @@ h1{
 }
 .page-title h1{
   font-size: clamp(28px, 4.2vw, 44px);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
+
 .page-title .sub{
-  color: var(--muted);
+  color: var(--text);
   max-width: 70ch;
+}
+
+.section-description {
+  color: var(--text);
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.6;
+}
+
+.page-title .roomy h1{
+  margin-bottom: 14px;
+}
+
+.page-description .bottom{
+  color: var(--text)
 }
 
 /* Contact */
@@ -519,6 +534,7 @@ input:focus, textarea:focus{
   .quickcard{ position: relative; top: 0; }
   .cards{ grid-template-columns: 1fr; }
   .menu-btn{ display:inline-flex; }
+
 
   .nav-links{
     display:none;
@@ -584,7 +600,7 @@ input:focus, textarea:focus{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 6px 10px;
+    padding: 6px 10x;
     font-size: 13px;
   }
 
@@ -592,7 +608,6 @@ input:focus, textarea:focus{
     display: none;
     flex-direction: column;
     gap: 10px;
-    margin-top: 10px;
   }
 
   .nav-links.open{
@@ -615,6 +630,7 @@ input:focus, textarea:focus{
   margin: 0 0 14px;
 }
 
+
 @media (min-width: 768px){
   .hero h1{
     font-size: 40px;
@@ -626,12 +642,10 @@ input:focus, textarea:focus{
   }
 }
 
+
 /* Fix homepage header height */
 
 .container.nav{
-  padding-top: 8px;
-  padding-bottom: 8px;
-  row-gap: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -697,12 +711,12 @@ input:focus, textarea:focus{
 .btn:not(.primary):hover {
   background: rgba(0,0,0,0.06);
   border-color: var(--accent);
- 
-  .btn-group {
-    gap: 8px;
-    padding: 6px;
-    border-radius: 12px;
-  }
+}
+
+.btn-group {
+  gap: 8px;
+  padding: 6px;
+  border-radius: 12px;
 }
 
 .badge.muted {
@@ -787,23 +801,18 @@ p {
   color: #999;
 }
 
+.section-description {
+  color: #111 !important;
+  line-height: 1.6;
+}
 
+.case-text {
+  color: #111 !important;
+  line-height: 1.7;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 20px;
+  }
+}
