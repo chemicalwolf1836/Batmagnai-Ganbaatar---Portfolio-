@@ -75,13 +75,17 @@ header.site-header{
   align-items:flex-start;
   gap: 10px;
 }
-.brand-mark{
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
+.brand-mark {
+  display: inline-block;   /* 🔥 THIS was missing */
+  width: 10px;
+  height: 10px;
+  background: #ff3b30;
+  border-radius: 2px;
+  flex-shrink: 0;
   clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
   box-shadow: 0 10px 24px rgba(255,45,45,0.22);
 }
+
 .brand strong{
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -185,11 +189,15 @@ header.site-header{
   margin-bottom: 12px;
 }
 .kicker i{
-  width: 8px; height: 8px;
-  background: var(--accent);
-  display:inline-block;
+  width: 10px;
+  height: 10px;
+  background: #ff3b30;
+  display: inline-block;
+  border-radius: 2px;
+  flex-shrink: 0;
   clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
 }
+
 
 h1{
   margin: 0 0 12px;
@@ -816,3 +824,109 @@ p {
     padding-top: 20px;
   }
 }
+
+@media (max-width: 768px) {
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .actions .btn {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 768px) {
+  /* =========================
+     HOMEPAGE HERO BUTTONS
+     ========================= */
+
+  .hero .btn,
+  .hero .links a,
+  .hero .actions a {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding-left: 16px;
+    margin-bottom: 10px;
+  }
+
+  /* remove extra bottom gap on last hero button */
+  .hero .btn:last-child,
+  .hero .links a:last-child,
+  .hero .actions a:last-child {
+    margin-bottom: 0;
+  }
+
+  /* =========================
+     PROMPTKIT ACTION BUTTONS
+     ========================= */
+
+  [data-generate],
+  [data-save],
+  [data-clear],
+  [data-clear-draft],
+  [data-copy] {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  [data-copy] {
+    margin-top: 10px;
+  }
+
+  [data-generate]:last-child,
+  [data-save]:last-child,
+  [data-clear]:last-child,
+  [data-clear-draft]:last-child,
+  [data-copy]:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+
+  button:not(.primary),
+  .btn:not(.primary) {
+    text-align: left;
+    padding-left: 16px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .brand span {
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .brand-mark {
+  display: inline-block ;   /* 🔥 THIS was missing */
+  width: 10px;
+  height: 10px;
+  background: #ff3b30;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
