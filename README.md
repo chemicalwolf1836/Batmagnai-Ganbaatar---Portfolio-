@@ -1,97 +1,139 @@
-# Batmagnai Ganbaatar – Portfolio Website
+# Batmagnai Ganbaatar — Portfolio Website
 
-Minimalist portfolio website built using HTML, CSS, and Vanilla JavaScript.
+Front-End Developer building clean interfaces and practical AI-powered tools.
 
-Live site: https://batmagnai-portfolio.netlify.app/
+🔗 Live site: https://batmagnai-portfolio.netlify.app/
 
 ---
 
 ## Overview
 
-This portfolio showcases my transition into Front-End Development and AI Workflow Systems.
+This portfolio represents my transition into:
 
-The site focuses on:
+- Front-End Development
+- AI Workflow Building
+- Practical UI Systems
+
+The site is designed with a focus on:
 
 - Clean semantic structure
-- Usable interface design
-- Practical front-end tooling
-- Client-side state management
+- Usable, minimal UI
+- Responsive layout across mobile and desktop
+- Consistent design system (brand marks, accent elements, layout patterns)
+- Real project implementation with supporting detail pages
+
+Each project includes a **dedicated detail page** explaining structure, decisions, and outcomes — not just surface-level descriptions.
 
 ---
 
-## Featured Tool: PromptKit
+## What This Demonstrates
 
-PromptKit is a lightweight front-end workflow tool embedded in this portfolio.
+- Building a complete front-end system (not just static pages)
+- Structuring projects with clear hierarchy and navigation
+- Designing reusable UI patterns and consistent visual elements
+- Creating responsive layouts using CSS
+- Translating ideas into usable tools and workflows
+- Managing UI state and user interactions without frameworks
 
-It converts rough project notes into structured summaries using:
+---
+
+## Featured Tool — PromptKit (v2)
+
+PromptKit is a lightweight front-end workflow tool embedded in the portfolio.
+
+It transforms rough notes into structured project summaries that can be reused for documentation and portfolio content.
+
+### Problem
+
+When documenting projects or creating prompts, raw notes are often unclear and unstructured.
+
+### Solution
+
+PromptKit provides a structured input system:
 
 - Problem
-- Actions
+- Actions (multi-line input)
 - Result
 - Tools
 
-## 🧠 Problem
+The tool converts this input into a clean, readable output format in real time.
 
-When preparing portfolio prompts or documenting projects, raw notes aren’t organized.
+### Features
 
-## 💡 Solution
+- Structured multi-field input system
+- Live preview while typing
+- Autosave and draft restore using localStorage
 
-PromptKit:
-- Accepts problem, actions, results, tools
-- Saves input in localStorage
-- Provides a live preview
-- Improves structure and clarity
+### Prompt Management
 
-## 🚀 Features
+- Save prompts as reusable cards
+- Load saved prompts into the editor
+- Delete prompts from storage
+- Search and filter saved prompts
 
-✔ Autosave on typing  
-✔ Clear Draft Reset  
-✔ Live UX feedback  
-✔ Local storage draft restore
+### Data Portability
 
-## ✨ What I Learned
+- Export prompts as a JSON file
+- Import prompts from a JSON file
 
-- Managing UI state
-- DOM event listeners
-- UX feedback patterns
-- Clean project structure and documentation
+### Output
+
+- Clean formatted output for reuse
+- Designed for portfolio writing and prompt workflows
+
+PromptKit is used to generate structured content for portfolio project descriptions.
 
 ---
 
-## 🧰 Tech Stack
+## What I Learned
+
+- Managing UI state without frameworks
+- DOM event handling and interaction flow
+- Designing UX feedback loops (live preview, autosave)
+- Creating consistent UI systems across pages
+- Structuring projects for clarity and readability
+- Handling user data with localStorage and JSON
+
+---
+
+## Tech Stack
 
 - HTML
 - CSS
-- Vanilla JavaScript
+- JavaScript (Vanilla)
 - localStorage API
 
 ---
 
-## 📂 File Structure
+## File Structure
 
-```
-index.html
-/pages
-    about.html
-    contact.html
-    projects.html
-    promptkit.html
-style.css
-script.js
-```
+    index.html
+    /pages
+      about.html
+      contact.html
+      projects.html
+      promptkit.html
+      promptkit-detail.html
+      tokyo-neon-kissa.html
+    style.css
+    script.js
 
 ---
 
 ## Purpose
 
-This project is part of my focused 6-month transition into:
+This project is part of my focused transition into:
 
 - Front-End Development
 - AI Prompt Engineering
 - Workflow System Design
 
-I prioritize clarity, structure, and real-world usability over complex frameworks.
+I prioritize **clarity, usability, and real-world practicality** over complexity.
+
+---
 
 ## Screenshot
-<img width="1679" height="922" alt="Screen Shot 2026-02-14 at 21 46 06" src="https://github.com/user-attachments/assets/60307863-b19f-4127-934a-d98822e27c6b" />
 
+(Add updated homepage + PromptKit v2 + project detail page screenshots)
+
+---
