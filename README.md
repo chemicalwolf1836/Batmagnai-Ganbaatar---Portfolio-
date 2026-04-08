@@ -134,6 +134,12 @@ I prioritize **clarity, usability, and real-world practicality** over complexity
 
 ## Screenshot
 
-(Add updated homepage + PromptKit v2 + project detail page screenshots)
+<img width="1623" height="635" alt="Screen Shot 2026-04-08 at 23 52 05" src="https://github.com/user-attachments/assets/083f53c1-6d4e-464f-8efe-ca8ec24ecaeb" />
+<img width="1623" height="465" alt="Screen Shot 2026-04-08 at 23 52 34" src="https://github.com/user-attachments/assets/e6e497de-36da-4aed-bfa3-3b741fb135a6" />
+<img width="1623" height="765" alt="Screen Shot 2026-04-08 at 23 53 19" src="https://github.com/user-attachments/assets/2d480f7b-3322-4dbf-8785-ade345b4d059" />
+<img width="1623" height="793" alt="Screen Shot 2026-04-08 at 23 53 38" src="https://github.com/user-attachments/assets/790d4892-3f3f-40b1-b731-60e35dbbcd34" />
+
+
+
 
 ---
