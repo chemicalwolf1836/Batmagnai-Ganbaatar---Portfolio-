@@ -258,6 +258,59 @@ h1{
   margin-bottom: 56px;
 }
 
+.formish .field {
+  display: grid;
+  gap: 8px;
+}
+
+.formish .field input,
+.formish .field textarea,
+.formish .field select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.4;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.formish .field select {
+  height: 42px;
+  padding: 0 36px 0 14px;
+  line-height: 42px;
+  cursor: pointer;
+  font-size: 14px;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* 🔥 Clean custom arrow */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%23666' height='10' viewBox='0 0 20 20' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M5 7l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 10px;
+
+}
+
+.formish .field input:focus,
+.formish .field textarea:focus,
+.formish .field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.08);
+}
+
+.formish .field input[list] {
+  padding-right: 14px; /* remove arrow spacing */
+}
+
+
+
 .quickcard{
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -856,7 +909,7 @@ p {
   /* remove extra bottom gap on last hero button */
   .hero .btn:last-child,
   .hero .links a:last-child,
-  .hero .actions a:last-child {
+  .hero .actions a:last-child { 
     margin-bottom: 0;
   }
 
@@ -911,22 +964,14 @@ p {
   }
 
   .brand-mark {
-  display: inline-block ;   /* 🔥 THIS was missing */
-  width: 10px;
-  height: 10px;
-  background: #ff3b30;
-  border-radius: 2px;
-  flex-shrink: 0;
+    display: inline-block;   /* 🔥 THIS was missing */
+    width: 10px;
+    height: 10px;
+    background: #ff3b30;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+
+
 }
-
-
-
-
-
-
-
-
-
-
-
-

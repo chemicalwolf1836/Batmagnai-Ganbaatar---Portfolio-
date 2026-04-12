@@ -78,15 +78,27 @@
       <h2>Input</h2>
 
       <div class="formish" aria-label="PromptKit inputs">
+
+      <div class="field">
+      <label for="promptMode">Prompt mode</label>
+      <select id="promptMode" name="promptMode">
+      <option value="portfolio" selected>Portfolio Card</option>
+      <option value="readme">README Section</option>
+      <option value="linkedin">LinkedIn Post</option>
+      </select>
+      </div>
+
         <div class="field">
-          <label for="badge">Badge</label>
-          <input id="badge" name="badge" list="badgeOptions" placeholder="Front End" />
-          <datalist id="badgeOptions">
-            <option value="Front End"></option>
-            <option value="AI"></option>
-            <option value="Workflow"></option>
-          </datalist>
-        </div>
+  <label for="badge">Badge</label>
+  <input
+    id="badge"
+    name="badge"
+    type="text"
+    placeholder="e.g. Front End, AI, DevOps"
+  />
+</div>
+
+
 
         <div class="field">
           <label for="title">Title</label>
