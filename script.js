@@ -175,6 +175,8 @@ document.addEventListener("DOMContentLoaded", function () {
  const savedPromptsKey = "promptkit_saved_prompts_v2";
  const exportBtn = document.getElementById("exportBtn");
  const importInput = document.getElementById("importInput");
+ const promptMode = document.getElementById("promptMode").value;
+
 
 
 
@@ -593,6 +595,7 @@ if (importInput) {
   }
 
   function buildPrompt() {
+    const promptMode = valueOrBlank(document.getElementById("promptMode"));
     const badge = sanitizeBadge(valueOrBlank(badgeEl));
     const title = valueOrBlank(titleEl);
     const problem = valueOrBlank(problemEl);
@@ -605,54 +608,186 @@ if (importInput) {
     const writeup = valueOrBlank(writeupEl);
     const refs = buildReferences(repo, demo, writeup);
 
-    return `You are a strict formatter and editor.\n` +
-`Your job is to convert input into a minimalist portfolio project card.\n` +
-`Do not add new facts or improve scope.\n\n` +
-`Task:\n` +
-`Create a minimalist portfolio project card from my input.\n\n` +
-`My input:\n` +
-`Badge: ${badge}\n` +
-`Status: In progress\n` +
-`Title: ${title}\n` +
-`Problem: ${problem}\n` +
-`Actions:\n${actions}\n` +
-`Result: ${result}\n` +
-`Tools: ${tools}\n` +
-`References:\n${refs || "(none)"}\n\n` +
-`Rules:\n` +
-`- Minimalist, neutral, professional tone. No hype or buzzwords.\n` +
-`- Do not invent tools, metrics, links, or outcomes. If missing, omit.\n` +
-`- One-line outcome: max 20 words.\n` +
-`- Summary: 3–6 bullets, each max 12 words.\n` +
-`- References: one line, dot-separated (e.g., Repo · Demo · Write-up). Only include provided links.\n` +
-`- If input is unclear, ask up to 3 clarifying questions BEFORE output.\n\n` +
-`Output:\n` +
-`1) Website text version (plain text):\n` +
-`Title: <title>\n` +
-`Outcome: <one-line outcome>\n` +
-`Summary:\n` +
-`- <bullet>\n` +
-`(3–6 bullets)\n` +
-`References: <Repo · Demo · Write-up> (omit if none)\n\n` +
-`2) HTML snippet version (NO inline styles):\n` +
-`<article class="card">\n` +
-`  <div class="meta">\n` +
-`    <span class="badge">${badge}</span>\n` +
-`    <span>In progress</span>\n` +
-`  </div>\n` +
-`  <h3>...</h3>\n` +
-`  <p>...</p>\n` +
-`  <div class="links">\n` +
-`    <a class="link" href="...">Repo</a>\n` +
-`    <a class="link" href="...">Demo</a>\n` +
-`    <a class="link" href="...">Write-up</a>\n` +
-`  </div>\n` +
-`</article>\n\n` +
-`HTML rules:\n` +
-`- Use only: article, div, span, h3, p, a.\n` +
-`- Use classes exactly: card, meta, badge, links, link.\n` +
-`- If a reference link is missing, do not include that <a>.\n`;
+    const data = {
+    badge,
+    title,
+    problem,
+    actions,
+    result,
+    tools,
+    refs
+  };
+
+  if (promptMode === "readme") {
+    return buildReadmePrompt(data);
   }
+
+  if (promptMode === "linkedin") {
+    return buildLinkedInPrompt(data);
+  }
+
+  return buildPortfolioPrompt(data);
+}
+
+function buildPortfolioPrompt(data) {
+  return `You are a strict formatter and editor.
+Your job is to convert input into a minimalist portfolio project card.
+Do not add new facts or improve the scope.
+
+Task:
+Create a minimalist portfolio project card from my input.
+
+My input:
+Badge: ${data.badge}
+Status: In progress
+Title: ${data.title}
+Problem: ${data.problem}
+Actions:
+${data.actions}
+Result: ${data.result}
+Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
+
+Rules:
+- Minimalist, neutral, professional tone. No hype or buzzwords.
+- Do not invent tools, metrics, links, or outcomes.
+- One-line outcome: max 20 words.
+- Summary: 3–6 bullets, each max 12 words.
+- References: one line, dot-separated (Repo · Demo · Write-up).
+- If unclear, ask up to 3 clarifying questions BEFORE output.
+
+Output:
+
+1) Website text version:
+Title: <title>
+Outcome: <one-line outcome>
+
+Summary:
+- <bullet>
+- <bullet>
+- <bullet>
+
+References: <Repo · Demo · Write-up>
+
+2) HTML snippet version (NO inline styles):
+
+<article class="card">
+  <div class="meta">
+    <span class="badge">${data.badge}</span>
+    <span>In progress</span>
+  </div>
+  <h3>...</h3>
+  <p>...</p>
+  <div class="links">
+    <a class="link" href="...">Repo</a>
+    <a class="link" href="...">Demo</a>
+    <a class="link" href="...">Write-up</a>
+  </div>
+</article>`;
+}
+
+function buildReadmePrompt(data) {
+  return `You are a strict formatter and editor.
+Your job is to turn project notes into a clean GitHub README section.
+Do not invent missing facts.
+
+Task:
+Create a README-ready markdown section from my input.
+
+My input:
+Badge: ${data.badge}
+Title: ${data.title}
+Problem: ${data.problem}
+Actions:
+${data.actions}
+Result: ${data.result}
+Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
+
+Rules:
+- Use clear markdown.
+- Professional, concise tone.
+- Do not invent metrics, technologies, links, or outcomes.
+- Keep it readable for recruiters and developers.
+- If something is missing, omit it cleanly.
+
+Output format:
+
+## ${data.title}
+
+Short summary:
+<2–3 sentence summary>
+
+### Problem
+<brief problem statement>
+
+### What I Built
+- <bullet>
+- <bullet>
+- <bullet>
+
+### Result
+<brief result statement>
+
+### Tech / Tools
+- <tool>
+- <tool>
+
+### Links
+- Repo: <if provided>
+- Demo: <if provided>
+- Write-up: <if provided>`;
+}
+
+
+function buildLinkedInPrompt(data) {
+  return `You are a strict formatter and editor.
+Your job is to turn project notes into a professional LinkedIn project update.
+Do not invent missing facts.
+
+Task:
+Create a LinkedIn-ready project summary from my input.
+
+My input:
+Badge: ${data.badge}
+Title: ${data.title}
+Problem: ${data.problem}
+Actions:
+${data.actions}
+Result: ${data.result}
+Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
+
+Rules:
+- Professional and natural tone.
+- No fake achievements or exaggerated claims.
+- Keep it concise and readable.
+- Focus on what was built, improved, or learned.
+- If links are missing, omit them.
+
+Output format:
+
+Project title: ${data.title}
+
+LinkedIn description:
+<short paragraph>
+
+Key points:
+• <point>
+• <point>
+• <point>
+
+Optional closing line:
+<one sentence about focus, usability, workflow, or iteration>
+
+Links:
+<only include provided links>`;
+}
+
+
 
   function setStatus(msg) {
     if (!copyStatus) return;
