@@ -626,6 +626,11 @@ if (importInput) {
     return buildLinkedInPrompt(data);
   }
 
+  if (promptMode === "web") {
+  return buildWebPrompt(data);
+}
+
+
   return buildPortfolioPrompt(data);
 }
 
@@ -786,6 +791,74 @@ Optional closing line:
 Links:
 <only include provided links>`;
 }
+
+function buildWebPrompt(data) {
+  return `You are a web project planner and frontend architect.
+
+Your job is to turn my project input into a structured web project build prompt.
+Do not invent unrealistic features or add unnecessary complexity.
+
+Task:
+Create a clear web project plan from my input.
+
+My input:
+Badge: ${data.badge}
+Project title: ${data.title}
+Idea / Problem: ${data.problem}
+Key actions / features:
+${data.actions}
+Desired result:
+${data.result}
+Preferred tools:
+${data.tools}
+References:
+${data.refs || "(none)"}
+
+Rules:
+- Keep it practical and beginner-friendly
+- Focus on real-world usability
+- Use modern frontend best practices
+- Do not invent features that are not supported by the input
+- If the input is vague, organize it clearly without changing the core idea
+
+Output format:
+
+1. Project Overview
+- What this project is
+- What problem it solves
+- Who it is for
+
+2. Core Features
+- Use the Actions section to extract the main features
+- Present them as a clean feature list
+
+3. Recommended Tech Stack
+- Use the Tools input if provided
+- If tools are vague, keep recommendations conservative
+
+4. UI / UX Structure
+- Suggested page layout
+- Key sections or components
+- User flow
+
+5. Build Plan
+1. Setup
+2. Core structure
+3. Main features
+4. Styling
+5. Testing / refinement
+
+6. Expected Result
+- Use the Result input to describe the intended outcome
+
+7. Optional References
+- Include any provided references if relevant
+
+Final instruction:
+Write the output as a structured project-building prompt that can be pasted into ChatGPT or another AI tool to help plan and build the project.`;
+}
+
+
 
 
 
