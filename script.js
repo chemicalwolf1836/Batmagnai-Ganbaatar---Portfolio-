@@ -723,9 +723,15 @@ function buildPortfolioPrompt(data) {
 
   return `You are a strict formatter and editor.
 
+Task:
+Convert input into a minimalist portfolio project card.
+
 My input:
 Title: ${data.title}
 Problem: ${data.problem}
+Actions:
+${data.actions}
+Tools: ${data.tools}
 
 Rules:
 ${config.rules}
@@ -733,15 +739,20 @@ ${config.rules}
 Output:
 ${config.output}`;
 }
+
 
 
 function buildReadmePrompt(data) {
   const config = PROMPT_CONFIG.readme;
 
-  return `Create a README section.
+  return `Create a clean GitHub README section.
 
 Input:
-${data.title}
+Title: ${data.title}
+Problem: ${data.problem}
+Actions:
+${data.actions}
+Tools: ${data.tools}
 
 Rules:
 ${config.rules}
@@ -749,16 +760,20 @@ ${config.rules}
 Output:
 ${config.output}`;
 }
+
 
 
 
 function buildLinkedInPrompt(data) {
   const config = PROMPT_CONFIG.linkedin;
 
-  return `Create a LinkedIn post.
+  return `Create a professional LinkedIn post.
 
 Input:
-${data.title}
+Title: ${data.title}
+Problem: ${data.problem}
+Actions:
+${data.actions}
 
 Rules:
 ${config.rules}
@@ -766,6 +781,7 @@ ${config.rules}
 Output:
 ${config.output}`;
 }
+
 
 
 function buildWebPrompt(data) {
