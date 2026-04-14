@@ -104,6 +104,90 @@
     return lines.length ? lines.join("\n") : "";
   }
 
+  const PROMPT_CONFIG = {
+  portfolio: {
+    rules: `
+- Minimalist, neutral, professional tone.
+- Do not invent tools, metrics, links, or outcomes.
+- One-line outcome: max 20 words.
+- Summary: 3–6 bullets, each max 12 words.
+- References: one line, dot-separated (Repo · Demo · Write-up).
+`,
+    output: `
+1) Website text version:
+Title: <title>
+Outcome: <one-line outcome>
+
+Summary:
+- <bullet>
+- <bullet>
+
+References: <Repo · Demo · Write-up>
+
+2) HTML snippet version:
+<article class="card">...</article>
+`
+  },
+
+  readme: {
+    rules: `
+- Use clear markdown.
+- Professional, concise tone.
+- Do not invent missing details.
+- Keep it readable for developers.
+`,
+    output: `
+## Title
+
+Short summary
+
+### Problem
+### What I Built
+### Result
+### Tech / Tools
+### Links
+`
+  },
+
+  linkedin: {
+    rules: `
+- Professional and natural tone.
+- No exaggeration.
+- Keep it concise.
+`,
+    output: `
+Project title
+
+Short paragraph
+
+Key points:
+• point
+• point
+• point
+`
+  },
+
+  web: {
+    rules: `
+- Keep it practical and beginner-friendly.
+- Focus on real-world usability.
+- Do not invent features or tools.
+- Use provided tools if available.
+`,
+    output: `
+Project planning prompt:
+
+1. Project overview
+2. Core features
+3. Suggested structure
+4. Tech approach
+5. Build plan
+6. Improvements
+`
+  }
+};
+
+
 
   // PromptKit preview renderer
   function splitBullets(text) {
@@ -635,227 +719,75 @@ if (importInput) {
 }
 
 function buildPortfolioPrompt(data) {
-  return `You are a strict formatter and editor.
-Your job is to convert input into a minimalist portfolio project card.
-Do not add new facts or improve the scope.
+  const config = PROMPT_CONFIG.portfolio;
 
-Task:
-Create a minimalist portfolio project card from my input.
+  return `You are a strict formatter and editor.
 
 My input:
-Badge: ${data.badge}
-Status: In progress
 Title: ${data.title}
 Problem: ${data.problem}
-Actions:
-${data.actions}
-Result: ${data.result}
-Tools: ${data.tools}
-References:
-${data.refs || "(none)"}
 
 Rules:
-- Minimalist, neutral, professional tone. No hype or buzzwords.
-- Do not invent tools, metrics, links, or outcomes.
-- One-line outcome: max 20 words.
-- Summary: 3–6 bullets, each max 12 words.
-- References: one line, dot-separated (Repo · Demo · Write-up).
-- If unclear, ask up to 3 clarifying questions BEFORE output.
+${config.rules}
 
 Output:
-
-1) Website text version:
-Title: <title>
-Outcome: <one-line outcome>
-
-Summary:
-- <bullet>
-- <bullet>
-- <bullet>
-
-References: <Repo · Demo · Write-up>
-
-2) HTML snippet version (NO inline styles):
-
-<article class="card">
-  <div class="meta">
-    <span class="badge">${data.badge}</span>
-    <span>In progress</span>
-  </div>
-  <h3>...</h3>
-  <p>...</p>
-  <div class="links">
-    <a class="link" href="...">Repo</a>
-    <a class="link" href="...">Demo</a>
-    <a class="link" href="...">Write-up</a>
-  </div>
-</article>`;
+${config.output}`;
 }
+
 
 function buildReadmePrompt(data) {
-  return `You are a strict formatter and editor.
-Your job is to turn project notes into a clean GitHub README section.
-Do not invent missing facts.
+  const config = PROMPT_CONFIG.readme;
 
-Task:
-Create a README-ready markdown section from my input.
+  return `Create a README section.
 
-My input:
-Badge: ${data.badge}
-Title: ${data.title}
-Problem: ${data.problem}
-Actions:
-${data.actions}
-Result: ${data.result}
-Tools: ${data.tools}
-References:
-${data.refs || "(none)"}
+Input:
+${data.title}
 
 Rules:
-- Use clear markdown.
-- Professional, concise tone.
-- Do not invent metrics, technologies, links, or outcomes.
-- Keep it readable for recruiters and developers.
-- If something is missing, omit it cleanly.
+${config.rules}
 
-Output format:
-
-## ${data.title}
-
-Short summary:
-<2–3 sentence summary>
-
-### Problem
-<brief problem statement>
-
-### What I Built
-- <bullet>
-- <bullet>
-- <bullet>
-
-### Result
-<brief result statement>
-
-### Tech / Tools
-- <tool>
-- <tool>
-
-### Links
-- Repo: <if provided>
-- Demo: <if provided>
-- Write-up: <if provided>`;
+Output:
+${config.output}`;
 }
+
 
 
 function buildLinkedInPrompt(data) {
-  return `You are a strict formatter and editor.
-Your job is to turn project notes into a professional LinkedIn project update.
-Do not invent missing facts.
+  const config = PROMPT_CONFIG.linkedin;
+
+  return `Create a LinkedIn post.
+
+Input:
+${data.title}
+
+Rules:
+${config.rules}
+
+Output:
+${config.output}`;
+}
+
+
+function buildWebPrompt(data) {
+  const config = PROMPT_CONFIG.web;
+
+  return `You are a strict formatter and project planner.
 
 Task:
-Create a LinkedIn-ready project summary from my input.
+Create a web project build prompt from my input.
 
 My input:
-Badge: ${data.badge}
 Title: ${data.title}
 Problem: ${data.problem}
 Actions:
 ${data.actions}
-Result: ${data.result}
 Tools: ${data.tools}
-References:
-${data.refs || "(none)"}
 
 Rules:
-- Professional and natural tone.
-- No fake achievements or exaggerated claims.
-- Keep it concise and readable.
-- Focus on what was built, improved, or learned.
-- If links are missing, omit them.
+${config.rules}
 
-Output format:
-
-Project title: ${data.title}
-
-LinkedIn description:
-<short paragraph>
-
-Key points:
-• <point>
-• <point>
-• <point>
-
-Optional closing line:
-<one sentence about focus, usability, workflow, or iteration>
-
-Links:
-<only include provided links>`;
-}
-
-function buildWebPrompt(data) {
-  return `You are a web project planner and frontend architect.
-
-Your job is to turn my project input into a structured web project build prompt.
-Do not invent unrealistic features or add unnecessary complexity.
-
-Task:
-Create a clear web project plan from my input.
-
-My input:
-Badge: ${data.badge}
-Project title: ${data.title}
-Idea / Problem: ${data.problem}
-Key actions / features:
-${data.actions}
-Desired result:
-${data.result}
-Preferred tools:
-${data.tools}
-References:
-${data.refs || "(none)"}
-
-Rules:
-- Keep it practical and beginner-friendly
-- Focus on real-world usability
-- Use modern frontend best practices
-- Do not invent features that are not supported by the input
-- If the input is vague, organize it clearly without changing the core idea
-
-Output format:
-
-1. Project Overview
-- What this project is
-- What problem it solves
-- Who it is for
-
-2. Core Features
-- Use the Actions section to extract the main features
-- Present them as a clean feature list
-
-3. Recommended Tech Stack
-- Use the Tools input if provided
-- If tools are vague, keep recommendations conservative
-
-4. UI / UX Structure
-- Suggested page layout
-- Key sections or components
-- User flow
-
-5. Build Plan
-1. Setup
-2. Core structure
-3. Main features
-4. Styling
-5. Testing / refinement
-
-6. Expected Result
-- Use the Result input to describe the intended outcome
-
-7. Optional References
-- Include any provided references if relevant
-
-Final instruction:
-Write the output as a structured project-building prompt that can be pasted into ChatGPT or another AI tool to help plan and build the project.`;
+Output:
+${config.output}`;
 }
 
 
