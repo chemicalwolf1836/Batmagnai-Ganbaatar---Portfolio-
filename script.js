@@ -680,6 +680,8 @@ if (importInput) {
 
   function buildPrompt() {
     const promptMode = valueOrBlank(document.getElementById("promptMode"));
+    const promptTone = valueOrBlank(document.getElementById("promptTone"));
+
     const badge = sanitizeBadge(valueOrBlank(badgeEl));
     const title = valueOrBlank(titleEl);
     const problem = valueOrBlank(problemEl);
@@ -699,7 +701,8 @@ if (importInput) {
     actions,
     result,
     tools,
-    refs
+    refs,
+    tone: promptTone
   };
 
   if (promptMode === "readme") {
@@ -720,6 +723,9 @@ if (importInput) {
 
 function buildPortfolioPrompt(data) {
   const config = PROMPT_CONFIG.portfolio;
+  const toneRules = TONE_CONFIG[data.tone] || "";
+
+
 
   return `You are a strict formatter and editor.
 
@@ -735,6 +741,7 @@ Tools: ${data.tools}
 
 Rules:
 ${config.rules}
+${toneRules}
 
 Output:
 ${config.output}`;
@@ -744,6 +751,7 @@ ${config.output}`;
 
 function buildReadmePrompt(data) {
   const config = PROMPT_CONFIG.readme;
+  const toneRules = TONE_CONFIG[data.tone] || ""
 
   return `Create a clean GitHub README section.
 
@@ -756,6 +764,7 @@ Tools: ${data.tools}
 
 Rules:
 ${config.rules}
+${toneRules}
 
 Output:
 ${config.output}`;
@@ -766,6 +775,7 @@ ${config.output}`;
 
 function buildLinkedInPrompt(data) {
   const config = PROMPT_CONFIG.linkedin;
+  const toneRules = TONE_CONFIG[data.tone] || ""
 
   return `Create a professional LinkedIn post.
 
@@ -777,6 +787,7 @@ ${data.actions}
 
 Rules:
 ${config.rules}
+${toneRules}
 
 Output:
 ${config.output}`;
@@ -786,6 +797,7 @@ ${config.output}`;
 
 function buildWebPrompt(data) {
   const config = PROMPT_CONFIG.web;
+  const toneRules = TONE_CONFIG[data.tone] || ""
 
   return `You are a strict formatter and project planner.
 
@@ -801,10 +813,38 @@ Tools: ${data.tools}
 
 Rules:
 ${config.rules}
+${toneRules}
 
 Output:
 ${config.output}`;
 }
+
+const TONE_CONFIG = {
+  professional: `
+- Use a clear, professional tone.
+- Keep the wording concise and practical.
+- Avoid hype, exaggeration, or filler.
+`,
+
+  recruiter: `
+- Use a recruiter-friendly tone.
+- Emphasize clarity, impact, and usability.
+- Keep the writing easy to skim quickly.
+`,
+
+  technical: `
+- Use a technical and precise tone.
+- Focus on implementation details, structure, and logic.
+- Keep the wording clear and developer-oriented.
+`,
+
+  beginner: `
+- Use a beginner-friendly tone.
+- Keep the language simple and supportive.
+- Explain structure clearly without jargon.
+`
+};
+
 
 
 
