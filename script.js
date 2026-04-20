@@ -187,6 +187,40 @@ Project planning prompt:
   }
 };
 
+const promptModeEl = document.getElementById("promptMode");
+const promptToneEl = document.getElementById("promptTone");
+const resetDefaultsBtn = document.getElementById("resetDefaults");
+
+promptModeEl?.addEventListener("change", loadDefaults);
+promptToneEl?.addEventListener("change", loadDefaults);
+resetDefaultsBtn?.addEventListener("click", loadDefaults);
+
+
+function loadDefaults() {
+  const modeEl = document.getElementById("promptMode");
+  const toneEl = document.getElementById("promptTone");
+  const rulesEl = document.getElementById("customRules");
+  const outputEl = document.getElementById("customOutput");
+
+  if (!modeEl || !toneEl || !rulesEl || !outputEl) return;
+
+  const mode = valueOrBlank(modeEl) || "portfolio";
+  const tone = valueOrBlank(toneEl) || "professional";
+
+
+  const config = PROMPT_CONFIG[mode];
+  const toneRules = TONE_CONFIG[tone] || "";
+
+
+  if (!config) return;
+
+  rulesEl.value = `${config.rules}\n${toneRules}`.trim();
+  outputEl.value = config.output.trim();
+
+}
+
+
+
 
 
   // PromptKit preview renderer
@@ -682,6 +716,19 @@ if (importInput) {
     const promptMode = valueOrBlank(document.getElementById("promptMode"));
     const promptTone = valueOrBlank(document.getElementById("promptTone"));
 
+    const customRules = valueOrBlank(document.getElementById("customRules"));
+    const customOutput = valueOrBlank(document.getElementById("customOutput"));
+
+   const config = PROMPT_CONFIG[promptMode];
+   const toneRules = TONE_CONFIG[promptTone] || "";
+
+   if (!config) return "";
+
+   const finalRules = customRules || `${config.rules}\n${toneRules}`.trim();
+   const finalOutput = customOutput || config.output.trim();
+
+
+
     const badge = sanitizeBadge(valueOrBlank(badgeEl));
     const title = valueOrBlank(titleEl);
     const problem = valueOrBlank(problemEl);
@@ -702,7 +749,9 @@ if (importInput) {
     result,
     tools,
     refs,
-    tone: promptTone
+    tone: promptTone,
+    rules: finalRules,
+    output: finalOutput
   };
 
   if (promptMode === "readme") {
@@ -722,102 +771,112 @@ if (importInput) {
 }
 
 function buildPortfolioPrompt(data) {
-  const config = PROMPT_CONFIG.portfolio;
-  const toneRules = TONE_CONFIG[data.tone] || "";
 
-
-
-  return `You are a strict formatter and editor.
+return `You are a strict formatter and editor.
 
 Task:
 Convert input into a minimalist portfolio project card.
 
 My input:
+Badge: ${data.badge}
 Title: ${data.title}
 Problem: ${data.problem}
 Actions:
 ${data.actions}
+Result: ${data.result}
 Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
 
 Rules:
-${config.rules}
-${toneRules}
+${data.rules}
 
 Output:
-${config.output}`;
+${data.output}`;
 }
 
 
 
-function buildReadmePrompt(data) {
-  const config = PROMPT_CONFIG.readme;
-  const toneRules = TONE_CONFIG[data.tone] || ""
 
-  return `Create a clean GitHub README section.
+function buildReadmePrompt(data) {
+
+
+ return `Create a clean GitHub README section.
 
 Input:
+Badge: ${data.badge}
 Title: ${data.title}
 Problem: ${data.problem}
 Actions:
 ${data.actions}
+Result: ${data.result}
 Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
 
 Rules:
-${config.rules}
-${toneRules}
+${data.rules}
 
 Output:
-${config.output}`;
+${data.output}`;
 }
 
 
 
 
 function buildLinkedInPrompt(data) {
-  const config = PROMPT_CONFIG.linkedin;
-  const toneRules = TONE_CONFIG[data.tone] || ""
 
-  return `Create a professional LinkedIn post.
+
+ return `Create a professional LinkedIn post.
 
 Input:
+Badge: ${data.badge}
 Title: ${data.title}
 Problem: ${data.problem}
 Actions:
 ${data.actions}
+Result: ${data.result}
+Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
 
 Rules:
-${config.rules}
-${toneRules}
+${data.rules}
 
 Output:
-${config.output}`;
+${data.output}`;
 }
 
 
 
-function buildWebPrompt(data) {
-  const config = PROMPT_CONFIG.web;
-  const toneRules = TONE_CONFIG[data.tone] || ""
 
-  return `You are a strict formatter and project planner.
+function buildWebPrompt(data) {
+
+
+ return `You are a strict formatter and project planner.
 
 Task:
 Create a web project build prompt from my input.
 
 My input:
+Badge: ${data.badge}
 Title: ${data.title}
 Problem: ${data.problem}
 Actions:
 ${data.actions}
+Result: ${data.result}
 Tools: ${data.tools}
+References:
+${data.refs || "(none)"}
 
 Rules:
-${config.rules}
-${toneRules}
+${data.rules}
 
 Output:
-${config.output}`;
+${data.output}`;
 }
+
+
 
 const TONE_CONFIG = {
   professional: `
