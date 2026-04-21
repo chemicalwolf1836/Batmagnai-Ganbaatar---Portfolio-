@@ -188,12 +188,15 @@ Project planning prompt:
 };
 
 const promptModeEl = document.getElementById("promptMode");
-const promptToneEl = document.getElementById("promptTone");
+const promptToneEl =  document.getElementById("promptTone");
 const resetDefaultsBtn = document.getElementById("resetDefaults");
+
 
 promptModeEl?.addEventListener("change", loadDefaults);
 promptToneEl?.addEventListener("change", loadDefaults);
 resetDefaultsBtn?.addEventListener("click", loadDefaults);
+
+
 
 
 function loadDefaults() {
@@ -217,9 +220,8 @@ function loadDefaults() {
   rulesEl.value = `${config.rules}\n${toneRules}`.trim();
   outputEl.value = config.output.trim();
 
+  refreshGeneratedPrompt();
 }
-
-
 
 
 
@@ -980,5 +982,6 @@ const TONE_CONFIG = {
       copyBtn.textContent = "Copy Prompt";
     }, 2000);
   }
+
 });
 })();
