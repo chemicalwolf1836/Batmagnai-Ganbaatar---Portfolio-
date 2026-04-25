@@ -550,34 +550,42 @@ editingId = null;
 
 
 
-    if (!problemEl || !actionsEl || !resultEl) {console.warn("Missing one or more fields in PromptKit page."); return;}
-
-    // Load saved values from localStorage
-    problemEl.value = localStorage.getItem("problem") || "";
-    actionsEl.value = localStorage.getItem("actions") || "";
-    resultEl.value = localStorage.getItem("result") || "";
-
-    renderSavedPrompts();
-    updateEditingUI();
 
 
-    //Save when typing
-    problemEl.addEventListener("input", () => {
-        localStorage.setItem("problem", problemEl.value);
-        showSaveStatus("Saved ✓");
-    });
+  if (!problemEl || !actionsEl || !resultEl) {console.warn("Missing one or more fields in PromptKit page."); return;}
 
-    actionsEl.addEventListener("input", () => {
-        localStorage.setItem("actions", actionsEl.value);
-        showSaveStatus("Saved ✓");
-    });
+    // Draft autosave fields
+const draftFields = [
+  "problem",
+  "actions",
+  "result",
+  "tools",
+  "repo",
+  "demo",
+  "writeup"
+];
 
-    resultEl.addEventListener("input", () => {
-        localStorage.setItem("result", resultEl.value);
-        showSaveStatus("Saved ✓");
-    });
+// Load saved draft values
+draftFields.forEach((id) => {
+  const el = document.getElementById(id);
+  if (!el) return;
 
-    console.log("Draft auto-save enabled for Problem, Actions, and Result fields.");
+  el.value = localStorage.getItem(id) || "";
+});
+
+// Save draft values while typing
+draftFields.forEach((id) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  el.addEventListener("input", () => {
+    localStorage.setItem(id, el.value);
+    showSaveStatus("Saved ✓");
+  });
+});
+
+console.log("Draft auto-save enabled for:", draftFields.join(", "));
+
 
     if (exportBtn) {
   exportBtn.addEventListener("click", function () {
@@ -647,13 +655,23 @@ if (importInput) {
     clearDraftBtn.addEventListener("click", () => {
       // 1) Confirm with user (optional but good UX)
       if (!confirm("Are you sure you want to clear the saved draft? This cannot be undone.")) return;
-        localStorage.removeItem("problem");
-        localStorage.removeItem("actions");
-        localStorage.removeItem("result");
-        // 2) Clear the fields on the page as well
-        problemEl.value = "";
-        actionsEl.value = "";
-        resultEl.value = "";
+        const draftFields = [
+       "problem",
+       "actions",
+       "result",
+       "tools",
+       "repo",
+       "demo",
+       "writeup"
+       ];
+
+       draftFields.forEach((key) => {
+       localStorage.removeItem(key);
+
+       const el = document.getElementById(key);
+       if (el) el.value = "";
+      });
+
         console.log("✅ Cleared saved draft.");
         //3) Clear output prompt box too  (optional but nice for workflow)
         if (outputEl) outputEl.value = "";
