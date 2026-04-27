@@ -238,6 +238,20 @@ function loadDefaults() {
     return (s || "").toString();
   }
 
+function formatUrl(url) {
+  if (!url) return "";
+
+  // If it already starts with http → OK
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+
+  // Otherwise → assume https
+  return "https://" + url;
+}
+
+
+
   function renderPreviewCard() {
     const mount = document.getElementById("previewMount");
     if (!mount) return;
@@ -245,36 +259,71 @@ function loadDefaults() {
     const badge = sanitizeBadge(valueOrBlank(badgeEl));
     const title = valueOrBlank(titleEl) || "Untitled project";
     const result = valueOrBlank(resultEl) || "Outcome will appear here.";
-    const bullets = splitBullets(valueOrBlank(actionsEl));
+    const bullets = splitBullets(valueOrBlank(actionsEl)); 
+    const tools = valueOrBlank(toolsEl) || "Tools will appear here.";
+    const problem = valueOrBlank(problemEl) || "Describe the problem.";
+    const rules = valueOrBlank(document.getElementById("customRules")) || "Add custom rules.";
+    const outputFormat = valueOrBlank(document.getElementById("customOutput")) || "Add desired output format.";
     const repo = valueOrBlank(repoEl);
     const demo = valueOrBlank(demoEl);
     const writeup = valueOrBlank(writeupEl);
     const status = result ? "Ready" : "Draft"; // can be changed later
 
     const links = [];
-    if (repo) links.push({ label: "Repo", href: repo });
-    if (demo) links.push({ label: "Demo", href: demo });
-    if (writeup) links.push({ label: "Write-up", href: writeup });
+    if (repo) links.push({ label: "Repo", href: formatUrl(repo) });
+    if (demo) links.push({ label: "Demo", href: formatUrl(demo) });
+    if (writeup) links.push({ label: "Write-up", href: formatUrl(writeup) });
 
     const bulletsHtml = bullets.length
       ? `<p>${bullets.map(b => `• ${escapeHtml(b)}`).join("<br />")}</p>`
       : `<p style="opacity:.8">• Add 3–6 action bullets to preview.</p>`;
 
     const linksHtml = links.length
-      ? `<div class="links">${links.map(l => `<a class="link" href="${escapeAttr(l.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label)}</a>`).join("")}</div>`
-      : `<div class="links"><span class="link" style="opacity:.6">No references yet</span></div>`;
+       ? `<div class="links">${
+      links.map(l =>
+        `<a class="link" href="${escapeAttr(l.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(l.label)}</a>`
+      ).join(" ")
+    }</div>`
+  : `<div class="links"><span class="link" style="opacity:.6">No references yet</span></div>`;
+
 
     mount.innerHTML =
-      `<article class="card">` +
-        `<div class="meta">` +
-          `<span class="badge">${escapeHtml(badge)}</span>` +
-          `<span class="badge muted">${status}</span>`+
-        `</div>` +
-        `<h3>${escapeHtml(title)}</h3>` +
-        `<p>${escapeHtml(result)}</p>` +
-        bulletsHtml +
-        linksHtml +
-      `</article>`;
+  `<article class="card">` +
+    `<div class="meta">` +
+      `<span class="badge">${escapeHtml(badge)}</span>` +
+      `<span>${escapeHtml(status)}</span>` +
+    `</div>` +
+    `<h3>${escapeHtml(title)}</h3>` +
+    '<div class="section-block">' +
+  '<p><strong>Problem</strong></p>' +
+  '<p>' + escapeHtml(problemEl?.value || "What problem were you solving?") + '</p>' +
+'</div>' +
+'<div class="section-block">' +
+      '<p><strong>Rules</strong></p>' +
+      '<p>' + escapeHtml(rules) + '</p>' +
+    '</div>'
+ +
+   '<div class="section-block">' +
+      '<p><strong>Output</strong></p>' +
+      '<p>' + escapeHtml(outputFormat) + '</p>' +
+    '</div>'
++
+
+
+
+'<div class="section-block">' +
+  '<p><strong>Actions</strong></p>' +
+  (bulletsHtml || '<p style="opacity:.6">Add actions...</p>') +
+'</div>' +
+
+
+
+    `<p><strong>Result:</strong> ${escapeHtml(result)}</p>` +
+    `<p><strong>Tools:</strong> ${escapeHtml(valueOrBlank(toolsEl) || "HTML, CSS, JavaScript")}</p>` +
+    linksHtml +
+  `</article>`;
+
+
   }
 
   let editingId = null;
@@ -296,6 +345,8 @@ document.addEventListener("DOMContentLoaded", function () {
  const exportBtn = document.getElementById("exportBtn");
  const importInput = document.getElementById("importInput");
  const promptMode = document.getElementById("promptMode").value;
+ const rulesEl = document.getElementById("customRules");
+const outputFormatEl = document.getElementById("customOutput");
 
 
 
@@ -755,6 +806,9 @@ if (importInput) {
     const actions = valueOrBlank(actionsEl);
     const result = valueOrBlank(resultEl);
     const tools = valueOrBlank(toolsEl);
+    const rules = valueOrBlank(document.getElementById("customRules"));
+    const output = valueOrBlank(document.getElementById("customOutput"));
+
 
     const repo = valueOrBlank(repoEl);
     const demo = valueOrBlank(demoEl);
