@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Edit(**/*.html)",
+      "Edit(**/*.css)",
+      "Edit(**/*.js)",
+      "Edit(**/CLAUDE.md)",
+      "Bash(git add *)",
+      "Bash(git commit -m *)",
+      "Bash(git push *)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)"
+    ],
+    "deny": [
+      "Bash(rm -rf *)",
+      "Bash(git push --force*)"
+    ]
+  },
+  "env": {
+    "ANTHROPIC_API_KEY": ""
+  },
+  "model": "claude-sonnet-4-6",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '[Claude Code] File edited successfully'"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,6 +1,18 @@
-// Minimal JS: mobile menu + active nav + mailto builder
+// Minimal JS: mobile menu + active nav + mailto builder + theme toggle
 
 (function () {
+  // Theme toggle — CSS handles icon visibility, JS handles state + persistence
+  const themeBtn = document.querySelector("[data-theme-btn]");
+  const html = document.documentElement;
+
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const next = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      localStorage.setItem("theme", next);
+    });
+  }
+
   const menuBtn = document.querySelector("[data-menu-btn]");
   const navLinks = document.querySelector("[data-nav-links]");
 
@@ -45,7 +57,7 @@
       const email = (document.querySelector("#email")?.value || "").trim();
       const msg = (document.querySelector("#message")?.value || "").trim();
 
-      const to = "your-email@example.com"; // <-- REPLACE THIS
+      const to = "batmagnai.ganbaatar@gmail.com";
       const subject = encodeURIComponent(`Portfolio inquiry from ${name || "someone"}`);
       const body = encodeURIComponent(
         `Name: ${name || "[not provided]"}\n` +
@@ -220,7 +232,7 @@ function loadDefaults() {
   rulesEl.value = `${config.rules}\n${toneRules}`.trim();
   outputEl.value = config.output.trim();
 
-  refreshGeneratedPrompt();
+  if (typeof renderPreviewCard === "function") renderPreviewCard();
 }
 
 
@@ -730,9 +742,9 @@ if (importInput) {
         const mount = document.getElementById("previewMount");
         if (mount) mount.innerHTML = "";
         //5) Show status message
-        setStatus("Saved draft cleared.");
+        showSaveStatus("Saved draft cleared.");
         //6) Clear status message after a few seconds
-        setTimeout(() => { setStatus(""); }, 3000);
+        setTimeout(() => { if (saveStatusEl) saveStatusEl.textContent = ""; }, 3000);
         //7) Update UI: disable Clear Draft button since there's no draft now
         clearDraftBtn.disabled = true;
         //8) Re-enable Clear Draft button after user starts typing again (optional)
@@ -762,22 +774,6 @@ if (importInput) {
       .replace(/"/g, "&quot;")
       .replace(/'/g, "&#39;");
   }
-
-  function updateEditingUI() {
-  const saveBtn = document.querySelector("[data-save]");
-  const editingLabel = document.getElementById("editingLabel");
-
-  if (!saveBtn || !editingLabel) return;
-
-  if (editingId) {
-    saveBtn.textContent = "Update Prompt";
-    editingLabel.textContent = "Editing mode";
-  } else {
-    saveBtn.textContent = "Save Prompt";
-    editingLabel.textContent = "";
-  }
-}
-
 
   function escapeAttr(str) {
     return escapeHtml(str).replace(/\s/g, "%20");

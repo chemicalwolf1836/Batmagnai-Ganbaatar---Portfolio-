@@ -10,6 +10,7 @@
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-icon-512x512.png">
 
   <link rel="stylesheet" href="style.css" />
+  <script>if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark");</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -22,10 +23,6 @@
         <span>/ Tokyo Neon Kissa</span>
       </a>
 
-      <button class="menu-toggle" data-menu-btn aria-expanded="false">
-        Menu
-      </button>
-
       <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
         <a href="index.html" data-nav-link>Home</a>
         <a href="about.html" data-nav-link>About</a>
@@ -33,6 +30,14 @@
         <a href="promptkit.html" data-nav-link>PromptKit</a>
         <a href="contact.html" data-nav-link>Contact</a>
       </nav>
+
+      <div class="nav-controls">
+        <button class="theme-btn" data-theme-btn aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="navLinks">Menu</button>
+      </div>
     </div>
   </header>
 
