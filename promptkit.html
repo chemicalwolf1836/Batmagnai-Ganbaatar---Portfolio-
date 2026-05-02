@@ -10,7 +10,7 @@
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-icon-512x512.png">
 
   <meta name="description" content="Generate a strict, minimalist prompt for portfolio project cards." />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2" />
   <script>if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark");</script>
 </head>
 <body>
@@ -195,13 +195,13 @@
           <div id="editingLabel" class="editing-status"></div>
 
           <div class="actions">
-          <button class="btn primary" type="button" data-generate>Generate Prompt</button>
-          <button class="btn" type="button" data-save-prompt>Save Prompt</button>
-          <button class="btn" type="button" data-clear>Clear</button>
-          <button class="btn" type="button" data-clear-draft>Clear Saved Draft</button>
-          <span id="saveStatus" style="font-size: 12px;color:red;margin-left: 10px;"></span>
-          <p class="muted">Tip: if you click twice while generating, you’ll see “Please wait…”.</p>
-         </div>
+            <button class="btn primary" type="button" data-generate>Generate Prompt</button>
+            <button class="btn" type="button" data-save-prompt>Save Prompt</button>
+            <button class="btn" type="button" data-clear>Clear</button>
+            <button class="btn" type="button" data-clear-draft>Clear Saved Draft</button>
+          </div>
+          <span id="saveStatus"></span>
+          <p class="muted">Tip: if you click twice while generating, you’ll see "Please wait…".</p>
 
         </div>
 

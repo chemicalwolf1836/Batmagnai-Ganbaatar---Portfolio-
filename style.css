@@ -232,6 +232,8 @@ h1{
 
 
 .btn{
+  appearance: none;
+  -webkit-appearance: none;
   display:inline-flex;
   align-items:center;
   gap: 10px;
@@ -240,6 +242,7 @@ h1{
   border: 1px solid var(--line);
   background: var(--surface);
   cursor: pointer;
+  font-family: inherit;
   font-size: 14px;
   transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
@@ -257,9 +260,6 @@ h1{
   box-shadow: 0 16px 30px rgba(255,45,45,0.18);
 }
 
-.formish .btn.primary {
-  margin-bottom: 56px;
-}
 
 .formish .field {
   display: grid;
@@ -595,10 +595,12 @@ h1{
   gap: 12px;
 }
 
-.saveStatus{
+.saveStatus, #saveStatus {
+  display: block;
   font-size: 12px;
   color: red;
   opacity: 0.8;
+  margin-top: 6px;
   white-space: nowrap;
 }
 label{
@@ -775,13 +777,13 @@ input:focus, textarea:focus{
 
 /*Promptkit buttons*/
 .btn:not(.primary) {
-  background: rgba(0,0,0,0.03);
+  background: var(--surface);
   border: 1px solid var(--line);
   color: var(--text);
 }
 
 .btn:not(.primary):hover {
-  background: rgba(0,0,0,0.06);
+  background: var(--surface);
   border-color: var(--accent);
 }
 
@@ -816,14 +818,14 @@ input:focus, textarea:focus{
 
 .actions {
   display: flex;
+  align-items: flex-start;
   gap: 10px;
   flex-wrap: wrap;
   margin-top: 10px;
 }
 
 .actions .btn {
-  flex: 1;
-  justify-content: center;
+  flex: none;
 }
 
 .hero-actions {
@@ -1026,6 +1028,7 @@ html[data-theme="dark"] .theme-btn .icon-sun { display: block; }
    DARK MODE — traditional dark grey + white
    ========================================= */
 html[data-theme="dark"] {
+  color-scheme: dark;
   --bg: #1a1a1a;
   --surface: #262626;
   --text: #f5f5f5;
