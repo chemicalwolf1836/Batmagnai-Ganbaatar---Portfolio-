@@ -1369,6 +1369,113 @@ html[data-theme="dark"] .icon-dm-invert {
   .resume-updated { align-self: center; }
 }
 
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+
+/* Native cross-page fade — browser holds a screenshot of the old page,
+   no blank flash between pages. Falls back to instant nav on Firefox. */
+@view-transition { navigation: auto; }
+
+@keyframes vt-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes vt-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-6px); }
+}
+::view-transition-new(root) { animation: vt-in  260ms var(--ease) both; }
+::view-transition-old(root) { animation: vt-out 160ms var(--ease) both; }
+
+/* Fallback for browsers without View Transitions (Firefox) */
+@supports not (view-transition-name: none) {
+  @keyframes pg-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  body { animation: pg-in 220ms var(--ease) both; }
+}
+
+/* ============================================
+   BUTTON ENHANCEMENTS
+   ============================================ */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer glint that sweeps across primary buttons on hover */
+.btn.primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, rgba(255,255,255,0.18) 50%, transparent 62%);
+  transform: translateX(-110%);
+  transition: transform 380ms var(--ease);
+  pointer-events: none;
+}
+.btn.primary:hover::after {
+  transform: translateX(110%);
+}
+
+/* Stronger hover lift + glow for primary buttons */
+.btn.primary:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 22px 44px rgba(255, 45, 45, 0.28);
+}
+
+/* Press-down on click */
+.btn.primary:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: 0 4px 12px rgba(255, 45, 45, 0.15);
+  transition-duration: 70ms;
+}
+.btn:not(.primary):active {
+  transform: translateY(1px);
+  box-shadow: none;
+  transition-duration: 70ms;
+}
+
+/* Ripple element injected by JS */
+.btn-ripple {
+  position: absolute;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: -60px;
+  margin-top: -60px;
+  background: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+  animation: btn-ripple 560ms var(--ease) forwards;
+}
+.btn.primary .btn-ripple { background: rgba(255, 255, 255, 0.2); }
+@keyframes btn-ripple {
+  from { transform: scale(0); opacity: 0.8; }
+  to   { transform: scale(4);  opacity: 0; }
+}
+
+/* ============================================
+   NAV LINK TRANSITIONS
+   ============================================ */
+.nav-links a {
+  transition: border-color 160ms var(--ease), background 160ms var(--ease);
+}
+.nav-links a:hover {
+  background: rgba(255, 45, 45, 0.05);
+}
+
+/* ============================================
+   REDUCED MOTION OVERRIDES
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none !important; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation: none !important; }
+  .btn-ripple { display: none !important; }
+  .btn.primary::after { display: none !important; }
+}
+
 /* Print styles */
 @media print {
   .site-header,
