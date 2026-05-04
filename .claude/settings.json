@@ -6,6 +6,7 @@
       "Edit(**/*.css)",
       "Edit(**/*.js)",
       "Edit(**/CLAUDE.md)",
+      "Edit(**/README.md)",
       "Bash(git add *)",
       "Bash(git commit -m *)",
       "Bash(git push *)",

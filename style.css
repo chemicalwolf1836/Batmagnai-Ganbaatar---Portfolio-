@@ -1006,6 +1006,8 @@ p {
   justify-content: center;
   width: 34px;
   height: 34px;
+  padding: 0;
+  line-height: 1;
   border-radius: 50%;
   background: none;
   border: 1px solid var(--line);
