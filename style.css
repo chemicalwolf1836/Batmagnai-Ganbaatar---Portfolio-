@@ -342,17 +342,21 @@ h1{
 .chip{
   display:flex;
   justify-content: space-between;
-  align-items:center;
+  align-items: flex-start;
   gap: 12px;
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 10px 12px;
   background: var(--surface);
 }
+.chip span{
+  white-space: nowrap;
+}
 .chip code{
   font-family: var(--mono);
   font-size: 12px;
   color: var(--muted);
+  text-align: right;
 }
 
 /* Sections */
