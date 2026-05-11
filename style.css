@@ -402,7 +402,6 @@ h1{
 .cards{
   margin-top: 24px;
   display:grid;
-  grid-template-columns: repeat (auto-fit, minmax(300px,380px));
   grid-template-columns: repeat(2,1fr);
   gap: 22px;
   justify-content: start;
@@ -413,7 +412,7 @@ h1{
   border-radius: var(--radius);
   padding: 16px;
   background: var(--surface);
-  transition: transform 180ms var(--ease), border-color 180ms var(--ease); box-shadow: 180ms var(--ease);
+  transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
 .card:hover{
   transform: translateY(-3px);

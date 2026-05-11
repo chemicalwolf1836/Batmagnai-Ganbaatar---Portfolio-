@@ -370,7 +370,7 @@ document.addEventListener("DOMContentLoaded", function () {
  const savedPromptsKey = "promptkit_saved_prompts_v2";
  const exportBtn = document.getElementById("exportBtn");
  const importInput = document.getElementById("importInput");
- const promptMode = document.getElementById("promptMode").value;
+ const promptMode = document.getElementById("promptMode")?.value ?? "";
  const rulesEl = document.getElementById("customRules");
 const outputFormatEl = document.getElementById("customOutput");
 
