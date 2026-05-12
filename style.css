@@ -1207,6 +1207,28 @@ html[data-theme="dark"] select {
   text-align: right;
 }
 
+.resume-actions .btn {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 7px 12px;
+  border-radius: 10px;
+  gap: 6px;
+  background: transparent;
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.resume-actions .btn.primary {
+  background: transparent;
+  color: var(--accent);
+  border-color: rgba(255, 45, 45, 0.35);
+}
+
+.resume-actions .btn.primary:hover {
+  background: rgba(255, 45, 45, 0.05);
+  box-shadow: none;
+}
+
 .resume-summary {
   color: var(--text) !important;
   font-size: 15px;
