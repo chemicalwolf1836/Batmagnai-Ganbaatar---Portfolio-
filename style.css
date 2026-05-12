@@ -212,7 +212,7 @@ h1{
 .lead{
   margin: 0 0 14px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.65;
   max-width: 46ch;
 }
@@ -238,7 +238,7 @@ h1{
   align-items:center;
   gap: 8px;
   border-radius: 12px;
-  padding: 9px 14px;
+  padding: 10px 18px;
   border: 1px solid var(--line);
   background: transparent;
   cursor: pointer;
@@ -464,7 +464,7 @@ h1{
 }
 .card p{
   margin: 0 0 12px;
-  font-size: 14px;
+  font-size: 15px;
 }
 .card .links{
   display:flex;
@@ -501,7 +501,7 @@ h1{
 .saved-prompt-preview {
   margin: 0 0 14px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
 }
 
@@ -720,7 +720,7 @@ input:focus, textarea:focus{
 }
 
 .hero .lead{
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.65;
   max-width: 46ch;
   margin: 0 0 14px;
@@ -765,7 +765,7 @@ input:focus, textarea:focus{
 
 .stack-list li {
   margin-bottom: 6px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -783,7 +783,7 @@ input:focus, textarea:focus{
 
 .feature-list li {
   margin-bottom: 8px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
 }
 
@@ -840,10 +840,10 @@ input:focus, textarea:focus{
 
 .actions {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: 8px;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin: 10px 0 18px;
 }
 
 .actions .btn {
@@ -1201,6 +1201,7 @@ html[data-theme="dark"] select {
   align-items: flex-end;
   gap: 14px;
   flex-shrink: 0;
+  padding-top: 36px;
 }
 
 .resume-updated {
@@ -1372,7 +1373,7 @@ html[data-theme="dark"] .icon-dm-invert {
 }
 
 .timeline-bullets li {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--muted);
   line-height: 1.6;
 }
