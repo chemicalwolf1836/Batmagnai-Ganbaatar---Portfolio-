@@ -15,8 +15,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://batmagnai-portfolio.netlify.app/about.html" />
   <meta name="theme-color" content="#ff2d2d" />
+  <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css" />
-  <script>if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark");</script>
+  <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>

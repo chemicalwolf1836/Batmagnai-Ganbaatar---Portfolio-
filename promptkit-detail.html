@@ -11,8 +11,9 @@
 
   <meta name="description" content="Case study: PromptKit v2 — a browser-based workflow tool for creating, saving, and reusing structured AI prompts with persistent state and live preview." />
   <meta name="theme-color" content="#ff2d2d" />
+  <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css" />
-  <script>if(localStorage.getItem("theme")==="dark")document.documentElement.setAttribute("data-theme","dark");</script>
+  <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
