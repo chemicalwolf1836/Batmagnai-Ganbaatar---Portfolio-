@@ -1389,8 +1389,11 @@ html[data-theme="dark"] .icon-dm-invert {
   .resume-header { flex-direction: column; gap: 20px; }
   .resume-contacts { flex-direction: column; gap: 10px; align-items: flex-start; }
   .resume-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; padding-top: 0; gap: 10px; }
-  .resume-actions .btn { flex: 1; justify-content: center; }
-  .resume-updated { width: 100%; align-self: flex-start; margin-top: 2px; text-align: left; }
+  .resume-actions .btn { flex: 1; justify-content: center; line-height: 1; padding-top: 11px; padding-bottom: 11px; }
+  .resume-updated { width: 100%; align-self: flex-start; margin-top: 10px; text-align: left; padding-left: 12px; }
+  .skill-blocks { gap: 16px; }
+  .skill-block-label { margin-bottom: 14px; }
+  .skill-chip { padding: 7px 11px; font-size: 12px; }
 }
 
 /* ============================================
