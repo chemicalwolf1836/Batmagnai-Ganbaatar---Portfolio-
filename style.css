@@ -236,28 +236,31 @@ h1{
   -webkit-appearance: none;
   display:inline-flex;
   align-items:center;
-  gap: 10px;
-  border-radius: 14px;
-  padding: 12px 14px;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 9px 14px;
   border: 1px solid var(--line);
-  background: var(--surface);
+  background: transparent;
   cursor: pointer;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 13px;
+  color: var(--muted);
   transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
 .btn:hover{
   transform: translateY(-1px);
-  border-color: rgba(255,45,45,0.45);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  border-color: rgba(255,45,45,0.35);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  color: var(--text);
 }
 .btn.primary{
-  background: var(--accent);
-  border-color: var(--accent);
-  color: white;
+  background: transparent;
+  border-color: rgba(255,45,45,0.35);
+  color: var(--accent);
 }
 .btn.primary:hover{
-  box-shadow: 0 16px 30px rgba(255,45,45,0.18);
+  background: rgba(255,45,45,0.05);
+  box-shadow: none;
 }
 
 
@@ -1205,28 +1208,6 @@ html[data-theme="dark"] select {
   font-size: 11px;
   color: var(--muted);
   text-align: right;
-}
-
-.resume-actions .btn {
-  font-family: var(--mono);
-  font-size: 11px;
-  padding: 7px 12px;
-  border-radius: 10px;
-  gap: 6px;
-  background: transparent;
-  border-color: var(--line);
-  color: var(--muted);
-}
-
-.resume-actions .btn.primary {
-  background: transparent;
-  color: var(--accent);
-  border-color: rgba(255, 45, 45, 0.35);
-}
-
-.resume-actions .btn.primary:hover {
-  background: rgba(255, 45, 45, 0.05);
-  box-shadow: none;
 }
 
 .resume-summary {
