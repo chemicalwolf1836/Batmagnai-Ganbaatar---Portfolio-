@@ -385,6 +385,10 @@ h1{
   letter-spacing: 0.5px;
 }
 
+.opacity-6 {
+  color: var(--muted);
+}
+
 .section-divider {
   margin: 24px 0;
   border: none;
