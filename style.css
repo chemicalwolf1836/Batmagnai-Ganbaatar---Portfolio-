@@ -381,7 +381,7 @@ h1{
   margin: 12px 0 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
   color: var(--muted);
 }
 
