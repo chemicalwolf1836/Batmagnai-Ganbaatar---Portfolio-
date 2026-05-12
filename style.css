@@ -1394,6 +1394,10 @@ html[data-theme="dark"] .icon-dm-invert {
   .skill-blocks { gap: 16px; }
   .skill-block-label { margin-bottom: 14px; }
   .skill-chip { padding: 7px 11px; font-size: 12px; }
+  .timeline-entry { padding: 16px 0 16px 22px; }
+  .timeline-role { font-size: 14px; }
+  .timeline-bullets li { font-size: 13px; line-height: 1.5; }
+  .timeline-bullets { gap: 6px; }
 }
 
 /* ============================================
