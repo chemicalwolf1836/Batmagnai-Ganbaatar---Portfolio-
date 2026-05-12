@@ -1387,8 +1387,10 @@ html[data-theme="dark"] .icon-dm-invert {
 /* Mobile adjustments */
 @media (max-width: 600px) {
   .resume-header { flex-direction: column; gap: 20px; }
-  .resume-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; padding-top: 0; }
-  .resume-updated { align-self: center; }
+  .resume-contacts { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .resume-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; padding-top: 0; gap: 10px; }
+  .resume-actions .btn { flex: 1; justify-content: center; }
+  .resume-updated { width: 100%; align-self: flex-start; margin-top: 2px; text-align: left; }
 }
 
 /* ============================================
