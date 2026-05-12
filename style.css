@@ -1196,7 +1196,7 @@ html[data-theme="dark"] select {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
+  gap: 14px;
   flex-shrink: 0;
   padding-top: 56px;
 }
