@@ -1145,7 +1145,7 @@ html[data-theme="dark"] select {
    ========================================= */
 
 .resume-header {
-  padding: 38px 0 8px;
+  padding: 38px 0 28px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -1159,7 +1159,7 @@ html[data-theme="dark"] select {
   font-family: var(--mono);
   font-size: 13px;
   color: var(--muted);
-  margin: 6px 0 18px;
+  margin: 12px 0 26px;
 }
 
 .resume-contacts {
