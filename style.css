@@ -1198,7 +1198,6 @@ html[data-theme="dark"] select {
   align-items: flex-end;
   gap: 14px;
   flex-shrink: 0;
-  padding-top: 56px;
 }
 
 .resume-updated {
