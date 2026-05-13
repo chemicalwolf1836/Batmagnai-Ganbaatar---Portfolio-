@@ -1306,7 +1306,7 @@ html[data-theme="dark"] .icon-dm-invert {
 
 .timeline-entry {
   position: relative;
-  padding: 14px 0 22px 26px;
+  padding: 14px 0 18px 26px;
   border-left: 2px solid var(--line);
   transition: border-color 200ms var(--ease);
 }
@@ -1354,18 +1354,19 @@ html[data-theme="dark"] .icon-dm-invert {
   font-size: 13px;
 }
 
-.timeline-org {
+.timeline-entry .timeline-org {
   font-family: var(--mono);
   font-size: 12px;
   color: var(--muted);
-  margin: 0 0 10px;
+  margin: 16px 0 10px;
+  padding-left: 4px;
 }
 
 .timeline-top {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 5px;
   margin-bottom: 4px;
 }
 
@@ -1375,7 +1376,8 @@ html[data-theme="dark"] .icon-dm-invert {
   flex-wrap: wrap;
 }
 .timeline-tags .badge {
-  padding: 5px 11px;
+  padding: 3px 8px;
+  font-size: 11px;
 }
 
 .timeline-bullets {
@@ -1395,6 +1397,7 @@ html[data-theme="dark"] .icon-dm-invert {
   display: flex;
   gap: 16px;
   margin-top: 16px;
+  padding-left: 16px;
 }
 
 /* Mobile adjustments */
