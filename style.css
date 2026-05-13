@@ -425,9 +425,11 @@ h1{
   margin-bottom: 56px;
 }
 .card{
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 16px;
+  padding: 20px;
   background: var(--surface);
   transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
@@ -466,10 +468,16 @@ h1{
   margin: 0 0 12px;
   font-size: 15px;
 }
+.muted{
+  font-size: 13px;
+  color: var(--muted);
+}
 .card .links{
   display:flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 14px;
 }
 
 .saved-prompts-grid {
@@ -1291,14 +1299,14 @@ html[data-theme="dark"] .icon-dm-invert {
 
 /* Timeline */
 .timeline {
-  margin-top: 20px;
+  margin-top: 0;
   display: grid;
   gap: 0;
 }
 
 .timeline-entry {
   position: relative;
-  padding: 20px 0 20px 26px;
+  padding: 14px 0 22px 26px;
   border-left: 2px solid var(--line);
   transition: border-color 200ms var(--ease);
 }
@@ -1307,7 +1315,7 @@ html[data-theme="dark"] .icon-dm-invert {
   content: '';
   position: absolute;
   left: -5px;
-  top: 26px;
+  top: 18px;
   width: 8px;
   height: 8px;
   background: var(--accent);
@@ -1320,6 +1328,7 @@ html[data-theme="dark"] .icon-dm-invert {
 
 .timeline-entry:last-child { border-left-color: transparent; }
 .timeline-entry:last-child::before { display: none; }
+.timeline-entry:only-child { padding-left: 0; border-left: none; }
 
 /* Placeholder entries are visually muted */
 .timeline-placeholder { opacity: 0.45; }
@@ -1334,13 +1343,15 @@ html[data-theme="dark"] .icon-dm-invert {
 
 .timeline-role {
   margin: 0 0 4px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .timeline-at {
   color: var(--muted);
   font-weight: 400;
+  font-family: var(--mono);
+  font-size: 13px;
 }
 
 .timeline-org {
@@ -1352,36 +1363,38 @@ html[data-theme="dark"] .icon-dm-invert {
 
 .timeline-top {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 4px;
 }
 
 .timeline-tags {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-  padding-top: 2px;
+}
+.timeline-tags .badge {
+  padding: 5px 11px;
 }
 
 .timeline-bullets {
-  margin: 6px 0 0;
+  margin: 10px 0 0;
   padding-left: 16px;
   display: grid;
-  gap: 4px;
+  gap: 7px;
 }
 
 .timeline-bullets li {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .timeline-links {
   display: flex;
   gap: 16px;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 /* Mobile adjustments */
@@ -1394,7 +1407,7 @@ html[data-theme="dark"] .icon-dm-invert {
   .skill-blocks { gap: 16px; }
   .skill-block-label { margin-bottom: 14px; }
   .skill-chip { padding: 7px 11px; font-size: 12px; }
-  .timeline-entry { padding: 16px 0 16px 22px; }
+  .timeline-entry { padding: 12px 0 16px 22px; }
   .timeline-role { font-size: 14px; }
   .timeline-bullets li { font-size: 13px; line-height: 1.5; }
   .timeline-bullets { gap: 6px; }
