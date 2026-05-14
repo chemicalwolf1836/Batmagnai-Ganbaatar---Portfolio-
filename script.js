@@ -316,33 +316,17 @@ function formatUrl(url) {
   `<article class="card">` +
     `<div class="meta">` +
       `<span class="badge">${escapeHtml(badge)}</span>` +
-      `<span>${escapeHtml(status)}</span>` +
+      `<span class="muted">${escapeHtml(status)}</span>` +
     `</div>` +
     `<h3>${escapeHtml(title)}</h3>` +
     '<div class="section-block">' +
-  '<p><strong>Problem</strong></p>' +
-  '<p>' + escapeHtml(problemEl?.value || "What problem were you solving?") + '</p>' +
-'</div>' +
-'<div class="section-block">' +
-      '<p><strong>Rules</strong></p>' +
-      '<p>' + escapeHtml(rules) + '</p>' +
-    '</div>'
- +
-   '<div class="section-block">' +
-      '<p><strong>Output</strong></p>' +
-      '<p>' + escapeHtml(outputFormat) + '</p>' +
-    '</div>'
-+
-
-
-
-'<div class="section-block">' +
-  '<p><strong>Actions</strong></p>' +
-  (bulletsHtml || '<p style="opacity:.6">Add actions...</p>') +
-'</div>' +
-
-
-
+      '<p><strong>Problem</strong></p>' +
+      '<p>' + escapeHtml(problemEl?.value || "What problem were you solving?") + '</p>' +
+    '</div>' +
+    '<div class="section-block">' +
+      '<p><strong>Actions</strong></p>' +
+      (bulletsHtml || '<p style="opacity:.6">Add actions...</p>') +
+    '</div>' +
     `<p><strong>Result:</strong> ${escapeHtml(result)}</p>` +
     `<p><strong>Tools:</strong> ${escapeHtml(valueOrBlank(toolsEl) || "HTML, CSS, JavaScript")}</p>` +
     linksHtml +
