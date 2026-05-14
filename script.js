@@ -114,8 +114,7 @@
 
   function sanitizeBadge(v) {
     const x = (v || "").trim();
-    if (x === "AI" || x === "Workflow" || x === "Front End") return x;
-    return "Front End";
+    return x || "Front End";
   }
 
   function valueOrBlank(el) {
@@ -382,7 +381,7 @@ const outputFormatEl = document.getElementById("customOutput");
 
     function showSaveStatus(msg) {
         if (!saveStatusEl) return;
-        saveStatusEl.textContent = "Saved ✓.";
+        saveStatusEl.textContent = msg;
         if (msg) setTimeout(() => { saveStatusEl.textContent = ""; }, 2000);
     }
 
@@ -469,11 +468,11 @@ if (!prompts.length) {
   savedPromptsEl.innerHTML = prompts.map(p => `
     <div class="card">
       <div class="meta">
-        <span class="badge">${p.badge}</span>
+        <span class="badge">${escapeHtml(p.badge)}</span>
       </div>
-      <h3>${p.title}</h3>
-      <p>${p.result || "No outcome yet."}</p>
-      <p class="muted">${p.tools || ""}</p>
+      <h3>${escapeHtml(p.title)}</h3>
+      <p>${escapeHtml(p.result || "No outcome yet.")}</p>
+      <p class="muted">${escapeHtml(p.tools || "")}</p>
 
       <div class="saved-actions">
   <button class="btn" type="button" data-load-id="${p.id}">Load</button>
@@ -633,6 +632,8 @@ editingId = null;
 
     // Draft autosave fields
 const draftFields = [
+  "badge",
+  "title",
   "problem",
   "actions",
   "result",
@@ -661,7 +662,6 @@ draftFields.forEach((id) => {
   });
 });
 
-console.log("Draft auto-save enabled for:", draftFields.join(", "));
 
 
     if (exportBtn) {
@@ -1005,7 +1005,6 @@ const TONE_CONFIG = {
   renderPreviewCard();
 
   genBtn.addEventListener("click", () => {
-    console.log("Generate clicked");
 
     if (isGenerating) {
       setStatus("Please wait...");
@@ -1033,6 +1032,8 @@ const TONE_CONFIG = {
     });
     if (badgeEl) badgeEl.value = "Front End";
     outputEl.value = "";
+    editingId = null;
+    updateEditingUI();
     const mount = document.getElementById("previewMount");
     if (mount) mount.innerHTML = "";
     setStatus("Cleared.");
