@@ -62,10 +62,9 @@
         <li>LinkedIn: <a class="link" href="https://www.linkedin.com/in/batmagnai-ganbaatar-025a94211/" target="_blank" rel="noopener">linkedin.com/in/batmagnai-ganbaatar-025a94211</a></li>
         <li>GitHub: <a class="link" href="https://github.com/chemicalwolf1836" target="_blank" rel="noopener">github.com/chemicalwolf1836</a></li>
       </ul>
-    </section>
 
 
-      <div class="formish" aria-label="Message form">
+      <form class="formish" aria-label="Message form" action="#" onsubmit="return false">
         <div class="field">
           <label for="name">Name</label>
           <input id="name" name="name" autocomplete="name" placeholder="Your name" />
@@ -82,7 +81,8 @@
         <button class="btn primary" type="button" data-mailto style="margin-top: 24px; margin-bottom: 48px;">
           Send via Email →
         </button>
-      </div>
+        <p id="form-error" class="form-error" aria-live="polite"></p>
+      </form>
     </section>
 
     <footer class="footer">

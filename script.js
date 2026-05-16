@@ -56,13 +56,25 @@
       const name = (document.querySelector("#name")?.value || "").trim();
       const email = (document.querySelector("#email")?.value || "").trim();
       const msg = (document.querySelector("#message")?.value || "").trim();
+      const errorEl = document.querySelector("#form-error");
+
+      if (!name || !email || !msg) {
+        if (errorEl) {
+          errorEl.textContent = "Please fill in all fields before sending.";
+          clearTimeout(errorEl._timer);
+          errorEl._timer = setTimeout(() => { errorEl.textContent = ""; }, 4000);
+        }
+        return;
+      }
+
+      if (errorEl) errorEl.textContent = "";
 
       const to = "batmagnai.ganbaatar@gmail.com";
-      const subject = encodeURIComponent(`Portfolio inquiry from ${name || "someone"}`);
+      const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
       const body = encodeURIComponent(
-        `Name: ${name || "[not provided]"}\n` +
-        `Email: ${email || "[not provided]"}\n\n` +
-        `${msg || "[message not provided]"}\n`
+        `Name: ${name}\n` +
+        `Email: ${email}\n\n` +
+        `${msg}\n`
       );
 
       window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
