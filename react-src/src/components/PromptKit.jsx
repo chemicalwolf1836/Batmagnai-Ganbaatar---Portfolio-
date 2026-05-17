@@ -396,7 +396,7 @@ export default function PromptKit() {
               className="btn primary"
               type="button"
               onClick={handleCopyPrompt}
-              style={{ width: '100%', borderRadius: '999px', justifyContent: 'center' }}
+              style={{ width: '100%', borderRadius: '999px', justifyContent: 'flex-start' }}
             >
               Copy Prompt
             </button>
