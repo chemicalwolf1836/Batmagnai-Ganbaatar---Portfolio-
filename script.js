@@ -508,8 +508,8 @@ if (!prompts.length) {
 
     updateEditingUI();
 
-    titleEl.focus();
-    titleEl.select();
+    titleEl?.focus();
+    titleEl?.select();
 
     showSaveStatus("Prompt loaded.");
   });
@@ -624,7 +624,7 @@ editingId = null;
 
 
 
-  if (!problemEl || !actionsEl || !resultEl) {console.warn("Missing one or more fields in PromptKit page."); return;}
+  if (!problemEl || !actionsEl || !resultEl) { return; }
 
     // Draft autosave fields
 const draftFields = [
@@ -745,7 +745,6 @@ if (importInput) {
        if (el) el.value = "";
       });
 
-        console.log("✅ Cleared saved draft.");
         //3) Clear output prompt box too  (optional but nice for workflow)
         if (outputEl) outputEl.value = "";
           //4) Clear preview card (optional but nice for workflow)

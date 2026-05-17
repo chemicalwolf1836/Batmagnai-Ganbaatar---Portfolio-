@@ -609,7 +609,7 @@ h1{
 }
 
 .page-description .bottom{
-  color: var(--text)
+  color: var(--text);
 }
 
 /* Contact */
@@ -716,20 +716,6 @@ input:focus, textarea:focus{
   display: flex;
   flex-direction: column;
   height: 100%;
-}
-
-/* MOBILE */
-@media (max-width: 768px){
-
-  .nav-links{
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-links.open{
-    display: flex;
-  }
 }
 
 /* Homepage only */
@@ -883,7 +869,7 @@ input:focus, textarea:focus{
 }
 
 .highlight {
-  color: #dc2626;
+  color: var(--accent);
   font-weight: 500;
   letter-spacing: 0.2px;
 }
@@ -906,11 +892,11 @@ p {
 
 /* Step highlight */
 .step-highlight {
-  color: #dc2626;
+  color: var(--accent);
   font-weight: 600;
   padding: 4px 8px;
   border-radius: 6px;
-  background: rgba(220, 38, 38, 0.08);
+  background: rgba(255, 45, 45, 0.08);
 }
 
 /* Arrow style */
@@ -919,12 +905,12 @@ p {
 }
 
 .section-description {
-  color: #111 !important;
+  color: var(--text) !important;
   line-height: 1.6;
 }
 
 .case-text {
-  color: #111 !important;
+  color: var(--text) !important;
   line-height: 1.7;
 }
 
