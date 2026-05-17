@@ -391,11 +391,16 @@ export default function PromptKit() {
             <textarea id="output" readOnly placeholder="Your generated prompt will appear here." value={output} onChange={() => {}} />
           </div>
 
-          <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 16 }}>
-            <button className="btn primary" type="button" onClick={handleCopyPrompt}>
+          <div style={{ marginTop: 16 }}>
+            <button
+              className="btn primary"
+              type="button"
+              onClick={handleCopyPrompt}
+              style={{ width: '100%', borderRadius: '999px', justifyContent: 'center' }}
+            >
               Copy Prompt
             </button>
-            {copyStatus && <span style={{ color: 'var(--muted)', fontSize: 13, alignSelf: 'center' }}>{copyStatus}</span>}
+            {copyStatus && <p style={{ color: 'var(--muted)', fontSize: 13, marginTop: 8 }}>{copyStatus}</p>}
           </div>
         </div>
       </section>
