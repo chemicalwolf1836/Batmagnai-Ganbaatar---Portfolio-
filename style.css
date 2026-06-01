@@ -1551,6 +1551,9 @@ html[data-theme="dark"] .icon-dm-invert {
   border: none;
   font-size: 18px;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
