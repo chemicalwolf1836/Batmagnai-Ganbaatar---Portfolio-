@@ -888,6 +888,11 @@ input:focus, textarea:focus{
   letter-spacing: 0.2px;
 }
 
+.divider {
+  color: var(--muted);
+  padding: 0 4px;
+}
+
 /* Paragraph spacing */
 p {
   margin: 0 0 12px;
@@ -919,12 +924,12 @@ p {
 }
 
 .section-description {
-  color: #111 !important;
+  color: var(--text);
   line-height: 1.6;
 }
 
 .case-text {
-  color: #111 !important;
+  color: var(--text);
   line-height: 1.7;
 }
 
@@ -1133,10 +1138,6 @@ html[data-theme="dark"] .saveStatus {
 }
 html[data-theme="dark"] .arrow {
   color: var(--muted);
-}
-html[data-theme="dark"] .section-description,
-html[data-theme="dark"] .case-text {
-  color: var(--text) !important;
 }
 html[data-theme="dark"] .nav-links {
   background: rgba(26,26,26,0.98);
