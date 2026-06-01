@@ -49,6 +49,17 @@
     if (href === path) a.setAttribute("aria-current", "page");
   });
 
+  // Back-to-top button
+  const backToTopBtn = document.getElementById("backToTop");
+  if (backToTopBtn) {
+    window.addEventListener("scroll", () => {
+      backToTopBtn.classList.toggle("visible", window.scrollY > 300);
+    }, { passive: true });
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
   // Contact page: build a mailto from fields (no backend)
   const mailBtn = document.querySelector("[data-mailto]");
   if (mailBtn) {
@@ -461,26 +472,27 @@ if (!prompts.length) {
 
 
 
-  savedPromptsEl.innerHTML = prompts.map(p => `
+  savedPromptsEl.innerHTML = prompts.map(p => {
+    const date = p.createdAt
+      ? new Date(p.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })
+      : "";
+    return `
     <div class="card">
       <div class="meta">
         <span class="badge">${escapeHtml(p.badge)}</span>
+        ${date ? `<span class="muted" style="font-size:12px">${escapeHtml(date)}</span>` : ""}
       </div>
       <h3>${escapeHtml(p.title)}</h3>
       <p>${escapeHtml(p.result || "No outcome yet.")}</p>
       <p class="muted">${escapeHtml(p.tools || "")}</p>
-
       <div class="saved-actions">
-  <button class="btn" type="button" data-load-id="${p.id}">Load</button>
-  <button class="btn" type="button" data-copy-id="${p.id}">Copy</button>
-  <button class="btn" type="button" data-delete-id="${p.id}">Delete</button>
-</div>
-
-
-
-
+        <button class="btn" type="button" data-load-id="${p.id}">Load</button>
+        <button class="btn" type="button" data-copy-id="${p.id}">Copy</button>
+        <button class="btn" type="button" data-delete-id="${p.id}">Delete</button>
+      </div>
     </div>
-  `).join("");
+  `;
+  }).join("");
 
   savedPromptsEl.querySelectorAll("[data-load-id]").forEach((button) => {
   button.addEventListener("click", function () {
@@ -526,7 +538,7 @@ savedPromptsEl.querySelectorAll("[data-copy-id]").forEach((button) => {
     editingId = prompt.id;
 
 
-    const text = [
+    const lines = [
       `Badge: ${prompt.badge || ""}`,
       `Title: ${prompt.title || ""}`,
       "",
@@ -541,7 +553,11 @@ savedPromptsEl.querySelectorAll("[data-copy-id]").forEach((button) => {
       "",
       "Tools:",
       prompt.tools || ""
-    ].join("\n");
+    ];
+    if (prompt.repo)    lines.push("", `Repo: ${prompt.repo}`);
+    if (prompt.demo)    lines.push("", `Demo: ${prompt.demo}`);
+    if (prompt.writeup) lines.push("", `Write-up: ${prompt.writeup}`);
+    const text = lines.join("\n");
 
     try {
       await navigator.clipboard.writeText(text);
@@ -555,6 +571,7 @@ savedPromptsEl.querySelectorAll("[data-copy-id]").forEach((button) => {
 
 savedPromptsEl.querySelectorAll("[data-delete-id]").forEach((button) => {
   button.addEventListener("click", function () {
+    if (!confirm("Delete this prompt? This cannot be undone.")) return;
     const id = button.getAttribute("data-delete-id");
     const prompts = getSavedPrompts().filter((item) => item.id !== id);
 
@@ -578,6 +595,9 @@ function buildSavedPrompt() {
     actions: actionsEl?.value.trim() || "",
     result: resultEl?.value.trim() || "",
     tools: toolsEl?.value.trim() || "",
+    repo: repoEl?.value.trim() || "",
+    demo: demoEl?.value.trim() || "",
+    writeup: writeupEl?.value.trim() || "",
     createdAt: new Date().toISOString()
   };
 }
@@ -636,7 +656,9 @@ const draftFields = [
   "tools",
   "repo",
   "demo",
-  "writeup"
+  "writeup",
+  "customRules",
+  "customOutput"
 ];
 
 // Load saved draft values

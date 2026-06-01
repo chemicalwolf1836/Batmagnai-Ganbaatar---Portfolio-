@@ -1538,8 +1538,36 @@ html[data-theme="dark"] .icon-dm-invert {
   .btn.primary::after { display: none !important; }
 }
 
+/* Back-to-top button */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s var(--ease);
+  z-index: 900;
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  opacity: 0.85;
+}
+
 /* Print styles */
 @media print {
+  .back-to-top { display: none !important; }
   .site-header,
   .resume-actions,
   .footer,
