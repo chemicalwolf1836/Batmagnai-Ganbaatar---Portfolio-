@@ -1554,7 +1554,7 @@ html[data-theme="dark"] .icon-dm-invert {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 3px;
+  padding-bottom: 6px;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
