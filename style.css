@@ -1644,13 +1644,13 @@ html[data-theme="dark"] .icon-dm-invert {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 6px;
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s var(--ease);
   z-index: 900;
 }
+.back-to-top svg { display: block; }
 .back-to-top.visible {
   opacity: 1;
   pointer-events: auto;

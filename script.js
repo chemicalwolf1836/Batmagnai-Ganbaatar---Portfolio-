@@ -1,5 +1,104 @@
 // Minimal JS: mobile menu + active nav + mailto builder + theme toggle
 
+// ---- UI sound effects (Nintendo-soft, synthesized; on after first click) ----
+(function () {
+  let ctx = null, bus = null, lastAt = 0;
+  // One AudioContext + a shared "bus" (compressor) so overlapping notes
+  // can't pile up and clip. Created/resumed on a user gesture.
+  function ac() {
+    if (!ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) return null;
+      ctx = new AC({ latencyHint: "interactive" }); // minimize output latency
+      const master = ctx.createGain();
+      master.gain.value = 0.9;
+      const comp = ctx.createDynamicsCompressor(); // tames stacked peaks
+      master.connect(comp).connect(ctx.destination);
+      bus = master;
+      // Keep-alive: a silent source keeps the context "running" so a later
+      // press never waits on an async resume() — removes the occasional pause.
+      const keep = ctx.createOscillator();
+      const keepGain = ctx.createGain();
+      keepGain.gain.value = 0;
+      keep.connect(keepGain).connect(ctx.destination);
+      keep.start();
+    }
+    if (ctx.state === "suspended") ctx.resume();
+    return ctx;
+  }
+  // Short sine note: soft LINEAR attack (no click) + smooth fade.
+  // Optional fast pitch glide (slideTo) gives a "rise" feel in one quick note.
+  function tone({ freq = 600, dur = 0.045, type = "sine", gain = 0.05, slideTo = null, when = 0 }) {
+    const c = ac();
+    if (!c) return;
+    const t0 = c.currentTime + when;
+    const o = c.createOscillator(), g = c.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, t0);
+    if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.linearRampToValueAtTime(gain, t0 + 0.006);      // quick soft attack
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur); // smooth fade
+    o.connect(g).connect(bus);
+    o.start(t0);
+    o.stop(t0 + dur + 0.02);
+  }
+  // Nintendo two-tone: two clean sequential rising notes for clicks,
+  // one tick for toggles. ~160ms total — see nav delay below so it isn't cut.
+  function playSelect() {
+    tone({ freq: 784, dur: 0.06, gain: 0.05 });
+    tone({ freq: 1047, dur: 0.09, gain: 0.05, when: 0.07 });
+  }
+  function playToggle() {
+    tone({ freq: 988, dur: 0.06, gain: 0.05 });
+  }
+  // Play the sound for an interactive element (throttled to avoid stacking).
+  function trigger(el) {
+    const now = performance.now();
+    if (now - lastAt < 35) return; // de-dupe only; won't skip deliberate presses
+    lastAt = now;
+    if (el.matches("[data-theme-btn], [data-menu-btn]")) playToggle();
+    else playSelect();
+  }
+
+  // Fire on POINTERDOWN so the sound lands on the press — in sync with the
+  // physical click, not the release.
+  document.addEventListener("pointerdown", (e) => {
+    if (e.button !== 0) return; // primary (left) button / touch only
+    const t = e.target;
+    if (!(t instanceof Element)) return;
+    const el = t.closest("a, button, .btn");
+    if (el) trigger(el);
+  });
+
+  // Keyboard activation (Enter/Space) doesn't fire pointerdown — cover it too.
+  document.addEventListener("keydown", (e) => {
+    if (e.repeat || (e.key !== "Enter" && e.key !== " ")) return;
+    const t = e.target;
+    if (!(t instanceof Element)) return;
+    const el = t.closest("a, button, .btn");
+    if (el) trigger(el);
+  });
+
+  // Let the full two-tone finish before a same-tab link changes the page.
+  // (Navigation still happens on click; the sound already fired on pointerdown.)
+  document.addEventListener("click", (e) => {
+    const t = e.target;
+    if (!(t instanceof Element)) return;
+    const a = t.closest("a");
+    if (!a) return;
+    const href = a.getAttribute("href");
+    const plainClick = !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey);
+    const sameTab = a.target !== "_blank" && !a.hasAttribute("download");
+    const navigates = href && !href.startsWith("#") && !/^(mailto:|tel:)/i.test(href);
+    if (plainClick && sameTab && navigates) {
+      e.preventDefault();
+      const dest = a.href;
+      setTimeout(() => { window.location.href = dest; }, 150);
+    }
+  });
+})();
+
 (function () {
   // Theme toggle — CSS handles icon visibility, JS handles state + persistence
   const themeBtn = document.querySelector("[data-theme-btn]");
@@ -52,6 +151,9 @@
   // Back-to-top button
   const backToTopBtn = document.getElementById("backToTop");
   if (backToTopBtn) {
+    // Replace the "↑" text glyph (off-centre in many fonts) with a symmetric SVG.
+    backToTopBtn.innerHTML =
+      '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg>';
     window.addEventListener("scroll", () => {
       backToTopBtn.classList.toggle("visible", window.scrollY > 300);
     }, { passive: true });
