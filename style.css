@@ -1094,7 +1094,7 @@ p {
 
 @media (max-width: 768px) {
 
-  button:not(.primary):not(.theme-btn),
+  button:not(.primary):not(.theme-btn):not(.back-to-top),
   .btn:not(.primary) {
     text-align: left;
     padding-left: 16px;
