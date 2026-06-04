@@ -2,7 +2,7 @@
 
 ## Project Overview
 Personal portfolio + PromptKit tool. Vanilla HTML, CSS, JavaScript — no frameworks.
-Live at: https://batmagnai-portfolio.netlify.app/
+Live at: https://batmagnai-ganbaatar-portfolio.vercel.app/
 
 ## File Structure
 ```

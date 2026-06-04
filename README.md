@@ -2,7 +2,7 @@
 
 Front-End Developer building clean interfaces and practical AI-powered tools.
 
-🔗 Live site: https://batmagnai-portfolio.netlify.app/
+🔗 Live site: https://batmagnai-ganbaatar-portfolio.vercel.app/
 
 ---
 
