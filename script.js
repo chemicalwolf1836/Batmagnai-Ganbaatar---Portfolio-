@@ -151,9 +151,7 @@
   // Back-to-top button
   const backToTopBtn = document.getElementById("backToTop");
   if (backToTopBtn) {
-    // Replace the "↑" text glyph (off-centre in many fonts) with a symmetric SVG.
-    backToTopBtn.innerHTML =
-      '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg>';
+    // (Arrow icon is now an inline SVG in the HTML — no JS insertion needed.)
     window.addEventListener("scroll", () => {
       backToTopBtn.classList.toggle("visible", window.scrollY > 300);
     }, { passive: true });
