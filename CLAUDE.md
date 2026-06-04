@@ -250,7 +250,7 @@ git commit -m "feat: add [project name] to portfolio"
 git push
 ```
 
-Then confirm Netlify auto-deploy triggered (the live URL should update in ~1 min).
+Then confirm Vercel auto-deploy triggered (the live URL should update in ~1 min).
 
 ---
 
@@ -547,4 +547,8 @@ open index.html
 ```
 
 ## Deploy
-Hosted on Netlify. Push to GitHub → auto-deploys.
+Hosted on **Vercel**. Push to GitHub → auto-deploys.
+(Migrated from Netlify on 2026-06-05. One-time setup: import the repo at
+vercel.com/new with framework preset "Other", no build command, output = repo root.
+Once the Vercel URL is confirmed, update the live URL in this file, the GitHub
+profile README, LinkedIn About, and the `og:url`/meta tags, then retire Netlify.)
