@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Job Application Assistant — Live Tool — Batmagnai Ganbaatar</title>
+
+  <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
+
+  <meta name="description" content="Run the AI Job Application Assistant live — upload a CV, paste a job description, and generate tailored application assets, embedded right here on the portfolio." />
+  <meta name="theme-color" content="#ff2d2d" />
+  <meta name="color-scheme" content="light" />
+  <link rel="stylesheet" href="style.css?v=10" />
+  <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>BATMAGNAI GANBAATAR</strong>
+        <span>/ AI Job Application Assistant</span>
+      </a>
+
+      <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
+        <a href="index.html" data-nav-link>Home</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="projects.html" data-nav-link>Projects</a>
+        <a href="promptkit.html" data-nav-link>PromptKit</a>
+        <a href="contact.html" data-nav-link>Contact</a>
+        <a href="resume.html" data-nav-link>Resume</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="theme-btn" data-theme-btn aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="navLinks">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <div class="kicker"><i></i> live tool</div>
+        <h1>AI Job Application Assistant</h1>
+        <p class="lead" style="max-width: 60ch;">
+          The live app, running right here. Upload a CV, paste a job description, and generate tailored application assets.
+          <span class="muted">First load can take ~30s while the Space wakes up.</span>
+        </p>
+
+        <div class="cta-row" style="margin: 16px 0 20px;">
+          <a class="btn" href="job-assistant.html">Case study</a>
+          <a class="btn" href="https://github.com/chemicalwolf1836/job-assistant" target="_blank" rel="noreferrer">Source ↗</a>
+        </div>
+
+        <div class="app-window">
+          <div class="app-bar">
+            <span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="app-title">job-assistant · live</span>
+            <span class="app-live">running on Hugging Face</span>
+          </div>
+          <iframe
+            src="https://chemicalwolf1836-job-assistant.hf.space"
+            title="AI Job Application Assistant — live app"
+            loading="lazy"
+            allow="clipboard-write; clipboard-read; fullscreen"
+            style="display:block; width:100%; height:80vh; min-height:560px; border:0;"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container row">
+      <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+      <div class="tiny">live tool / job-assistant</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
+  <script src="script.js?v=10"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
