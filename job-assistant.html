@@ -12,7 +12,7 @@
   <meta name="description" content="Case study: AI Job Application Assistant — a Python/Gradio tool that generates tailored cover letters, CV suggestions, skills analysis, interview questions, and salary estimates from an uploaded CV and job description." />
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=8" />
+  <link rel="stylesheet" href="style.css?v=9" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -46,13 +46,29 @@
   </header>
 
   <main id="main">
-    <section class="section">
+    <!-- ── HERO ─────────────────────────────────── -->
+    <section class="hero">
+      <div class="gridlines" aria-hidden="true"></div>
+      <div class="angles" aria-hidden="true">
+        <div class="angle a1"></div>
+        <div class="angle a2"></div>
+      </div>
+
       <div class="container">
-        <p class="kicker"><i></i> case study • ai tool</p>
+        <div class="kicker"><i></i> case study • ai tool</div>
         <h1>AI Job Application Assistant</h1>
-        <p class="case-text">
-          A Python AI tool that turns your <span class="highlight">uploaded CV</span> and a pasted job description into a tailored cover letter, CV improvement suggestions, skills gap analysis, interview questions, and salary estimate — all streamed live through a Gradio interface.
+        <p class="lead">
+          Upload your CV, paste a job description, and get five tailored application assets —
+          <span class="highlight">cover letter, CV fixes, skills-gap analysis, interview questions, and a salary estimate</span>
+          — streamed live.
         </p>
+
+        <div class="chips-row" aria-label="Tech stack">
+          <span class="tag">Python</span>
+          <span class="tag">Gradio</span>
+          <span class="tag">Groq · Llama 3.3 70B</span>
+          <span class="tag">pdfplumber</span>
+        </div>
 
         <div class="cta-row">
           <a class="btn primary" href="https://github.com/chemicalwolf1836/job-assistant" target="_blank" rel="noreferrer">Source ↗</a>
@@ -61,24 +77,134 @@
       </div>
     </section>
 
+    <!-- ── APP MOCKUP ───────────────────────────── -->
     <section class="section">
       <div class="container">
+        <div class="app-window" aria-label="Interface preview">
+          <div class="app-bar">
+            <span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="app-title">job-assistant · gradio</span>
+            <span class="app-live">streaming</span>
+          </div>
+
+          <div class="app-body">
+            <!-- inputs -->
+            <div class="app-inputs">
+              <div class="app-field">
+                <label>Your CV</label>
+                <div class="dropzone">
+                  <span aria-hidden="true">⬆</span>
+                  Drop a PDF CV to parse
+                  <span class="file">Batmagnai_Resume.pdf · parsed</span>
+                </div>
+              </div>
+
+              <div class="app-field">
+                <label>Job description</label>
+                <textarea class="app-ta" readonly aria-label="Job description sample">Front-End Developer (Tokyo)
+We're hiring a front-end developer comfortable with React, Next.js, and TypeScript to build and ship customer-facing web apps. Bonus: full-stack experience and an eye for clean UI.</textarea>
+              </div>
+
+              <button class="btn primary app-generate" type="button" data-generate>Generate ✦</button>
+            </div>
+
+            <!-- outputs -->
+            <div class="app-output">
+              <div class="app-tabs" role="tablist" aria-label="Generated outputs">
+                <button class="app-tab is-active" data-tab="cover" role="tab" aria-selected="true">Cover letter</button>
+                <button class="app-tab" data-tab="cv" role="tab" aria-selected="false">CV suggestions</button>
+                <button class="app-tab" data-tab="skills" role="tab" aria-selected="false">Skills gap</button>
+                <button class="app-tab" data-tab="interview" role="tab" aria-selected="false">Interview</button>
+                <button class="app-tab" data-tab="salary" role="tab" aria-selected="false">Salary</button>
+              </div>
+
+              <div class="app-panel" data-panel="cover" role="tabpanel">
+                <h4>Tailored cover letter</h4>
+                <p>Dear Hiring Manager,</p>
+                <p>I'm applying for the Front-End Developer role. Over the past year I've designed and shipped full-stack web apps — including an AI travel planner and a retirement-planning SaaS — with React, Next.js, TypeScript, and Supabase, deploying on Vercel.</p>
+                <p>What draws me to this role is the focus on clean, customer-facing UI<span class="app-caret"></span></p>
+              </div>
+
+              <div class="app-panel" data-panel="cv" role="tabpanel" hidden>
+                <h4>CV suggestions</h4>
+                <ul>
+                  <li>Lead bullets with impact — "Shipped a streaming AI tool that produces 5 tailored outputs" beats "Worked on an AI tool."</li>
+                  <li>Move Next.js + TypeScript higher; they're first in the job's must-haves.</li>
+                  <li>Add a concrete metric to the RetireAI line (users, outputs, or latency).</li>
+                </ul>
+              </div>
+
+              <div class="app-panel" data-panel="skills" role="tabpanel" hidden>
+                <h4>Skills gap analysis</h4>
+                <p>Strong match on React, Next.js, and TypeScript. Gaps to address:</p>
+                <ul>
+                  <li><strong>Testing</strong> — add a Jest / React Testing Library example.</li>
+                  <li><strong>CI/CD</strong> — mention your Vercel auto-deploy pipeline.</li>
+                  <li><strong>Accessibility</strong> — you already do this; make it explicit on the CV.</li>
+                </ul>
+              </div>
+
+              <div class="app-panel" data-panel="interview" role="tabpanel" hidden>
+                <h4>Interview questions</h4>
+                <ul>
+                  <li>Walk through how you'd structure state in a multi-step form.</li>
+                  <li>How do you prevent layout shift when lazy-loading images?</li>
+                  <li>Describe a tradeoff you made between speed and correctness.</li>
+                </ul>
+              </div>
+
+              <div class="app-panel" data-panel="salary" role="tabpanel" hidden>
+                <h4>Salary estimate</h4>
+                <p>For a junior–mid front-end role in Tokyo, the typical range is:</p>
+                <p class="big">¥4.5M – ¥6.5M / year</p>
+                <p>Strong TypeScript and full-stack examples push toward the top of the range.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ja-statbar">
+          <div class="s"><b>5</b><span>structured outputs</span></div>
+          <div class="s"><b>~60s</b><span>end to end</span></div>
+          <div class="s"><b>70B</b><span>Llama 3.3 via Groq</span></div>
+          <div class="s"><b>Live</b><span>streamed responses</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── HOW IT WORKS ─────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <h2>How it works</h2>
+        <div class="ja-flow">
+          <div class="ja-step">
+            <h3>Upload CV</h3>
+            <p>Your PDF is parsed with pdfplumber into clean text, whatever the layout.</p>
+          </div>
+          <div class="ja-step">
+            <h3>Paste job description</h3>
+            <p>CV and job description become shared context for the model.</p>
+          </div>
+          <div class="ja-step">
+            <h3>Five AI calls</h3>
+            <p>Each output runs its own targeted system prompt for structured results.</p>
+          </div>
+          <div class="ja-step">
+            <h3>Stream &amp; export</h3>
+            <p>Responses stream live, and any output downloads as a Markdown file.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── UNDER THE HOOD ───────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <h2>Under the hood</h2>
         <div class="cards">
           <article class="card">
-            <div class="meta">
-              <span class="badge">Overview</span>
-            </div>
-            <h3>Project Summary</h3>
-            <p>
-              AI Job Application Assistant lets you upload a PDF CV and paste a job description, then generates five structured outputs — a tailored cover letter, CV suggestions, skills analysis, interview prep questions, and a salary estimate — streamed live through a conversational Gradio interface.
-            </p>
-          </article>
-
-          <article class="card">
-            <div class="meta">
-              <span class="badge">Stack</span>
-            </div>
-            <h3>Stack & Architecture</h3>
+            <div class="meta"><span class="badge">Stack</span></div>
+            <h3>Stack &amp; Architecture</h3>
             <ul class="stack-list">
               <li><strong>Python</strong> — application layer</li>
               <li><strong>Gradio</strong> — chat UI with streaming output</li>
@@ -89,27 +215,8 @@
           </article>
 
           <article class="card">
-            <div class="meta">
-              <span class="badge">Features</span>
-            </div>
-            <h3>Key Features</h3>
-            <ul class="feature-list">
-              <li><strong>PDF CV upload</strong> — extract and parse CV text automatically</li>
-              <li><strong>Tailored cover letter</strong> — generated specifically for the job description provided</li>
-              <li><strong>CV suggestions</strong> — targeted improvements based on the role requirements</li>
-              <li><strong>Skills gap analysis</strong> — identify missing skills and how to address them</li>
-              <li><strong>Interview questions</strong> — role-specific questions to prepare with</li>
-              <li><strong>Salary estimate</strong> — market range based on the role and location</li>
-              <li><strong>Streaming output</strong> — all responses stream live to the browser</li>
-              <li><strong>Markdown export</strong> — download any output as a .md file</li>
-            </ul>
-          </article>
-
-          <article class="card">
-            <div class="meta">
-              <span class="badge">Challenges</span>
-            </div>
-            <h3>Challenges & Learnings</h3>
+            <div class="meta"><span class="badge">Challenges</span></div>
+            <h3>Challenges &amp; Learnings</h3>
             <ul class="feature-list">
               <li><strong>Prompt engineering for variety</strong> — each of the five outputs needed its own system prompt to produce correctly structured, useful output</li>
               <li><strong>PDF text extraction</strong> — CVs have inconsistent formatting; pdfplumber handled most cases but required testing across different CV layouts</li>
@@ -121,67 +228,37 @@
       </div>
     </section>
 
+    <!-- ── CASE NOTES ───────────────────────────── -->
     <section class="section">
       <div class="container">
-        <h2>Problem</h2>
-        <p class="case-text">
-          Tailoring a job application takes hours — rewriting a cover letter, adjusting CV bullet points, researching the role, preparing for interviews. Most people either skip the tailoring and send a generic application, or spend too much time doing it manually. I wanted a tool that could do the heavy lifting in seconds.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>Approach</h2>
-        <p class="case-text">
-          The tool takes two inputs — a PDF CV and a pasted job description — and uses them as shared context for five separate LLM calls, each with a targeted prompt. Responses stream live so there's no waiting for a full response before reading. Each output is downloadable as Markdown so it can be edited and reused.
-        </p>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <h2>What I Built</h2>
-        <div class="cards">
-          <article class="card">
-            <div class="meta">
-              <span class="badge">Core</span>
-            </div>
-            <h3>CV Parser</h3>
+        <h2>Case notes</h2>
+        <div class="ja-notes">
+          <div class="ja-note">
+            <p class="label">PROBLEM</p>
             <p>
-              Built PDF text extraction using pdfplumber to pull clean text from uploaded CVs regardless of formatting. The extracted text is passed as context to every subsequent LLM call.
+              Tailoring a job application takes hours — rewriting a cover letter, adjusting CV bullet points, researching the role, preparing for interviews. Most people either skip the tailoring and send a generic application, or spend too much time doing it manually. I wanted a tool that could do the heavy lifting in seconds.
             </p>
-          </article>
+          </div>
 
-          <article class="card">
-            <div class="meta">
-              <span class="badge">Core</span>
-            </div>
-            <h3>Five-Output Generation Pipeline</h3>
+          <div class="ja-note">
+            <p class="label">APPROACH</p>
             <p>
-              Designed five separate system prompts — cover letter, CV suggestions, skills analysis, interview questions, salary estimate — each tuned to produce structured, actionable output rather than generic advice.
+              The tool takes two inputs — a PDF CV and a pasted job description — and uses them as shared context for five separate LLM calls, each with a targeted prompt. Responses stream live so there's no waiting for a full response before reading. Each output is downloadable as Markdown so it can be edited and reused.
             </p>
-          </article>
+          </div>
 
-          <article class="card">
-            <div class="meta">
-              <span class="badge">UI</span>
-            </div>
-            <h3>Gradio Streaming Interface</h3>
+          <div class="ja-note">
+            <p class="label">RESULT</p>
             <p>
-              Built a clean Gradio interface with PDF upload, a job description input, and streaming output for each analysis type. All outputs are exportable as Markdown files for further editing.
+              The tool generates a full set of job application materials from a CV and job description in under a minute, streamed live. This project pushed me further into Python backend work, prompt engineering for structured outputs, and building practical AI tools that solve a real, everyday problem.
             </p>
-          </article>
+          </div>
         </div>
-      </div>
-    </section>
 
-    <section class="section">
-      <div class="container">
-        <h2>Result</h2>
-        <p class="case-text">
-          The tool generates a full set of job application materials from a CV and job description in under a minute, streamed live. This project pushed me further into Python backend work, prompt engineering for structured outputs, and building practical AI tools that solve a real, everyday problem.
-        </p>
+        <div class="cta-row" style="margin-top: 28px;">
+          <a class="btn primary" href="https://github.com/chemicalwolf1836/job-assistant" target="_blank" rel="noreferrer">View Source ↗</a>
+          <a class="btn" href="projects.html">Back to Projects</a>
+        </div>
       </div>
     </section>
   </main>
@@ -194,9 +271,32 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Tabbed output panels for the app mockup (page-specific).
+    (function () {
+      const tabs = document.querySelectorAll(".app-tab");
+      const panels = document.querySelectorAll(".app-panel");
+      if (!tabs.length) return;
+      function show(id) {
+        tabs.forEach((t) => {
+          const on = t.getAttribute("data-tab") === id;
+          t.classList.toggle("is-active", on);
+          t.setAttribute("aria-selected", String(on));
+        });
+        panels.forEach((p) => { p.hidden = p.getAttribute("data-panel") !== id; });
+      }
+      tabs.forEach((t) => t.addEventListener("click", () => show(t.getAttribute("data-tab"))));
+      // "Generate" cycles through the outputs so the demo feels alive.
+      const gen = document.querySelector("[data-generate]");
+      if (gen) {
+        const order = ["cover", "cv", "skills", "interview", "salary"];
+        let i = 0;
+        gen.addEventListener("click", () => { i = (i + 1) % order.length; show(order[i]); });
+      }
+    })();
   </script>
 </body>
 </html>
