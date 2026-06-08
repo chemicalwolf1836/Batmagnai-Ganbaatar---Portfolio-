@@ -13,6 +13,21 @@
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css?v=10" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
+
+  <!-- Output (rendered Markdown) typography -->
+  <style>
+    [data-out] { color: var(--text); font-size: 14.5px; line-height: 1.7; }
+    [data-out] > :first-child { margin-top: 0; }
+    [data-out] p { color: var(--text); margin: 0 0 11px; }
+    [data-out] h4 { margin: 16px 0 8px; font-size: 15px; }
+    [data-out] h5 { margin: 14px 0 6px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+    [data-out] ul, [data-out] ol { margin: 0 0 12px; padding-left: 20px; color: var(--text); }
+    [data-out] li { margin: 5px 0; }
+    [data-out] strong { color: var(--text); font-weight: 700; }
+    [data-out] em { font-style: italic; }
+    [data-out] code { font-family: var(--mono); font-size: 12.5px; background: rgba(255,45,45,.08); padding: 1px 5px; border-radius: 5px; }
+    [data-out] .muted { color: var(--muted); }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -102,7 +117,7 @@
                 <button class="app-tab" type="button" data-download>Download .md</button>
               </div>
 
-              <div class="app-panel" data-out style="white-space:pre-wrap; min-height:320px;">
+              <div class="app-panel" data-out style="min-height:320px;">
                 <span class="muted">Your generated output will appear here. Choose a tab and press Generate.</span>
               </div>
             </div>
@@ -155,16 +170,50 @@
 
       function setStatus(t) { if (status) status.textContent = t; }
 
+      // --- Minimal, safe Markdown → HTML (escape first, then format) ---
+      function escapeHtml(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+      function inlineMd(s) {
+        return s
+          .replace(/`([^`]+)`/g, "<code>$1</code>")
+          .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+          .replace(/__([^_]+)__/g, "<strong>$1</strong>")
+          .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+      }
+      function mdToHtml(md) {
+        const lines = escapeHtml(md).split(/\r?\n/);
+        let html = "", list = null;
+        const closeList = () => { if (list) { html += `</${list}>`; list = null; } };
+        for (const raw of lines) {
+          const line = raw.replace(/\s+$/, "");
+          if (!line.trim()) { closeList(); continue; }
+          let m;
+          if ((m = line.match(/^(#{1,6})\s+(.*)$/))) {
+            closeList();
+            const tag = m[1].length <= 2 ? "h4" : "h5";
+            html += `<${tag}>${inlineMd(m[2])}</${tag}>`;
+          } else if ((m = line.match(/^\s*[-*+]\s+(.*)$/))) {
+            if (list !== "ul") { closeList(); html += "<ul>"; list = "ul"; }
+            html += `<li>${inlineMd(m[1])}</li>`;
+          } else if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) {
+            if (list !== "ol") { closeList(); html += "<ol>"; list = "ol"; }
+            html += `<li>${inlineMd(m[1])}</li>`;
+          } else {
+            closeList();
+            html += `<p>${inlineMd(line)}</p>`;
+          }
+        }
+        closeList();
+        return html;
+      }
+
       function render(type) {
         const text = results[type];
-        out.textContent = "";
         if (!text) {
-          const s = document.createElement("span");
-          s.className = "muted";
-          s.textContent = "No output yet — press Generate.";
-          out.appendChild(s);
+          out.innerHTML = '<span class="muted">No output yet — press Generate.</span>';
         } else {
-          out.textContent = text;
+          out.innerHTML = mdToHtml(text);
         }
       }
 
@@ -254,7 +303,7 @@
                 const delta = json.choices?.[0]?.delta?.content;
                 if (delta) {
                   results[genType] += delta;
-                  if (active === genType) out.textContent = results[genType];
+                  if (active === genType) out.innerHTML = mdToHtml(results[genType]);
                 }
               } catch { /* ignore keep-alive / partial */ }
             }
