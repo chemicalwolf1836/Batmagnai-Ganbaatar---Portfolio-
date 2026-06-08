@@ -254,13 +254,12 @@ h1{
   color: var(--text);
 }
 .btn.primary{
-  background: transparent;
-  border-color: rgba(255,45,45,0.35);
-  color: var(--accent);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
 }
 .btn.primary:hover{
-  background: rgba(255,45,45,0.05);
-  box-shadow: none;
+  background: #e01f1f;
 }
 
 
