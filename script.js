@@ -26,11 +26,9 @@
     if (ctx.state === "suspended") ctx.resume();
     return ctx;
   }
-  // Short sine note: soft LINEAR attack (no click) + smooth fade.
-  // Optional fast pitch glide (slideTo) gives a "rise" feel in one quick note.
-  function tone({ freq = 600, dur = 0.045, type = "sine", gain = 0.05, slideTo = null, when = 0 }) {
-    const c = ac();
-    if (!c) return;
+  // Build + play one short sine note on a RUNNING context: soft LINEAR attack
+  // (no click) + smooth fade. Optional pitch glide (slideTo) for a "rise" feel.
+  function play(c, { freq, dur, type, gain, slideTo, when }) {
     const t0 = c.currentTime + when;
     const o = c.createOscillator(), g = c.createGain();
     o.type = type;
@@ -42,6 +40,17 @@
     o.connect(g).connect(bus);
     o.start(t0);
     o.stop(t0 + dur + 0.02);
+  }
+  function tone(opts) {
+    const o = { freq: 600, dur: 0.045, type: "sine", gain: 0.05, slideTo: null, when: 0, ...opts };
+    const c = ac();
+    if (!c) return;
+    // After the tab sits idle or is backgrounded, the browser suspends the
+    // context. resume() is async, so scheduling immediately would place the
+    // note in the PAST (currentTime stays frozen until it resumes) and you'd
+    // hear nothing — the "no sound until I click again" bug. Wait for running.
+    if (c.state === "running") play(c, o);
+    else c.resume().then(() => play(c, o)).catch(() => {});
   }
   // Nintendo two-tone: two clean sequential rising notes for clicks,
   // one tick for toggles. The second note starts at 70ms, runs 90ms, and its
@@ -81,6 +90,12 @@
     if (!(t instanceof Element)) return;
     const el = t.closest("a, button, .btn");
     if (el) trigger(el);
+  });
+
+  // Returning to the tab often leaves the context suspended — wake it ahead of
+  // time so the next press is audible immediately (no silent "warm-up" click).
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && ctx && ctx.state === "suspended") ctx.resume().catch(() => {});
   });
 
   // Let the full two-tone finish before a same-tab link changes the page.
