@@ -1659,9 +1659,54 @@ html[data-theme="dark"] .icon-dm-invert {
   opacity: 0.85;
 }
 
+/* Scroll progress bar — fixed sliver across the very top of every page.
+   z-index sits above the sticky header (999). Width is set by JS. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  background: var(--accent);
+  z-index: 1000;
+  pointer-events: none;
+  transition: width 0.1s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { transition: none; }
+}
+
+/* "Currently building" status line in the hero */
+.now-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  font-size: 13px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+.now-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+  animation: now-pulse 2s var(--ease) infinite;
+}
+@keyframes now-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .now-dot { animation: none; }
+}
+
 /* Print styles */
 @media print {
   .back-to-top { display: none !important; }
+  .scroll-progress { display: none !important; }
   .site-header,
   .resume-actions,
   .footer,

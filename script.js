@@ -160,6 +160,22 @@
     });
   }
 
+  // Scroll progress bar — injected here so it shows on every page without
+  // editing each HTML file. Width tracks how far down the page you are.
+  const progress = document.createElement("div");
+  progress.className = "scroll-progress";
+  progress.setAttribute("aria-hidden", "true");
+  document.body.appendChild(progress);
+  const updateProgress = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+    progress.style.width = pct + "%";
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress, { passive: true });
+  updateProgress();
+
   // Contact page: build a mailto from fields (no backend)
   const mailBtn = document.querySelector("[data-mailto]");
   if (mailBtn) {
