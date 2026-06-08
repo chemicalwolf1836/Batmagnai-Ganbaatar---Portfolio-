@@ -44,7 +44,10 @@
     o.stop(t0 + dur + 0.02);
   }
   // Nintendo two-tone: two clean sequential rising notes for clicks,
-  // one tick for toggles. ~160ms total — see nav delay below so it isn't cut.
+  // one tick for toggles. The second note starts at 70ms, runs 90ms, and its
+  // oscillator stops 20ms later — so the whole sound needs ~180ms to finish.
+  // The nav handler below waits out exactly this long so it's never cut.
+  const SELECT_MS = 180;
   function playSelect() {
     tone({ freq: 784, dur: 0.06, gain: 0.05 });
     tone({ freq: 1047, dur: 0.09, gain: 0.05, when: 0.07 });
@@ -81,7 +84,9 @@
   });
 
   // Let the full two-tone finish before a same-tab link changes the page.
-  // (Navigation still happens on click; the sound already fired on pointerdown.)
+  // The sound already started on pointerdown/keydown (time recorded in lastAt),
+  // so we wait out only the time it has LEFT — never cutting it, and navigating
+  // sooner than a fixed delay when the press-to-click gap already covered some.
   document.addEventListener("click", (e) => {
     const t = e.target;
     if (!(t instanceof Element)) return;
@@ -94,7 +99,9 @@
     if (plainClick && sameTab && navigates) {
       e.preventDefault();
       const dest = a.href;
-      setTimeout(() => { window.location.href = dest; }, 150);
+      const remaining = SELECT_MS - (performance.now() - lastAt);
+      const wait = Math.max(0, Math.min(SELECT_MS, remaining));
+      setTimeout(() => { window.location.href = dest; }, wait);
     }
   });
 })();
