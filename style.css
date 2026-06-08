@@ -1799,6 +1799,16 @@ html[data-theme="dark"] .icon-dm-invert {
 .app-caret::after { content: "▍"; color: var(--accent); animation: ja-blink 1s steps(1) infinite; }
 @keyframes ja-blink { 50% { opacity: 0; } }
 
+/* Generation progress (handbook) */
+.app-metaline { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 0 8px; }
+.app-progress { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; margin: 2px 0 16px; }
+.app-progress > i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.app-toc { list-style: none; margin: 0; padding: 0; }
+.app-toc li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.app-toc li:last-child { border-bottom: none; }
+.app-toc .wc { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.app-toc .done { color: var(--accent); }
+
 @media (max-width: 820px) {
   .app-body { grid-template-columns: 1fr; }
   .app-inputs { border-right: none; border-bottom: 1px solid var(--line); }
