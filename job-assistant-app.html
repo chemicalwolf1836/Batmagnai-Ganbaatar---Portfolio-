@@ -8,7 +8,7 @@
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Run the AI Job Application Assistant live — upload a CV, paste a job description, and generate tailored application assets, embedded right here on the portfolio." />
+  <meta name="description" content="Run the AI Job Application Assistant — upload a CV, paste a job description, and generate a tailored cover letter, CV suggestions, skills-gap analysis, interview questions, and a salary estimate." />
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css?v=10" />
@@ -50,27 +50,63 @@
         <div class="kicker"><i></i> live tool</div>
         <h1>AI Job Application Assistant</h1>
         <p class="lead" style="max-width: 60ch;">
-          The live app, running right here. Upload a CV, paste a job description, and generate tailored application assets.
-          <span class="muted">First load can take ~30s while the Space wakes up.</span>
+          Upload a CV, paste a job description, and generate tailored application assets — running live, powered by Llama 3.3 70B.
         </p>
 
         <div class="cta-row" style="margin: 16px 0 20px;">
           <a class="btn" href="job-assistant.html">Case study</a>
-          <a class="btn" href="https://github.com/chemicalwolf1836/job-assistant" target="_blank" rel="noreferrer">Source ↗</a>
+          <a class="btn" href="projects.html">Back to Projects</a>
         </div>
 
         <div class="app-window">
           <div class="app-bar">
             <span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <span class="app-title">job-assistant · live</span>
-            <span class="app-live">running on Hugging Face</span>
+            <span class="app-live" data-status>ready</span>
           </div>
-          <iframe
-            src="https://chemicalwolf1836-job-assistant.hf.space"
-            title="AI Job Application Assistant — live app"
-            loading="lazy"
-            allow="clipboard-write; clipboard-read; fullscreen"
-            style="display:block; width:100%; height:80vh; min-height:560px; border:0;"></iframe>
+
+          <div class="app-body">
+            <!-- inputs -->
+            <div class="app-inputs">
+              <div class="app-field">
+                <label>Your CV (PDF)</label>
+                <label class="dropzone" for="cvFile" style="cursor:pointer;">
+                  <span aria-hidden="true">⬆</span>
+                  Click to upload a PDF CV
+                  <span class="file" data-cvlabel hidden></span>
+                </label>
+                <input id="cvFile" type="file" accept="application/pdf" hidden>
+              </div>
+
+              <div class="app-field">
+                <label for="jobInput">Job description</label>
+                <textarea id="jobInput" class="app-ta" placeholder="Paste the job description here…"></textarea>
+              </div>
+
+              <button class="btn primary app-generate" type="button" data-generate>Generate ✦</button>
+              <p class="app-metaline" data-hint>Pick an output tab, then Generate. A CV is optional but improves results.</p>
+            </div>
+
+            <!-- outputs -->
+            <div class="app-output">
+              <div class="app-tabs" role="tablist" aria-label="Outputs">
+                <button class="app-tab is-active" data-tab="cover" role="tab" aria-selected="true">Cover letter</button>
+                <button class="app-tab" data-tab="cv" role="tab" aria-selected="false">CV suggestions</button>
+                <button class="app-tab" data-tab="skills" role="tab" aria-selected="false">Skills gap</button>
+                <button class="app-tab" data-tab="interview" role="tab" aria-selected="false">Interview</button>
+                <button class="app-tab" data-tab="salary" role="tab" aria-selected="false">Salary</button>
+              </div>
+
+              <div class="app-tabs" style="border-bottom:1px solid var(--line); justify-content:flex-end; gap:8px;">
+                <button class="app-tab" type="button" data-copy>Copy</button>
+                <button class="app-tab" type="button" data-download>Download .md</button>
+              </div>
+
+              <div class="app-panel" data-out style="white-space:pre-wrap; min-height:320px;">
+                <span class="muted">Your generated output will appear here. Choose a tab and press Generate.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -84,9 +120,178 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
+
+  <!-- PDF text extraction (browser-side) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="script.js?v=10"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    (function () {
+      if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+
+      const fileInput = document.getElementById("cvFile");
+      const cvLabel = document.querySelector("[data-cvlabel]");
+      const jobInput = document.getElementById("jobInput");
+      const tabs = Array.from(document.querySelectorAll(".app-tab[data-tab]"));
+      const out = document.querySelector("[data-out]");
+      const genBtn = document.querySelector("[data-generate]");
+      const status = document.querySelector("[data-status]");
+      const copyBtn = document.querySelector("[data-copy]");
+      const dlBtn = document.querySelector("[data-download]");
+
+      const TITLES = {
+        cover: "cover-letter", cv: "cv-suggestions", skills: "skills-gap",
+        interview: "interview-questions", salary: "salary-estimate",
+      };
+
+      let cvText = "";
+      let active = "cover";
+      const results = {}; // type -> generated text
+      let busy = false;
+
+      function setStatus(t) { if (status) status.textContent = t; }
+
+      function render(type) {
+        const text = results[type];
+        out.textContent = "";
+        if (!text) {
+          const s = document.createElement("span");
+          s.className = "muted";
+          s.textContent = "No output yet — press Generate.";
+          out.appendChild(s);
+        } else {
+          out.textContent = text;
+        }
+      }
+
+      function setActive(type) {
+        active = type;
+        tabs.forEach((t) => {
+          const on = t.getAttribute("data-tab") === type;
+          t.classList.toggle("is-active", on);
+          t.setAttribute("aria-selected", String(on));
+        });
+        render(type);
+      }
+
+      tabs.forEach((t) =>
+        t.addEventListener("click", () => setActive(t.getAttribute("data-tab")))
+      );
+
+      // --- PDF upload → text ---
+      fileInput.addEventListener("change", async () => {
+        const f = fileInput.files && fileInput.files[0];
+        if (!f) return;
+        cvLabel.hidden = false;
+        cvLabel.textContent = `${f.name} · reading…`;
+        try {
+          const buf = await f.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+          let text = "";
+          for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            text += content.items.map((it) => it.str).join(" ") + "\n";
+          }
+          cvText = text.trim();
+          cvLabel.textContent = `${f.name} · ${cvText.length.toLocaleString()} chars parsed`;
+        } catch (e) {
+          cvText = "";
+          cvLabel.textContent = `${f.name} · couldn't read this PDF`;
+        }
+      });
+
+      // --- Generate (streams from /api/generate) ---
+      async function generate() {
+        if (busy) return;
+        const job = jobInput.value.trim();
+        if (!job) { out.textContent = "Paste a job description first."; return; }
+
+        busy = true;
+        genBtn.disabled = true;
+        const label = genBtn.textContent;
+        genBtn.textContent = "Generating…";
+        setStatus("generating");
+        out.textContent = "";
+        const genType = active; // lock the target in case tabs are switched mid-stream
+        results[genType] = "";
+
+        try {
+          const res = await fetch("/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ cv: cvText, job, type: active }),
+          });
+
+          if (!res.ok) {
+            const msg = await res.text();
+            out.textContent = msg || `Error ${res.status}`;
+            setStatus("error");
+            return;
+          }
+
+          const reader = res.body.getReader();
+          const decoder = new TextDecoder();
+          let buffer = "";
+
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            const lines = buffer.split("\n");
+            buffer = lines.pop(); // keep partial line
+            for (const line of lines) {
+              const s = line.trim();
+              if (!s.startsWith("data:")) continue;
+              const data = s.slice(5).trim();
+              if (data === "[DONE]") continue;
+              try {
+                const json = JSON.parse(data);
+                const delta = json.choices?.[0]?.delta?.content;
+                if (delta) {
+                  results[genType] += delta;
+                  if (active === genType) out.textContent = results[genType];
+                }
+              } catch { /* ignore keep-alive / partial */ }
+            }
+          }
+          setStatus("ready");
+        } catch (e) {
+          out.textContent = "Network error — please try again.";
+          setStatus("error");
+        } finally {
+          busy = false;
+          genBtn.disabled = false;
+          genBtn.textContent = label;
+        }
+      }
+
+      genBtn.addEventListener("click", generate);
+
+      // --- Copy / download ---
+      copyBtn.addEventListener("click", async () => {
+        const text = results[active];
+        if (!text) return;
+        try { await navigator.clipboard.writeText(text); copyBtn.textContent = "Copied"; setTimeout(() => (copyBtn.textContent = "Copy"), 1200); } catch {}
+      });
+
+      dlBtn.addEventListener("click", () => {
+        const text = results[active];
+        if (!text) return;
+        const blob = new Blob([text], { type: "text/markdown" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `${TITLES[active] || "output"}.md`;
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+
+      setActive("cover");
+    })();
   </script>
 </body>
 </html>
