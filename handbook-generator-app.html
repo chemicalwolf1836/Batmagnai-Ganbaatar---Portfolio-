@@ -8,11 +8,27 @@
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Run the AI Handbook Generator live — generate 20,000-word structured handbooks from uploaded PDFs, embedded right here on the portfolio." />
+  <meta name="description" content="Run the AI Handbook Generator — upload PDFs or give a topic and generate a structured, multi-section handbook live." />
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css?v=11" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
+
+  <!-- Output (rendered Markdown) typography -->
+  <style>
+    [data-out] { color: var(--text); font-size: 14.5px; line-height: 1.7; }
+    [data-out] > :first-child { margin-top: 0; }
+    [data-out] p { color: var(--text); margin: 0 0 11px; }
+    [data-out] h4 { margin: 18px 0 8px; font-size: 16px; }
+    [data-out] h5 { margin: 14px 0 6px; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+    [data-out] ul, [data-out] ol { margin: 0 0 12px; padding-left: 20px; color: var(--text); }
+    [data-out] li { margin: 5px 0; }
+    [data-out] strong { color: var(--text); font-weight: 700; }
+    [data-out] em { font-style: italic; }
+    [data-out] code { font-family: var(--mono); font-size: 12.5px; background: rgba(255,45,45,.08); padding: 1px 5px; border-radius: 5px; }
+    [data-out] .muted { color: var(--muted); }
+    .app-tab[disabled] { opacity: .4; cursor: not-allowed; }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -49,28 +65,64 @@
       <div class="container">
         <div class="kicker"><i></i> live tool</div>
         <h1>AI Handbook Generator</h1>
-        <p class="lead" style="max-width: 60ch;">
-          The live app, running right here. Upload PDFs and generate a 20,000-word structured handbook.
-          <span class="muted">First load can take ~30s while the Space wakes up.</span>
+        <p class="lead" style="max-width: 62ch;">
+          Upload PDFs (or just give a topic) and generate a structured, multi-section handbook — planned, written section by section, and streamed live.
+          <span class="muted">Runs on Llama 3.3 70B; a full handbook takes a few minutes.</span>
         </p>
 
         <div class="cta-row" style="margin: 16px 0 20px;">
           <a class="btn" href="handbook-generator.html">Case study</a>
-          <a class="btn" href="https://github.com/chemicalwolf1836/handbook-generator" target="_blank" rel="noreferrer">Source ↗</a>
+          <a class="btn" href="projects.html">Back to Projects</a>
         </div>
 
         <div class="app-window">
           <div class="app-bar">
             <span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
             <span class="app-title">handbook-generator · live</span>
-            <span class="app-live">running on Hugging Face</span>
+            <span class="app-live" data-status>ready</span>
           </div>
-          <iframe
-            src="https://chemicalwolf1836-handbook-generator.hf.space"
-            title="AI Handbook Generator — live app"
-            loading="lazy"
-            allow="clipboard-write; clipboard-read; fullscreen"
-            style="display:block; width:100%; height:80vh; min-height:560px; border:0;"></iframe>
+
+          <div class="app-body">
+            <!-- inputs -->
+            <div class="app-inputs">
+              <div class="app-field">
+                <label>Source documents (PDF, optional)</label>
+                <label class="dropzone" for="srcFiles" style="cursor:pointer;">
+                  <span aria-hidden="true">⬆</span>
+                  Click to upload PDFs
+                  <span class="file" data-srclabel hidden></span>
+                </label>
+                <input id="srcFiles" type="file" accept="application/pdf" multiple hidden>
+              </div>
+
+              <div class="app-field">
+                <label for="topicInput">Topic / instructions</label>
+                <textarea id="topicInput" class="app-ta" placeholder="e.g. A complete employee handbook from these documents — onboarding, policies, benefits, conduct, FAQ."></textarea>
+              </div>
+
+              <button class="btn primary app-generate" type="button" data-generate>Generate handbook ✦</button>
+              <button class="btn" type="button" data-stop style="margin-top:8px; display:none;">Stop</button>
+              <p class="app-metaline" data-hint>Give a topic and/or upload PDFs, then Generate. ⌘/Ctrl + Enter also works.</p>
+            </div>
+
+            <!-- output -->
+            <div class="app-output">
+              <div class="app-tabs" style="border-bottom:1px solid var(--line); justify-content:space-between; align-items:center;">
+                <span class="app-metaline" data-statusline style="margin:0;">Ready — add a topic and Generate.</span>
+                <span style="display:flex; gap:8px;">
+                  <button class="app-tab" type="button" data-copy>Copy</button>
+                  <button class="app-tab" type="button" data-download>Download .md</button>
+                </span>
+              </div>
+              <div style="padding:14px 22px 0;">
+                <div class="app-progress" aria-hidden="true"><i data-bar style="width:0%"></i></div>
+              </div>
+
+              <div class="app-panel" data-out style="min-height:360px;">
+                <span class="muted">Your handbook will appear here, section by section.</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -84,9 +136,272 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="script.js?v=11"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    (function () {
+      if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+
+      const fileInput = document.getElementById("srcFiles");
+      const srcLabel = document.querySelector("[data-srclabel]");
+      const topicInput = document.getElementById("topicInput");
+      const out = document.querySelector("[data-out]");
+      const genBtn = document.querySelector("[data-generate]");
+      const stopBtn = document.querySelector("[data-stop]");
+      const status = document.querySelector("[data-status]");
+      const statusLine = document.querySelector("[data-statusline]");
+      const bar = document.querySelector("[data-bar]");
+      const copyBtn = document.querySelector("[data-copy]");
+      const dlBtn = document.querySelector("[data-download]");
+
+      let docText = "";
+      let fullMd = "";       // assembled handbook so far
+      let busy = false;
+      let cancelled = false;
+
+      const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      // --- Minimal, safe Markdown → HTML ---
+      function escapeHtml(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+      function inlineMd(s) {
+        return s
+          .replace(/`([^`]+)`/g, "<code>$1</code>")
+          .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+          .replace(/__([^_]+)__/g, "<strong>$1</strong>")
+          .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+      }
+      function mdToHtml(md) {
+        const lines = escapeHtml(md).split(/\r?\n/);
+        let html = "", list = null;
+        const closeList = () => { if (list) { html += "</" + list + ">"; list = null; } };
+        for (const raw of lines) {
+          const line = raw.replace(/\s+$/, "");
+          if (!line.trim()) { closeList(); continue; }
+          let m;
+          if ((m = line.match(/^(#{1,6})\s+(.*)$/))) {
+            closeList();
+            const tag = m[1].length <= 2 ? "h4" : "h5";
+            html += "<" + tag + ">" + inlineMd(m[2]) + "</" + tag + ">";
+          } else if ((m = line.match(/^\s*[-*+]\s+(.*)$/))) {
+            if (list !== "ul") { closeList(); html += "<ul>"; list = "ul"; }
+            html += "<li>" + inlineMd(m[1]) + "</li>";
+          } else if ((m = line.match(/^\s*\d+[.)]\s+(.*)$/))) {
+            if (list !== "ol") { closeList(); html += "<ol>"; list = "ol"; }
+            html += "<li>" + inlineMd(m[1]) + "</li>";
+          } else {
+            closeList();
+            html += "<p>" + inlineMd(line) + "</p>";
+          }
+        }
+        closeList();
+        return html;
+      }
+
+      function setStatus(t) { if (status) status.textContent = t; }
+      function setLine(t) { if (statusLine) statusLine.textContent = t; }
+      function setBar(pct) { if (bar) bar.style.width = Math.max(0, Math.min(100, pct)) + "%"; }
+      function renderOut(extra) {
+        out.innerHTML = mdToHtml(fullMd + (extra || ""));
+        out.scrollTop = out.scrollHeight;
+      }
+      function updateToolbar() {
+        const has = !!fullMd.trim();
+        copyBtn.disabled = !has;
+        dlBtn.disabled = !has;
+      }
+
+      // --- PDF upload → text (supports multiple files) ---
+      fileInput.addEventListener("change", async () => {
+        const files = Array.from(fileInput.files || []);
+        if (!files.length) return;
+        srcLabel.hidden = false;
+        srcLabel.textContent = files.length + " file(s) · reading…";
+        let text = "";
+        try {
+          for (const f of files) {
+            const buf = await f.arrayBuffer();
+            const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+            for (let i = 1; i <= pdf.numPages; i++) {
+              const page = await pdf.getPage(i);
+              const content = await page.getTextContent();
+              text += content.items.map((it) => it.str).join(" ") + "\n";
+            }
+          }
+          docText = text.trim();
+          srcLabel.textContent = files.length + " file(s) · " + docText.length.toLocaleString() + " chars parsed";
+        } catch (e) {
+          docText = "";
+          srcLabel.textContent = "Couldn't read those PDFs";
+        }
+      });
+
+      // --- API call with rate-limit (429) backoff ---
+      async function callApi(payload, attempt) {
+        attempt = attempt || 0;
+        const res = await fetch("/api/handbook", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (res.status === 429 && attempt < 5 && !cancelled) {
+          setLine("Rate limited by the model — waiting 20s, then continuing…");
+          await sleep(20000);
+          return callApi(payload, attempt + 1);
+        }
+        return res;
+      }
+
+      // --- Stream one section, rendering live; returns its text ---
+      async function streamSection(sec, outlineText) {
+        const res = await callApi({
+          mode: "section", topic: topicInput.value.trim(), doc: docText,
+          title: sec.title, scope: sec.scope || "", outline: outlineText,
+        });
+        if (!res.ok || !res.body) {
+          const m = await res.text().catch(() => "");
+          throw new Error(m || ("Error " + res.status));
+        }
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "", text = "";
+        while (true) {
+          if (cancelled) { reader.cancel(); break; }
+          const { value, done } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split("\n");
+          buffer = lines.pop();
+          for (const line of lines) {
+            const s = line.trim();
+            if (!s.startsWith("data:")) continue;
+            const data = s.slice(5).trim();
+            if (data === "[DONE]") continue;
+            try {
+              const json = JSON.parse(data);
+              const delta = json.choices?.[0]?.delta?.content;
+              if (delta) { text += delta; renderOut((fullMd ? "\n\n" : "") + text); }
+            } catch (e) { /* ignore */ }
+          }
+        }
+        return text.trim();
+      }
+
+      function wordCount(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+      async function generate() {
+        if (busy) return;
+        const topic = topicInput.value.trim();
+        if (!topic && !docText) {
+          out.innerHTML = '<span class="muted">Add a topic or upload a PDF first.</span>';
+          topicInput.focus();
+          return;
+        }
+
+        busy = true; cancelled = false;
+        genBtn.disabled = true;
+        const label = genBtn.textContent;
+        genBtn.textContent = "Generating…";
+        stopBtn.style.display = "";
+        setStatus("planning");
+        fullMd = "";
+        updateToolbar();
+        setBar(4);
+        setLine("Planning the outline…");
+        out.innerHTML = '<span class="muted">Planning the outline…</span>';
+
+        try {
+          // 1) Outline
+          const oRes = await callApi({ mode: "outline", topic, doc: docText });
+          if (!oRes.ok) {
+            out.innerHTML = '<span class="muted">' + escapeHtml(await oRes.text().catch(() => "Error")) + '</span>';
+            setStatus("error"); setLine("Couldn't plan the outline.");
+            return;
+          }
+          let sections;
+          try {
+            sections = JSON.parse(await oRes.text());
+          } catch (e) {
+            out.innerHTML = '<span class="muted">The outline came back malformed — please try again.</span>';
+            setStatus("error"); setLine("Outline parse failed.");
+            return;
+          }
+          sections = (sections || []).filter((s) => s && s.title).slice(0, 8);
+          if (!sections.length) {
+            out.innerHTML = '<span class="muted">No sections were produced — try a clearer topic.</span>';
+            setStatus("error"); setLine("Empty outline.");
+            return;
+          }
+
+          const outlineText = sections.map((s, i) => (i + 1) + ". " + s.title + (s.scope ? " — " + s.scope : "")).join("\n");
+          const N = sections.length;
+
+          // 2) Sections
+          for (let i = 0; i < N; i++) {
+            if (cancelled) break;
+            setStatus("writing");
+            setLine("Writing section " + (i + 1) + " of " + N + " — " + sections[i].title);
+            setBar((i / N) * 100);
+            const sectionText = await streamSection(sections[i], outlineText);
+            fullMd += (fullMd ? "\n\n" : "") + sectionText;
+            renderOut("");
+            updateToolbar();
+            setBar(((i + 1) / N) * 100);
+          }
+
+          if (cancelled) {
+            setStatus("stopped");
+            setLine("Stopped — " + wordCount(fullMd).toLocaleString() + " words so far.");
+          } else {
+            setStatus("done");
+            setBar(100);
+            setLine("Done — " + N + " sections, " + wordCount(fullMd).toLocaleString() + " words.");
+          }
+        } catch (e) {
+          if (fullMd.trim()) {
+            renderOut("");
+            setLine("Stopped early: " + (e.message || "error") + ". Partial handbook kept below.");
+          } else {
+            out.innerHTML = '<span class="muted">' + escapeHtml(e.message || "Something went wrong — please try again.") + '</span>';
+          }
+          setStatus("error");
+        } finally {
+          busy = false;
+          genBtn.disabled = false;
+          genBtn.textContent = label;
+          stopBtn.style.display = "none";
+          updateToolbar();
+        }
+      }
+
+      genBtn.addEventListener("click", generate);
+      stopBtn.addEventListener("click", () => { cancelled = true; stopBtn.disabled = true; setTimeout(() => (stopBtn.disabled = false), 500); });
+      document.addEventListener("keydown", (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); generate(); }
+      });
+
+      // --- Copy / download ---
+      copyBtn.addEventListener("click", async () => {
+        if (!fullMd.trim()) return;
+        try { await navigator.clipboard.writeText(fullMd); copyBtn.textContent = "Copied"; setTimeout(() => (copyBtn.textContent = "Copy"), 1200); } catch (e) {}
+      });
+      dlBtn.addEventListener("click", () => {
+        if (!fullMd.trim()) return;
+        const blob = new Blob([fullMd], { type: "text/markdown" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "handbook.md";
+        a.click();
+        URL.revokeObjectURL(a.href);
+      });
+
+      updateToolbar();
+    })();
   </script>
 </body>
 </html>
