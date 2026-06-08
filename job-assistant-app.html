@@ -27,6 +27,24 @@
     [data-out] em { font-style: italic; }
     [data-out] code { font-family: var(--mono); font-size: 12.5px; background: rgba(255,45,45,.08); padding: 1px 5px; border-radius: 5px; }
     [data-out] .muted { color: var(--muted); }
+
+    /* Per-tab progress dots */
+    .app-tab[data-tab] { display: inline-flex; align-items: center; gap: 7px; }
+    .app-tab[data-tab]::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--line); flex: 0 0 auto;
+      transition: background .2s var(--ease), opacity .2s var(--ease);
+    }
+    .app-tab[data-tab][data-state="done"]::before { background: #22c55e; }
+    .app-tab[data-tab][data-state="loading"]::before { background: var(--accent); animation: ja-tab-pulse 1s ease-in-out infinite; }
+    .app-tab.is-active[data-tab]::before { background: rgba(255,255,255,.55); }
+    .app-tab.is-active[data-tab][data-state="done"]::before { background: #fff; }
+    .app-tab.is-active[data-tab][data-state="loading"]::before { background: #fff; }
+    @keyframes ja-tab-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .25; } }
+    @media (prefers-reduced-motion: reduce) { .app-tab[data-tab][data-state="loading"]::before { animation: none; } }
+
+    /* Disabled toolbar buttons (Copy / Download before any output) */
+    .app-tab[disabled] { opacity: .4; cursor: not-allowed; }
   </style>
 </head>
 <body>
@@ -165,10 +183,35 @@
 
       let cvText = "";
       let active = "cover";
-      const results = {}; // type -> generated text
+      const results = {};   // type -> generated text
+      let genType = null;   // type currently streaming (drives the loading dot)
       let busy = false;
 
       function setStatus(t) { if (status) status.textContent = t; }
+
+      // --- tab dots + toolbar/button state ---
+      function tabStateFor(type) {
+        if (genType === type) return "loading";
+        return results[type] ? "done" : "empty";
+      }
+      function refreshTabs() {
+        tabs.forEach((t) => {
+          const type = t.getAttribute("data-tab");
+          const on = type === active;
+          t.classList.toggle("is-active", on);
+          t.setAttribute("aria-selected", String(on));
+          t.dataset.state = tabStateFor(type);
+        });
+      }
+      function updateToolbar() {
+        const has = !!results[active];
+        copyBtn.disabled = !has;
+        dlBtn.disabled = !has;
+      }
+      function updateGenBtn() {
+        if (busy) return;
+        genBtn.textContent = results[active] ? "Regenerate ✦" : "Generate ✦";
+      }
 
       // --- Minimal, safe Markdown → HTML (escape first, then format) ---
       function escapeHtml(s) {
@@ -219,12 +262,10 @@
 
       function setActive(type) {
         active = type;
-        tabs.forEach((t) => {
-          const on = t.getAttribute("data-tab") === type;
-          t.classList.toggle("is-active", on);
-          t.setAttribute("aria-selected", String(on));
-        });
+        refreshTabs();
         render(type);
+        updateToolbar();
+        updateGenBtn();
       }
 
       tabs.forEach((t) =>
@@ -254,31 +295,43 @@
         }
       });
 
+      // remember the job description across refreshes
+      try { jobInput.value = localStorage.getItem("ja_job") || ""; } catch (e) {}
+      jobInput.addEventListener("input", () => {
+        try { localStorage.setItem("ja_job", jobInput.value); } catch (e) {}
+        updateGenBtn();
+      });
+
       // --- Generate (streams from /api/generate) ---
       async function generate() {
         if (busy) return;
         const job = jobInput.value.trim();
-        if (!job) { out.textContent = "Paste a job description first."; return; }
+        if (!job) {
+          out.innerHTML = '<span class="muted">Paste a job description first.</span>';
+          jobInput.focus();
+          return;
+        }
 
         busy = true;
         genBtn.disabled = true;
-        const label = genBtn.textContent;
         genBtn.textContent = "Generating…";
         setStatus("generating");
         out.textContent = "";
-        const genType = active; // lock the target in case tabs are switched mid-stream
+        genType = active; // module-level: locks the target + drives the loading dot
         results[genType] = "";
+        refreshTabs();
+        updateToolbar();
 
         try {
           const res = await fetch("/api/generate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ cv: cvText, job, type: active }),
+            body: JSON.stringify({ cv: cvText, job, type: genType }),
           });
 
           if (!res.ok) {
             const msg = await res.text();
-            out.textContent = msg || `Error ${res.status}`;
+            out.innerHTML = '<span class="muted">' + escapeHtml(msg || ("Error " + res.status)) + '</span>';
             setStatus("error");
             return;
           }
@@ -303,23 +356,34 @@
                 const delta = json.choices?.[0]?.delta?.content;
                 if (delta) {
                   results[genType] += delta;
-                  if (active === genType) out.innerHTML = mdToHtml(results[genType]);
+                  if (active === genType) {
+                    out.innerHTML = mdToHtml(results[genType]);
+                    out.scrollTop = out.scrollHeight; // keep newest text in view
+                  }
                 }
               } catch { /* ignore keep-alive / partial */ }
             }
           }
           setStatus("ready");
         } catch (e) {
-          out.textContent = "Network error — please try again.";
+          out.innerHTML = '<span class="muted">Network error — please try again.</span>';
           setStatus("error");
         } finally {
           busy = false;
           genBtn.disabled = false;
-          genBtn.textContent = label;
+          genType = null;
+          refreshTabs();
+          updateToolbar();
+          updateGenBtn();
         }
       }
 
       genBtn.addEventListener("click", generate);
+
+      // ⌘/Ctrl + Enter to generate from anywhere
+      document.addEventListener("keydown", (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === "Enter") { e.preventDefault(); generate(); }
+      });
 
       // --- Copy / download ---
       copyBtn.addEventListener("click", async () => {
