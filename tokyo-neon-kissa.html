@@ -10,9 +10,17 @@
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
   <meta name="description" content="Case study: Tokyo Neon Kissa — a bilingual Next.js web application with reservation system and cocktail discovery for Tokyo nightlife venues." />
+
+  <!-- Open Graph (link previews on LinkedIn etc.) -->
+  <meta property="og:title" content="Tokyo Neon Kissa — Case Study" />
+  <meta property="og:description" content="A bilingual Next.js cocktail-bar web app with a reservation workflow, AI virtual host, and cocktail finder for Tokyo nightlife." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/tokyo-neon-kissa.html" />
+  <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/projects/tokyo-neon-kissa/hero.jpg" />
+
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=15" />
+  <link rel="stylesheet" href="style.css?v=16" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -64,6 +72,7 @@
 
     <section class="section">
       <div class="container">
+        <h2 class="sr-only">At a glance</h2>
         <div class="cards">
           <article class="card">
             <div class="meta">
@@ -148,25 +157,26 @@
 
     <section class="section">
       <div class="container">
-        <h2>What I Built</h2>
+        <h2>How I Built It</h2>
+        <p class="case-text">A closer look at the implementation behind the main features.</p>
         <div class="cards">
           <article class="card">
             <div class="meta">
-              <span class="badge">UI</span>
+              <span class="badge">Frontend</span>
             </div>
-            <h3>Responsive Interface</h3>
+            <h3>Bilingual UI</h3>
             <p>
-              Built a clean bilingual UI with sections for menu, reservations, access, and bar information, designed to work across desktop and mobile layouts.
+              Structured the interface as reusable React components and drove the English/Japanese switch from a single language state, persisted to localStorage so the choice survives a refresh.
             </p>
           </article>
 
           <article class="card">
             <div class="meta">
-              <span class="badge">Feature</span>
+              <span class="badge">Logic</span>
             </div>
             <h3>Cocktail Finder</h3>
             <p>
-              Added a small interactive feature to help users explore drink options, making the project feel more dynamic than a standard landing page.
+              Scored each drink against the user's selected mood and sweetness, then ranked the matches — a small recommendation algorithm rather than a static list.
             </p>
           </article>
 
@@ -176,7 +186,7 @@
             </div>
             <h3>Reservation Workflow</h3>
             <p>
-              Connected the reservation form to an email workflow using Resend, then deployed and tested the project on Vercel.
+              Wired the booking form through a server route to the Resend API for transactional email, with input validation before submission and Vercel for deployment.
             </p>
           </article>
         </div>
@@ -201,7 +211,7 @@
   </footer>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
-  <script src="script.js?v=15"></script>
+  <script src="script.js?v=16"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
