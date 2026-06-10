@@ -12,6 +12,18 @@
   --radius: 18px;
   --max: 1080px;
 
+  /* Spacing scale — every gap/padding should snap to one of these (4px base).
+     Using a fixed set instead of random numbers is what makes spacing feel
+     consistent and "designed" rather than hand-placed. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
@@ -204,7 +216,7 @@ header.site-header{
 
 h1{
   margin: 0 0 12px;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(32px, 5vw, 46px);
   letter-spacing: -0.02em;
   line-height: 1.15;
   font-weight: 600;
@@ -212,16 +224,16 @@ h1{
 .lead{
   margin: 0 0 14px;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
   max-width: 46ch;
 }
 
 .cta-row{
   display:flex;
-  gap: 12px;
+  gap: var(--space-3);
   flex-wrap: wrap;
-  margin-top: 18px;
+  margin-top: var(--space-4);
 }
 
 .cta-buttons{
@@ -236,7 +248,7 @@ h1{
   -webkit-appearance: none;
   display:inline-flex;
   align-items:center;
-  gap: 8px;
+  gap: var(--space-2);
   border-radius: 12px;
   padding: 10px 18px;
   border: 1px solid var(--line);
@@ -261,6 +273,20 @@ h1{
 .btn.primary:hover{
   background: rgba(255,45,45,0.05);
   box-shadow: none;
+}
+
+/* Keyboard focus — visible ring for anyone tabbing through the page.
+   :focus-visible only shows for keyboard users, so mouse clicks stay clean. */
+.btn:focus-visible,
+.nav-links a:focus-visible,
+.brand:focus-visible,
+.link:focus-visible,
+.theme-btn:focus-visible,
+.menu-btn:focus-visible,
+.back-to-top:focus-visible{
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 
 
@@ -376,13 +402,13 @@ h1{
 
 /* Sections */
 .section{
-  padding: 42px 0;
+  padding: var(--space-7) 0;
   border-top: 1px solid var(--line);
 
 }
 .section h2{
   margin: 0 0 10px;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: -0.02em;
 }
 .section p{
@@ -429,12 +455,14 @@ h1{
 
 
 .cards{
-  margin-top: 24px;
+  margin-top: var(--space-5);
   display:grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 22px;
+  /* Fluid columns: fit as many 300px+ cards as will go, then wrap.
+     The grid handles its own collapse, so no breakpoint needed. */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-5);
   justify-content: start;
-  margin-bottom: 56px;
+  margin-bottom: var(--space-7);
 }
 .card{
   position: relative;
@@ -443,7 +471,7 @@ h1{
   flex-direction: column;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: var(--space-5);
   background: var(--surface);
   transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
@@ -746,7 +774,6 @@ input:focus, textarea:focus{
 @media (max-width: 860px){
   .hero-inner{ grid-template-columns: 1fr; }
   .quickcard{ position: relative; top: 0; }
-  .cards{ grid-template-columns: 1fr; }
   .menu-btn{ display:inline-flex; }
 
 

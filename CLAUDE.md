@@ -47,10 +47,22 @@ script.js               ← ALL JS (one shared file)
 --font: ui-sans-serif, system-ui, ...
 --mono: ui-monospace, SFMono-Regular, ...
 --ease: cubic-bezier(.2,.8,.2,1)
+
+/* Spacing scale (4px base) — snap gaps/padding to these, not random px */
+--space-1: 4px
+--space-2: 8px
+--space-3: 12px
+--space-4: 16px
+--space-5: 24px
+--space-6: 32px
+--space-7: 48px
+--space-8: 64px
 ```
 
 Always use these variables. Never hardcode colors — except #ff3b30 used on
-.brand-mark and .kicker i (slightly warmer red, intentional).
+.brand-mark and .kicker i (slightly warmer red, intentional). Prefer the
+--space-* tokens for spacing; legacy raw-px values are being migrated onto the
+scale incrementally.
 
 ### Key UI Patterns
 - `.card` — white panel, 1px border, border-radius var(--radius), hover lifts with red border tint
