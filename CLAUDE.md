@@ -80,11 +80,10 @@ scale incrementally.
 ---
 
 ## Known Bugs (fix these, don't introduce more)
-1. `.actions` has `display: auto` — INVALID. Should be `display: flex; flex-wrap: wrap;`
-2. `.highlight` is defined twice in style.css — remove the duplicate (keep the one with `letter-spacing`)
-3. `menu-toggle` vs `menu-btn` — inconsistent across pages; standardize to `menu-btn` + update CSS
-4. Contact script.js still has `your-email@example.com` — needs real email
-5. Duplicate `id="editingLabel"` in promptkit.html — IDs must be unique in HTML
+None currently. The five previously listed bugs (`display: auto` on `.actions`,
+duplicate `.highlight`, `menu-toggle` naming, placeholder contact email,
+duplicate `editingLabel` id) were all verified fixed on 2026-06-11.
+Add new bugs here as they're found.
 
 ---
 

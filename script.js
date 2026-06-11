@@ -198,6 +198,30 @@
   window.addEventListener("resize", updateProgress, { passive: true });
   updateProgress();
 
+  // Scroll reveal — cards and section headings rise into view as you scroll.
+  // IntersectionObserver tells us when an element enters the viewport, which
+  // is far cheaper than measuring positions on every scroll event. Elements
+  // only get the .reveal (hidden) class here in JS, so if JS never runs the
+  // page stays fully visible — progressive enhancement.
+  const revealEls = document.querySelectorAll(".cards .card, .section h2, .section .sub");
+  if ("IntersectionObserver" in window && revealEls.length) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("in");
+        io.unobserve(entry.target); // reveal once, then stop watching
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach((el) => {
+      // Stagger siblings (cards in the same row) by 70ms steps
+      const siblings = Array.from(el.parentElement.children);
+      el.style.setProperty("--reveal-delay", `${(siblings.indexOf(el) % 3) * 70}ms`);
+      el.classList.add("reveal");
+      io.observe(el);
+    });
+  }
+
   // Contact page: build a mailto from fields (no backend)
   const mailBtn = document.querySelector("[data-mailto]");
   if (mailBtn) {

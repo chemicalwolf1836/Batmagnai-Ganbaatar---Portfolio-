@@ -1887,3 +1887,56 @@ html[data-theme="dark"] .icon-dm-invert {
 .ja-note { border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 12px; padding: 18px 20px; background: var(--surface); }
 .ja-note .label { margin: 0 0 8px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--accent); }
 .ja-note p:last-child { margin: 0; color: var(--muted); line-height: 1.7; }
+/* ── Motion: hero entrance + scroll reveal ──
+   The design brief is "subtle motion" — one orchestrated rise on page load,
+   then cards reveal as they enter the viewport. All gated behind
+   prefers-reduced-motion so nothing animates for users who opt out. */
+
+@keyframes rise{
+  from{ opacity: 0; transform: translateY(12px); }
+  to{ opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference){
+  .hero .kicker,
+  .hero h1,
+  .hero .lead,
+  .hero .now-line,
+  .hero .cta-row,
+  .hero .quickcard{
+    animation: rise 560ms var(--ease) both;
+  }
+  .hero h1{ animation-delay: 60ms; }
+  .hero .lead{ animation-delay: 120ms; }
+  .hero .now-line{ animation-delay: 180ms; }
+  .hero .cta-row{ animation-delay: 240ms; }
+  .hero .quickcard{ animation-delay: 320ms; }
+}
+
+/* .reveal is added by script.js, .in flips on when the element scrolls into
+   view. Without JS the class never appears, so content stays fully visible. */
+.reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 520ms var(--ease), transform 520ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.in{
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity: 1; transform: none; transition: none; }
+}
+
+/* ── Editorial card numbers (01, 02, …) ──
+   CSS counters — no HTML changes. Inherits the mono 12px style from .meta. */
+.cards{ counter-reset: card; }
+.cards .card{ counter-increment: card; }
+.cards .card .meta::after{
+  content: counter(card, decimal-leading-zero);
+  margin-left: auto;
+  letter-spacing: 0.08em;
+  opacity: 0.6;
+}
