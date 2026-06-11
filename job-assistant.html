@@ -9,7 +9,7 @@
 
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Case study: AI Job Application Assistant — a Python/Gradio tool that generates tailored cover letters, CV suggestions, skills analysis, interview questions, and salary estimates from an uploaded CV and job description." />
+  <meta name="description" content="Case study: AI Job Application Assistant — an AI tool that generates tailored cover letters, CV suggestions, skills analysis, interview questions, and salary estimates from an uploaded CV and job description. Try it live." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="AI Job Application Assistant — Batmagnai Ganbaatar" />
@@ -23,7 +23,7 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=17" />
+  <link rel="stylesheet" href="style.css?v=18" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -75,16 +75,49 @@
         </p>
 
         <div class="chips-row" aria-label="Tech stack">
-          <span class="tag">Python</span>
-          <span class="tag">Gradio</span>
+          <span class="tag">Python · Gradio</span>
+          <span class="tag">JavaScript · Vercel Edge</span>
           <span class="tag">Groq · Llama 3.3 70B</span>
-          <span class="tag">pdfplumber</span>
+          <span class="tag">PDF.js</span>
         </div>
 
         <div class="cta-row">
           <a class="btn primary" href="job-assistant-app.html">Open Tool →</a>
           <a class="btn" href="https://github.com/chemicalwolf1836/job-assistant-" target="_blank" rel="noreferrer">Source ↗</a>
           <a class="btn" href="projects.html">Back to Projects</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ORIGINAL vs LIVE ─────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div class="ja-note" style="max-width: 800px;">
+          <p class="label">ORIGINAL vs LIVE VERSION</p>
+          <div class="vs-compare">
+            <div>
+              <p class="vs-col-h">Original · Python</p>
+              <ul class="vs-list">
+                <li>Python · Gradio UI</li>
+                <li>pdfplumber CV parsing</li>
+                <li>Server-side backend</li>
+                <li>Five streamed outputs</li>
+              </ul>
+            </div>
+            <div>
+              <p class="vs-col-h vs-live">Live · this site</p>
+              <ul class="vs-list">
+                <li>Vanilla JS frontend</li>
+                <li>PDF.js parses in-browser</li>
+                <li>Vercel Edge Function</li>
+                <li>Same five outputs</li>
+              </ul>
+            </div>
+          </div>
+          <div class="vs-foot">
+            <span class="vs-foot-text">Same idea — CV + job description → five tailored assets.</span>
+            <a class="vs-try" href="job-assistant-app.html">Try the live version →</a>
+          </div>
         </div>
       </div>
     </section>
@@ -262,7 +295,7 @@ We're hiring a front-end developer comfortable with React, Next.js, and TypeScri
           <div class="ja-note">
             <p class="label">RESULT</p>
             <p>
-              The tool generates a full set of job application materials from a CV and job description in under a minute, streamed live. This project pushed me further into Python backend work, prompt engineering for structured outputs, and building practical AI tools that solve a real, everyday problem.
+              The tool generates a full set of job application materials from a CV and job description in under a minute, streamed live. This project pushed me further into Python backend work, prompt engineering for structured outputs, and building practical AI tools that solve a real, everyday problem. It now also runs live on this site, rebuilt as a vanilla JS frontend with a Vercel Edge Function that keeps the API key server-side.
             </p>
           </div>
         </div>

@@ -9,11 +9,11 @@
 
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Case study: AI Handbook Generator — a Python/Gradio app that generates 20,000-word structured handbooks from uploaded PDFs using RAG and the LongWriter technique." />
+  <meta name="description" content="Case study: AI Handbook Generator — an AI tool that generates 20,000-word structured handbooks from uploaded PDFs using RAG and the LongWriter technique, with a live serverless version to try." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="AI Handbook Generator — Batmagnai Ganbaatar" />
-  <meta property="og:description" content="A Python/Gradio app that generates 20,000-word structured handbooks from uploaded PDFs using a custom RAG engine and the LongWriter technique." />
+  <meta property="og:description" content="An AI tool that generates 20,000-word structured handbooks from uploaded PDFs using a custom RAG engine and the LongWriter technique — with a live version to try." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/handbook-generator.html" />
   <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
@@ -23,23 +23,9 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=17" />
+  <link rel="stylesheet" href="style.css?v=18" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 
-  <!-- Original vs Live comparison grid -->
-  <style>
-    .hb-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; margin-top: 20px; max-width: 720px; }
-    .hb-col-h { margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
-    .hb-col-h.hb-live { color: var(--accent); }
-    .hb-list { list-style: none; margin: 0; padding: 0; }
-    .hb-list li { padding: 9px 0; font-size: 14px; color: var(--text); border-top: 1px solid var(--line); }
-    .hb-list li:first-child { border-top: none; padding-top: 0; }
-    .hb-foot { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; }
-    .hb-foot-text { margin: 0; }
-    .hb-try { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--accent); border: 1px solid rgba(255,45,45,0.35); border-radius: 999px; padding: 8px 16px; background: transparent; text-decoration: none; transition: background 160ms var(--ease), border-color 160ms var(--ease); }
-    .hb-try:hover { background: rgba(255,45,45,0.06); border-color: rgba(255,45,45,0.5); }
-    @media (max-width: 620px) { .hb-compare { grid-template-columns: 1fr; gap: 18px; } }
-  </style>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -90,10 +76,9 @@
         </p>
 
         <div class="chips-row" aria-label="Tech stack">
-          <span class="tag">Python</span>
-          <span class="tag">Gradio</span>
+          <span class="tag">Python · Gradio</span>
+          <span class="tag">JavaScript · Vercel Edge</span>
           <span class="tag">Groq · Llama 3.3 70B</span>
-          <span class="tag">sentence-transformers</span>
           <span class="tag">RAG</span>
         </div>
 
@@ -110,10 +95,10 @@
       <div class="container">
         <div class="ja-note" style="max-width: 800px;">
           <p class="label">ORIGINAL vs LIVE VERSION</p>
-          <div class="hb-compare">
+          <div class="vs-compare">
             <div>
-              <p class="hb-col-h">Original · Python</p>
-              <ul class="hb-list">
+              <p class="vs-col-h">Original · Python</p>
+              <ul class="vs-list">
                 <li>20,000-word handbooks</li>
                 <li>12–16 sections</li>
                 <li>Custom vector RAG</li>
@@ -121,8 +106,8 @@
               </ul>
             </div>
             <div>
-              <p class="hb-col-h hb-live">Live · this site</p>
-              <ul class="hb-list">
+              <p class="vs-col-h vs-live">Live · this site</p>
+              <ul class="vs-list">
                 <li>~8–10k words</li>
                 <li>6–8 sections</li>
                 <li>Long-context grounding</li>
@@ -130,9 +115,9 @@
               </ul>
             </div>
           </div>
-          <div class="hb-foot">
-            <span class="hb-foot-text">Same approach — plan → write per section → assemble.</span>
-            <a class="hb-try" href="handbook-generator-app.html">Try the live version →</a>
+          <div class="vs-foot">
+            <span class="vs-foot-text">Same approach — plan → write per section → assemble.</span>
+            <a class="vs-try" href="handbook-generator-app.html">Try the live version →</a>
           </div>
         </div>
       </div>
