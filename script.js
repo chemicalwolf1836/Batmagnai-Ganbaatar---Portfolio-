@@ -1,36 +1,35 @@
 // Minimal JS: mobile menu + active nav + mailto builder + theme toggle
 
-// ---- UI sound effects (Nintendo-soft, synthesized; on after first click) ----
+// ---- UI sound effects (Nintendo-soft, synthesized) ----
 (function () {
-  let ctx = null, bus = null, lastAt = 0;
-  // One AudioContext + a shared "bus" (compressor) so overlapping notes
-  // can't pile up and clip. Created/resumed on a user gesture.
-  function ac() {
-    if (!ctx) {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return null;
-      ctx = new AC({ latencyHint: "interactive" }); // minimize output latency
-      const master = ctx.createGain();
-      master.gain.value = 0.9;
-      const comp = ctx.createDynamicsCompressor(); // tames stacked peaks
-      master.connect(comp).connect(ctx.destination);
-      bus = master;
-      // Keep-alive: a silent source keeps the context "running" so a later
-      // press never waits on an async resume() — removes the occasional pause.
-      const keep = ctx.createOscillator();
-      const keepGain = ctx.createGain();
-      keepGain.gain.value = 0;
-      keep.connect(keepGain).connect(ctx.destination);
-      keep.start();
-    }
-    if (ctx.state === "suspended") ctx.resume();
-    return ctx;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return; // older browser with no Web Audio — bail silently
+
+  // Build the context + audio graph ONCE at page load, not on first click.
+  // A new context always starts "suspended" (browser autoplay policy) and
+  // makes no sound until a user gesture resumes it — but CONSTRUCTING it
+  // early means the first press only has to resume (fast), not build (slow).
+  // That removes the "first click on a fresh page is silent/late" bug.
+  const ctx = new AC({ latencyHint: "interactive" });
+  const bus = ctx.createGain(); // shared bus so overlapping notes can't pile up
+  bus.gain.value = 0.9;
+  bus.connect(ctx.createDynamicsCompressor()).connect(ctx.destination); // tame stacked peaks
+
+  // Resume the context whenever the page becomes interactive again.
+  // pageshow is the key one: pressing Back restores this page from the
+  // browser's cache and fires pageshow (NOT visibilitychange), so without
+  // it the context stayed asleep and the next press was silent.
+  function wake() {
+    if (ctx.state !== "running") ctx.resume().catch(() => {});
   }
-  // Build + play one short sine note on a RUNNING context: soft LINEAR attack
-  // (no click) + smooth fade. Optional pitch glide (slideTo) for a "rise" feel.
-  function play(c, { freq, dur, type, gain, slideTo, when }) {
-    const t0 = c.currentTime + when;
-    const o = c.createOscillator(), g = c.createGain();
+  window.addEventListener("pageshow", wake);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) wake(); });
+
+  // Build + play one short sine note: soft LINEAR attack (no click) + smooth
+  // fade. Optional pitch glide (slideTo) for a "rise" feel.
+  function play({ freq = 600, dur = 0.045, type = "sine", gain = 0.05, slideTo = null, when = 0 }) {
+    const t0 = ctx.currentTime + when;
+    const o = ctx.createOscillator(), g = ctx.createGain();
     o.type = type;
     o.frequency.setValueAtTime(freq, t0);
     if (slideTo) o.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
@@ -41,30 +40,27 @@
     o.start(t0);
     o.stop(t0 + dur + 0.02);
   }
+  // While suspended, ctx.currentTime is frozen — scheduling "now" would put
+  // the note in the PAST and it would never sound. So resume first, then play.
   function tone(opts) {
-    const o = { freq: 600, dur: 0.045, type: "sine", gain: 0.05, slideTo: null, when: 0, ...opts };
-    const c = ac();
-    if (!c) return;
-    // After the tab sits idle or is backgrounded, the browser suspends the
-    // context. resume() is async, so scheduling immediately would place the
-    // note in the PAST (currentTime stays frozen until it resumes) and you'd
-    // hear nothing — the "no sound until I click again" bug. Wait for running.
-    if (c.state === "running") play(c, o);
-    else c.resume().then(() => play(c, o)).catch(() => {});
+    if (ctx.state === "running") play(opts);
+    else ctx.resume().then(() => play(opts)).catch(() => {});
   }
-  // Nintendo two-tone: two clean sequential rising notes for clicks,
-  // one tick for toggles. The second note starts at 70ms, runs 90ms, and its
-  // oscillator stops 20ms later — so the whole sound needs ~180ms to finish.
-  // The nav handler below waits out exactly this long so it's never cut.
-  const SELECT_MS = 180;
+
+  // Nintendo two-tone for clicks, one tick for toggles. Kept SHORT (~110ms):
+  // the sound starts on pointerdown, and on a link click the old page keeps
+  // playing during the network hop to the next page, so a short sound finishes
+  // on its own — no need to hold navigation back (that hold was the "pause").
   function playSelect() {
-    tone({ freq: 784, dur: 0.06, gain: 0.05 });
-    tone({ freq: 1047, dur: 0.09, gain: 0.05, when: 0.07 });
+    tone({ freq: 784, dur: 0.05 });
+    tone({ freq: 1047, dur: 0.06, when: 0.05 });
   }
   function playToggle() {
-    tone({ freq: 988, dur: 0.06, gain: 0.05 });
+    tone({ freq: 988, dur: 0.06 });
   }
+
   // Play the sound for an interactive element (throttled to avoid stacking).
+  let lastAt = 0;
   function trigger(el) {
     const now = performance.now();
     if (now - lastAt < 35) return; // de-dupe only; won't skip deliberate presses
@@ -74,9 +70,11 @@
   }
 
   // Fire on POINTERDOWN so the sound lands on the press — in sync with the
-  // physical click, not the release.
+  // physical click, not the release. wake() first so the context is live even
+  // when the press isn't on a button (e.g. scrolling, tapping empty space).
   document.addEventListener("pointerdown", (e) => {
     if (e.button !== 0) return; // primary (left) button / touch only
+    wake();
     const t = e.target;
     if (!(t instanceof Element)) return;
     const el = t.closest("a, button, .btn");
@@ -86,38 +84,11 @@
   // Keyboard activation (Enter/Space) doesn't fire pointerdown — cover it too.
   document.addEventListener("keydown", (e) => {
     if (e.repeat || (e.key !== "Enter" && e.key !== " ")) return;
+    wake();
     const t = e.target;
     if (!(t instanceof Element)) return;
     const el = t.closest("a, button, .btn");
     if (el) trigger(el);
-  });
-
-  // Returning to the tab often leaves the context suspended — wake it ahead of
-  // time so the next press is audible immediately (no silent "warm-up" click).
-  document.addEventListener("visibilitychange", () => {
-    if (!document.hidden && ctx && ctx.state === "suspended") ctx.resume().catch(() => {});
-  });
-
-  // Let the full two-tone finish before a same-tab link changes the page.
-  // The sound already started on pointerdown/keydown (time recorded in lastAt),
-  // so we wait out only the time it has LEFT — never cutting it, and navigating
-  // sooner than a fixed delay when the press-to-click gap already covered some.
-  document.addEventListener("click", (e) => {
-    const t = e.target;
-    if (!(t instanceof Element)) return;
-    const a = t.closest("a");
-    if (!a) return;
-    const href = a.getAttribute("href");
-    const plainClick = !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey);
-    const sameTab = a.target !== "_blank" && !a.hasAttribute("download");
-    const navigates = href && !href.startsWith("#") && !/^(mailto:|tel:)/i.test(href);
-    if (plainClick && sameTab && navigates) {
-      e.preventDefault();
-      const dest = a.href;
-      const remaining = SELECT_MS - (performance.now() - lastAt);
-      const wait = Math.max(0, Math.min(SELECT_MS, remaining));
-      setTimeout(() => { window.location.href = dest; }, wait);
-    }
   });
 })();
 
