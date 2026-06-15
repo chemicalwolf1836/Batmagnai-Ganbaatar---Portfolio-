@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://batmagnai-ganbaatar-portfolio.vercel.app/sitemap.xml
