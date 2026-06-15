@@ -1,0 +1,7 @@
+# Dependencies (Vercel installs these from package.json on deploy)
+node_modules/
+
+# Local-only tooling and renders, not part of the site
+_test-card.mjs
+linkedin-visuals/
+.vercel/
