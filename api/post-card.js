@@ -106,7 +106,7 @@ export default async function handler(req) {
         letterSpacing: "0.28em",
         textTransform: "uppercase",
         color: C.muted,
-        margin: "52px 0 22px",
+        margin: "40px 0 18px",
       },
     }, text);
 
@@ -180,14 +180,14 @@ export default async function handler(req) {
     label("What the build taught me"),
     h("div", { style: { display: "flex", flexWrap: "wrap", gap: 18 } }, ...d.takeaways.slice(0, 4).map(cell)),
 
-    h("div", { style: { display: "flex", height: 1, backgroundColor: C.line, margin: "52px 0 28px" } }),
+    h("div", { style: { display: "flex", height: 1, backgroundColor: C.line, margin: "40px 0 26px" } }),
     h("div", { style: { display: "flex", borderLeft: `3px solid ${C.gold}`, paddingLeft: 26, fontFamily: "Lora", fontSize: 26, lineHeight: 1.5, color: "#d9d5cc", maxWidth: 900 } }, d.quote),
 
     // footer pinned to bottom
-    h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: "auto" } },
-      h("div", { style: { display: "flex", flexDirection: "column" } },
-        h("div", { style: { fontFamily: "Lora", fontWeight: 600, fontSize: 30, marginBottom: 8 } }, d.name),
-        h("div", { style: { fontFamily: "Mono", fontSize: 16, color: C.muted } }, d.links)
+    h("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginTop: "auto", paddingTop: 36 } },
+      h("div", { style: { display: "flex", flexDirection: "column", flexShrink: 1, minWidth: 0, maxWidth: 700, marginRight: 24 } },
+        h("div", { style: { fontFamily: "Lora", fontWeight: 600, fontSize: 30, marginBottom: 10 } }, d.name),
+        h("div", { style: { fontFamily: "Mono", fontSize: 15, lineHeight: 1.5, color: C.muted } }, d.links)
       ),
       h("div", { style: { display: "flex", flexShrink: 0, whiteSpace: "nowrap", fontFamily: "Mono", fontSize: 18, letterSpacing: "0.12em", color: C.gold, border: `1px solid ${C.gold}`, borderRadius: 999, padding: "12px 22px" } }, d.pill)
     )
