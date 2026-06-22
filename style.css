@@ -880,7 +880,7 @@ input:focus, textarea:focus{
 
 @media (min-width: 768px){
   .hero h1{
-    font-size: 40px;
+    font-size: clamp(48px, 6vw, 68px);
   }
 
   .hero .lead{
