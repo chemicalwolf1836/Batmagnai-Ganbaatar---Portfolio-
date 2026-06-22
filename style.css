@@ -570,6 +570,22 @@ h1{
   padding-top: 14px;
 }
 
+.card-tech{
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: 0 0 var(--space-3);
+}
+.card-tech span{
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: rgba(17,17,20,0.05);
+  border: 1px solid var(--line);
+}
+
 .saved-prompts-grid {
   margin-top: 18px;
   display: grid;
@@ -1236,6 +1252,9 @@ html[data-theme="dark"] .gridlines {
 html[data-theme="dark"] .card:hover {
   border-color: rgba(255,45,45,0.45);
   box-shadow: 0 12px 40px rgba(255,45,45,0.12);
+}
+html[data-theme="dark"] .card-tech span {
+  background: rgba(255,255,255,0.06);
 }
 html[data-theme="dark"] .saved-prompt-card:hover {
   border-color: rgba(255,45,45,0.35);
