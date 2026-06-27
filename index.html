@@ -4,52 +4,53 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
   <title>Batmagnai Ganbaatar — Portfolio</title>
 
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
-
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-   <!-- SEO -->
-   <meta name="title" content="Batmagnai Ganbaatar — Portfolio" />
-   <meta name="description" content="Minimalist portfolio with selected projects and contact info." />
+  <!-- SEO -->
+  <meta name="title" content="Batmagnai Ganbaatar — Portfolio" />
+  <meta name="description" content="Front-end and full-stack developer based in Tokyo. Building AI products and clean web applications." />
 
   <!-- Open Graph -->
   <meta property="og:title" content="Batmagnai Ganbaatar — Portfolio" />
-  <meta property="og:description" content="Minimalist portfolio with selected projects and contact info." />
+  <meta property="og:description" content="Front-end and full-stack developer based in Tokyo. Building AI products and clean web applications." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app" />
   <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Batmagnai Ganbaatar — Front End • Full Stack • AI Workflow" />
-
+  <meta property="og:image:alt" content="Batmagnai Ganbaatar — Front End · Full Stack · AI" />
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
 
-  <link rel="stylesheet" href="style.css?v=18" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css?v=19" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <header class="site-header" data-nav>
     <div class="container nav">
       <a class="brand" href="index.html">
         <span class="brand-mark" aria-hidden="true"></span>
         <strong>BATMAGNAI GANBAATAR</strong>
-        <span>/ Front End • Full Stack • AI Workflow</span>
       </a>
 
       <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
-        <a href="index.html" data-nav-link>Home</a>
-        <a href="about.html" data-nav-link>About</a>
-        <a href="projects.html" data-nav-link>Projects</a>
+        <a href="#work" data-nav-link>Work</a>
+        <a href="#about" data-nav-link>About</a>
+        <a href="resume.html" data-nav-link>Résumé</a>
+        <a href="#contact" data-nav-link>Contact</a>
         <a href="promptkit.html" data-nav-link>PromptKit</a>
-        <a href="contact.html" data-nav-link>Contact</a>
-        <a href="resume.html" data-nav-link>Resume</a>
       </nav>
 
       <div class="nav-controls">
@@ -63,6 +64,8 @@
   </header>
 
   <main id="main">
+
+    <!-- ── HERO ── -->
     <section class="hero">
       <div class="gridlines" aria-hidden="true"></div>
       <div class="angles" aria-hidden="true">
@@ -71,245 +74,246 @@
       </div>
 
       <div class="container hero-inner">
-        <div>
-          <div class="kicker"><i></i> clean • sharp • fast</div>
-          <h1>Batmagnai Ganbaatar</h1>
-          <p class="lead">
-             I build clean, practical front-end and full-stack applications, along with structured AI workflows focused on clarity and usability.
-          </p>
+        <span class="coords" aria-hidden="true">35.6895°N / 139.6917°E · TOKYO</span>
 
-          <p class="now-line"><span class="now-dot" aria-hidden="true"></span> Currently building — Wander, an AI travel-discovery app.</p>
-
-          <div class="cta-row">
-            <a class="btn primary" href="projects.html">View Projects →</a>
-            <a class="btn" href="contact.html">Contact</a>
-            <a class="btn" href="https://linkedin.com/in/batmagnai-ganbaatar-025a94211" target="_blank" rel="noreferrer">LinkedIn</a>
-            <a class="btn" href="https://github.com/chemicalwolf1836" target="_blank" rel="noreferrer">GitHub</a>
+        <div class="hero-left">
+          <div class="kicker"><i></i> PORTFOLIO — 2026 / TOKYO</div>
+          <h1>Batmagnai<br>Ganbaatar</h1>
+          <div class="hero-bar" aria-hidden="true"></div>
+          <p class="lead">Full-stack developer &amp; AI applications builder. I ship complete products — not just front-end demos — with a bias toward clarity, restraint, and usability.</p>
+          <p class="now-line"><span class="now-dot" aria-hidden="true"></span> CURRENTLY BUILDING — WANDER, AN AI TRAVEL APP</p>
+          <div class="hero-links">
+            <a href="#work">View work →</a>
+            <a href="resume.html">Résumé ↗</a>
+            <a href="#contact">Contact ↗</a>
           </div>
         </div>
 
-        <aside class="quickcard" aria-label="Highlights">
-          <div class="label">HIGHLIGHTS</div>
-          <h2>What I bring</h2>
-          <ul>
-            <li class="chip">
-              <span>Front end</span>
-              <code>HTML • CSS • JS • React</code>
-            </li>
-            <li class="chip">
-              <span>Stack</span>
-              <code>Next.js • TypeScript • Tailwind</code>
-            </li>
-            <li class="chip">
-              <span>AI engineering</span>
-              <code>Python • Groq API • RAG</code>
-            </li>
-            <li class="chip">
-              <span>UI focus</span>
-              <code>clean • minimal • responsive</code>
-            </li>
-          </ul>
+        <aside class="profile-card" aria-label="Profile">
+          <div class="profile-card-label">// Profile</div>
+          <div class="profile-card-body">
+            <div class="profile-row">
+              <span class="profile-key"><span class="profile-dot" aria-hidden="true"></span>ROLE</span>
+              <span class="profile-val">Front-End / Full-Stack Developer</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-key"><span class="profile-dot" aria-hidden="true"></span>BASED</span>
+              <span class="profile-val">Tokyo, JP · EN / 日本語</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-key"><span class="profile-dot" aria-hidden="true"></span>FOCUS</span>
+              <span class="profile-val">Next.js · TypeScript · Python · AI</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-key"><span class="profile-dot" aria-hidden="true"></span>NOW</span>
+              <span class="profile-val">Building Wander — AI travel app</span>
+            </div>
+            <div class="profile-row">
+              <span class="profile-key"><span class="profile-dot" aria-hidden="true"></span>STATUS</span>
+              <span class="profile-val">Open to roles + IT support</span>
+            </div>
+          </div>
         </aside>
       </div>
     </section>
 
-    <section class="section">
-  <div class="container">
-    <h2>Projects</h2>
-    <p class="sub">Selected projects demonstrating real implementation and practical outcomes.</p>
-
-    <div class="cards">
-      <article class="card">
-        <div class="meta">
-          <span class="badge">Full Stack</span>
-          <span class="opacity-6">Complete</span>
+    <!-- ── PROJECT INDEX ── -->
+    <section class="section" id="work">
+      <div class="container">
+        <div class="index-header">
+          <h2 class="index-label">Index — Selected Work</h2>
+          <span class="index-count" id="projectCount">7 / 7 entries</span>
         </div>
 
-        <h3>Wander</h3>
-
-        <p>
-          An <span class="highlight">AI travel discovery app</span> that finds your perfect destination through natural conversation, guided prompts, or a single tap.
-        </p>
-
-        <div class="card-tech">
-          <span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Claude API</span><span>Supabase</span><span>Mapbox</span>
+        <div class="filter-chips" role="group" aria-label="Filter projects by category">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="ai">AI</button>
+          <button class="filter-chip" data-filter="fullstack">Full-Stack</button>
+          <button class="filter-chip" data-filter="frontend">Front-End</button>
+          <button class="filter-chip" data-filter="tool">Tools</button>
         </div>
 
-        <div class="links">
-          <a class="link" href="https://wander-travel-app-jade.vercel.app" target="_blank" rel="noreferrer">Live demo</a>
-          <span class="divider">|</span>
-          <a class="link" href="wander.html">View details</a>
-          <span class="divider">|</span>
-          <a class="link" href="https://github.com/chemicalwolf1836/wander-travel-app" target="_blank" rel="noreferrer">Source</a>
+        <div class="project-index" id="projectIndex">
+          <a class="project-row" href="wander.html" data-cat="ai fullstack">
+            <span class="project-num">01</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">Wander</span>
+                <span class="project-type">AI · FULL-STACK</span>
+              </span>
+              <span class="project-blurb">AI travel-discovery app — find your destination through conversation, guided prompts, or a single tap.</span>
+              <span class="project-tech">Next.js · Claude · Supabase · Mapbox</span>
+            </span>
+            <span class="project-year">2026 <span class="project-arrow">→</span></span>
+          </a>
+
+          <a class="project-row" href="retireai.html" data-cat="ai fullstack">
+            <span class="project-num">02</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">RetireAI</span>
+                <span class="project-type">AI · FULL-STACK</span>
+              </span>
+              <span class="project-blurb">AI retirement planner with savings projections, scenario comparison, and generated personalised reports.</span>
+              <span class="project-tech">Next.js · TypeScript · Claude API</span>
+            </span>
+            <span class="project-year">2026 <span class="project-arrow">→</span></span>
+          </a>
+
+          <a class="project-row" href="neon-kissa-v2.html" data-cat="frontend">
+            <span class="project-num">03</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">Neon Kissa V2</span>
+                <span class="project-type">FRONT-END</span>
+              </span>
+              <span class="project-blurb">Bilingual cocktail-bar site with four switchable neon palettes, a mood-based finder, and an AI host.</span>
+              <span class="project-tech">Next.js · React 19 · Tailwind</span>
+            </span>
+            <span class="project-year">2025 <span class="project-arrow">→</span></span>
+          </a>
+
+          <a class="project-row" href="tokyo-neon-kissa.html" data-cat="frontend">
+            <span class="project-num">04</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">Tokyo Neon Kissa</span>
+                <span class="project-type">FRONT-END</span>
+              </span>
+              <span class="project-blurb">Bilingual web app with reservation workflows, venue discovery, and a guided cocktail finder.</span>
+              <span class="project-tech">Next.js · TypeScript · Tailwind</span>
+            </span>
+            <span class="project-year">2025 <span class="project-arrow">→</span></span>
+          </a>
+
+          <a class="project-row" href="promptkit.html" data-cat="frontend tool">
+            <span class="project-num">05</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">PromptKit v2</span>
+                <span class="project-type">FRONT-END · TOOL</span>
+              </span>
+              <span class="project-blurb">Browser tool that turns rough ideas into structured, reusable prompts with persistent state and live preview.</span>
+              <span class="project-tech">HTML · CSS · JavaScript</span>
+            </span>
+            <span class="project-year">2025 <span class="project-arrow">→</span></span>
+          </a>
+
+          <a class="project-row" href="handbook-generator.html" data-cat="ai tool">
+            <span class="project-num">06</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">AI Handbook Generator</span>
+                <span class="project-type">AI · TOOL</span>
+              </span>
+              <span class="project-blurb">Generates multi-section structured handbooks from uploaded PDFs — planned, then streamed section by section.</span>
+              <span class="project-tech">JavaScript · Vercel Edge · Groq</span>
+            </span>
+            <span class="project-year">2025 <span class="project-arrow">→</span></span>
+          </a>
+
+          <a class="project-row" href="job-assistant.html" data-cat="ai tool">
+            <span class="project-num">07</span>
+            <span class="project-body">
+              <span class="project-title-row">
+                <span class="project-name">AI Job Assistant</span>
+                <span class="project-type">AI · TOOL</span>
+              </span>
+              <span class="project-blurb">Upload a CV and a job post → tailored cover letter, CV suggestions, skills analysis, and salary estimate.</span>
+              <span class="project-tech">JavaScript · Vercel Edge · Groq</span>
+            </span>
+            <span class="project-year">2025 <span class="project-arrow">→</span></span>
+          </a>
         </div>
-      </article>
+      </div>
+    </section>
 
-      <article class="card">
-        <div class="meta">
-          <span class="badge">Full Stack</span>
-          <span class="opacity-6">Complete</span>
+    <!-- ── ABOUT ── -->
+    <section class="section" id="about">
+      <div class="container about-split">
+        <div class="about-left">
+          <h2 class="index-label">// About</h2>
+          <p class="about-lead">Full-stack developer and AI applications builder based in <span class="highlight">Tokyo, Japan</span>. I ship complete products — RAG pipelines, LLM integrations, full-stack apps with auth and databases.</p>
+          <p class="about-sub">Moving fast and shipping in public: bilingual (EN / 日本語), evidence-first, and focused on practical tools people can actually use. Meta Front-End Developer certified, with a BBA from APU.</p>
+          <a class="about-more" href="about.html">Full background →</a>
         </div>
-
-        <h3>RetireAI</h3>
-
-        <p>
-          An <span class="highlight">AI-powered retirement planner</span> with savings projections, scenario comparison, and Claude-generated personalised reports.
-        </p>
-
-        <div class="card-tech">
-          <span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Supabase</span><span>Claude API</span>
+        <div class="about-right">
+          <div class="skills-label">// What I bring</div>
+          <div class="skills-table">
+            <div class="skills-row"><span>Front end</span><span>HTML · CSS · JS · React</span></div>
+            <div class="skills-row"><span>Stack</span><span>Next.js · TypeScript · Tailwind</span></div>
+            <div class="skills-row"><span>AI engineering</span><span>Python · Groq · Claude · RAG</span></div>
+            <div class="skills-row"><span>UI focus</span><span>Clean · minimal · responsive</span></div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="links">
-          <a class="link" href="https://retirement-planner-chi.vercel.app" target="_blank" rel="noreferrer">Live demo</a>
-          <span class="divider">|</span>
-          <a class="link" href="retireai.html">View details</a>
-          <span class="divider">|</span>
-          <a class="link" href="https://github.com/chemicalwolf1836/retirement-planner" target="_blank" rel="noreferrer">Source</a>
+    <!-- ── CONTACT CTA ── -->
+    <section class="section cta-section" id="contact">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-eyebrow">// Open to work</div>
+          <h2 class="cta-heading">Let's work together.</h2>
+          <p class="cta-sub">Open to front-end, full-stack, and IT support roles — remote, hybrid, or in Tokyo. If you're hiring or know someone who is, let's talk.</p>
+          <div class="cta-actions">
+            <a class="btn primary" href="contact.html">Get in touch →</a>
+            <a class="btn" href="https://linkedin.com/in/batmagnai-ganbaatar-025a94211" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn" href="https://github.com/chemicalwolf1836" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
         </div>
-      </article>
-
-      <article class="card">
-        <div class="meta">
-          <span class="badge">Full Stack</span>
-          <span class="opacity-6">Complete</span>
-        </div>
-
-        <h3>Neon Kissa V2</h3>
-
-        <p>
-          A redesigned <span class="highlight">bilingual cocktail bar website</span> with four switchable neon palettes, a mood-based <span class="highlight">cocktail finder</span>, AI virtual host, and reservation workflow.
-        </p>
-
-        <div class="card-tech">
-          <span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>React 19</span><span>Bilingual UI</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="https://neon-kissa-v2.vercel.app" target="_blank" rel="noreferrer">Live demo</a>
-          <span class="divider">|</span>
-          <a class="link" href="neon-kissa-v2.html">View details</a>
-          <span class="divider">|</span>
-          <a class="link" href="https://github.com/chemicalwolf1836/neon-kissa-v2" target="_blank" rel="noreferrer">Source</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="meta">
-          <span class="badge">Full Stack</span>
-          <span class="opacity-6">Complete</span>
-        </div>
-
-        <h3>Tokyo Neon Kissa</h3>
-
-        <p>
-          A bilingual <span class="highlight">web application</span> featuring <span class="highlight">reservation workflows</span>, venue discovery, and a guided cocktail finder for Tokyo nightlife.
-
-        </p>
-
-        <div class="card-tech">
-          <span>Next.js</span><span>TypeScript</span><span>Tailwind CSS</span><span>Bilingual UI</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="https://tokyo-neon-bar.vercel.app" target="_blank" rel="noreferrer">Live demo</a>
-          <span class="divider">|</span>
-          <a class="link" href="tokyo-neon-kissa.html">View details</a>
-          <span class="divider">|</span>
-          <a class="link" href="https://github.com/chemicalwolf1836/tokyo-neon-bar" target="_blank" rel="noreferrer">Source</a>
-        </div>
-      </article>
-
-      <article class="card" id="promptkit">
-        <div class="meta">
-          <span class="badge">Front End</span>
-          <span class="opacity-6">Complete</span>
-        </div>
-
-        <h3>PromptKit v2</h3>
-
-        <p>
-         A browser-based <span class="highlight">workflow tool</span>  that transforms rough ideas into structured, reusable prompts with persistent state and live preview.
-
-        </p>
-
-        <div class="card-tech">
-          <span>HTML</span><span>CSS</span><span>JavaScript</span><span>localStorage</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="promptkit.html">Open tool →</a>
-          <span class="divider">|</span>
-          <a class="link" href="promptkit-detail.html">View details</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="meta">
-          <span class="badge">AI Tool</span>
-          <span class="opacity-6">Complete</span>
-        </div>
-
-        <h3>AI Handbook Generator</h3>
-
-        <p>
-          A serverless AI tool that generates <span class="highlight">multi-section structured handbooks</span> from uploaded PDFs — planned, then streamed section by section, live in the browser.
-        </p>
-
-        <div class="card-tech">
-          <span>JavaScript</span><span>Vercel Edge</span><span>pdf.js</span><span>Groq API</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="handbook-generator-app.html">Open tool →</a>
-          <span class="divider">|</span>
-          <a class="link" href="handbook-generator.html">View details</a>
-          <span class="divider">|</span>
-          <a class="link" href="https://github.com/chemicalwolf1836/handbook-generator" target="_blank" rel="noreferrer">Source</a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="meta">
-          <span class="badge">AI Tool</span>
-          <span class="opacity-6">Complete</span>
-        </div>
-
-        <h3>AI Job Application Assistant</h3>
-
-        <p>
-          Upload a PDF CV and paste a job description — get a <span class="highlight">tailored cover letter</span>, CV suggestions, skills analysis, interview questions, and salary estimate in seconds.
-        </p>
-
-        <div class="card-tech">
-          <span>JavaScript</span><span>Vercel Edge</span><span>pdf.js</span><span>Groq API</span>
-        </div>
-
-        <div class="links">
-          <a class="link" href="job-assistant-app.html">Open tool →</a>
-          <span class="divider">|</span>
-          <a class="link" href="job-assistant.html">View details</a>
-          <span class="divider">|</span>
-          <a class="link" href="https://github.com/chemicalwolf1836/job-assistant-" target="_blank" rel="noreferrer">Source</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
+      </div>
+    </section>
 
     <footer class="footer">
       <div class="container row">
         <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
-        <div class="tiny">minimal / angular / redline</div>
+        <div class="tiny">TOKYO / JP — 35.6895°N</div>
       </div>
     </footer>
   </main>
 
-  <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg>
+  </button>
+
   <script src="script.js?v=17"></script>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Project category filter
+    (function () {
+      const chips = document.querySelectorAll('.filter-chip');
+      const rows  = document.querySelectorAll('.project-row');
+      const count = document.getElementById('projectCount');
+      const total = rows.length;
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          const f = chip.dataset.filter;
+          chips.forEach(c => c.classList.toggle('active', c === chip));
+          let shown = 0;
+          rows.forEach(row => {
+            const visible = f === 'all' || (row.dataset.cat || '').includes(f);
+            row.style.display = visible ? '' : 'none';
+            if (visible) shown++;
+          });
+          count.textContent = shown + ' / ' + total + ' entries';
+        });
+      });
+    })();
+
+    // Smooth scroll for anchor nav links (Work / About / Contact)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          window.scrollTo({ top: el.offsetTop - 64, behavior: 'smooth' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
