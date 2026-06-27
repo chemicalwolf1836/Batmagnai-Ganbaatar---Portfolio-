@@ -6,12 +6,11 @@
   <title>Contact — Batmagnai Ganbaatar</title>
 
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
-
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Contact details and a simple message form." />
+  <meta name="description" content="Contact Batmagnai Ganbaatar — open to front-end, full-stack, and IT support roles in Tokyo or remote." />
   <meta property="og:title" content="Contact — Batmagnai Ganbaatar" />
-  <meta property="og:description" content="Get in touch — email, phone, LinkedIn, and GitHub." />
+  <meta property="og:description" content="Get in touch — email, LinkedIn, and GitHub." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/contact.html" />
   <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
@@ -21,7 +20,7 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=18" />
+  <link rel="stylesheet" href="style.css?v=21" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -34,7 +33,6 @@
         <strong>BATMAGNAI GANBAATAR</strong>
         <span>/ Contact</span>
       </a>
-
       <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
         <a href="index.html" data-nav-link>Home</a>
         <a href="about.html" data-nav-link>About</a>
@@ -43,7 +41,6 @@
         <a href="contact.html" data-nav-link>Contact</a>
         <a href="resume.html" data-nav-link>Resume</a>
       </nav>
-
       <div class="nav-controls">
         <button class="theme-btn" data-theme-btn aria-label="Toggle dark mode">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -54,54 +51,75 @@
     </div>
   </header>
 
-  <main id="main" class="container">
-    <section class="page-title">
-      <h1>Contact</h1>
+  <main id="main">
+
+    <!-- ── HERO ── -->
+    <section class="hero page-hero">
+      <div class="gridlines" aria-hidden="true"></div>
+      <div class="container hero-left">
+        <div class="kicker"><i></i> CONTACT — DIRECT</div>
+        <h1>Get in touch.</h1>
+        <div class="hero-bar" aria-hidden="true"></div>
+        <p class="lead">Open to front-end, full-stack, and IT support roles — remote, hybrid, or in Tokyo. If you're hiring or know someone who is, reach out.</p>
+      </div>
     </section>
 
-    <section class="section">
-      <h2>Contact</h2>
-      <ul class="contact-list">
-        <li>Email: <a class="link" href="mailto:batmagnai.ganbaatar@gmail.com">batmagnai.ganbaatar@gmail.com</a></li>
-        <li>Phone: <a class="link" href="tel:+8107065287754">+81 070 6528 7754</a></li>
-        <li>LinkedIn: <a class="link" href="https://www.linkedin.com/in/batmagnai-ganbaatar-025a94211/" target="_blank" rel="noopener">linkedin.com/in/batmagnai-ganbaatar-025a94211</a></li>
-        <li>GitHub: <a class="link" href="https://github.com/chemicalwolf1836" target="_blank" rel="noopener">github.com/chemicalwolf1836</a></li>
-      </ul>
-
-
-      <form class="formish" aria-label="Message form" action="#" onsubmit="return false">
-        <div class="field">
-          <label for="name">Name</label>
-          <input id="name" name="name" autocomplete="name" placeholder="Your name" />
+    <!-- ── DIRECT LINES ── -->
+    <section class="section" id="direct">
+      <div class="container about-split">
+        <div class="about-left">
+          <h2 class="index-label">// Direct lines</h2>
+          <p class="about-sub">Reach out on any of the following. Email is fastest.</p>
         </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="your@email.com" />
+        <div class="about-right">
+          <div class="skills-table">
+            <div class="skills-row"><span>Email</span><span><a class="link" href="mailto:batmagnai.ganbaatar@gmail.com">batmagnai.ganbaatar@gmail.com</a></span></div>
+            <div class="skills-row"><span>Phone</span><span><a class="link" href="tel:+8107065287754">+81 070 6528 7754</a></span></div>
+            <div class="skills-row"><span>LinkedIn</span><span><a class="link" href="https://www.linkedin.com/in/batmagnai-ganbaatar-025a94211/" target="_blank" rel="noopener">linkedin.com/in/batmagnai-ganbaatar-025a94211</a></span></div>
+            <div class="skills-row"><span>GitHub</span><span><a class="link" href="https://github.com/chemicalwolf1836" target="_blank" rel="noopener">github.com/chemicalwolf1836</a></span></div>
+          </div>
         </div>
-        <div class="field">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="What can I help with?"></textarea>
-        </div>
+      </div>
+    </section>
 
-        <button class="btn primary" type="button" data-mailto style="margin-top: 24px; margin-bottom: 48px;">
-          Send via Email →
-        </button>
-        <p id="form-error" class="form-error" aria-live="polite"></p>
-      </form>
+    <!-- ── FORM ── -->
+    <section class="section" id="message">
+      <div class="container about-split">
+        <div class="about-left">
+          <h2 class="index-label">// Send a message</h2>
+          <p class="about-sub">I'll reply within 24 hours.</p>
+        </div>
+        <div class="about-right">
+          <form class="formish" aria-label="Message form" action="#" onsubmit="return false">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" placeholder="Your name" />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="your@email.com" />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="What can I help with?"></textarea>
+            </div>
+            <button class="btn primary" type="button" data-mailto style="margin-top: 8px;">Send via Email →</button>
+            <p id="form-error" class="form-error" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
     </section>
 
     <footer class="footer">
       <div class="container row">
         <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
-        <div class="tiny">contact / direct</div>
+        <div class="tiny">TOKYO / JP — 35.6895°N</div>
       </div>
     </footer>
   </main>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
   <script src="script.js?v=17"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

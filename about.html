@@ -6,7 +6,6 @@
   <title>About — Batmagnai Ganbaatar</title>
 
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
-
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
   <meta name="description" content="About Batmagnai Ganbaatar — full-stack developer and AI applications builder based in Tokyo, Japan." />
@@ -21,7 +20,7 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=18" />
+  <link rel="stylesheet" href="style.css?v=21" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -34,8 +33,6 @@
         <strong>BATMAGNAI GANBAATAR</strong>
         <span>/ About</span>
       </a>
-
-
       <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
         <a href="index.html" data-nav-link>Home</a>
         <a href="about.html" data-nav-link>About</a>
@@ -44,7 +41,6 @@
         <a href="contact.html" data-nav-link>Contact</a>
         <a href="resume.html" data-nav-link>Resume</a>
       </nav>
-
       <div class="nav-controls">
         <button class="theme-btn" data-theme-btn aria-label="Toggle dark mode">
           <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -55,77 +51,100 @@
     </div>
   </header>
 
-  <main id="main" class="container">
-    <section class="page-title">
-      <h1>About</h1>
-      <h3>Batmagnai Ganbaatar</h3>
-      <p class="sub">
-  I’m a full-stack developer and AI applications builder based in Tokyo, Japan. I build and ship complete products — <span class="highlight">RAG pipelines, LLM integrations, full-stack SaaS</span> with auth and databases — not just front-end demos.
-</p>
+  <main id="main">
 
-<p>
-  My work spans Next.js, Python, Supabase, and TypeScript. I approach AI development as a <span class="highlight">product discipline</span> — structured inputs, reliable outputs, and tools people can actually use.
-</p>
-    </section>
-
-    
-
-    <section class="section">
-      <h2>Skills</h2>
-      <p>Two core capabilities. Minimalist, practical, evidence-first.</p>
-
-      <div class="cards">
-        <article class="card">
-          <div class="meta"><span class="badge">Full Stack</span><span>core</span></div>
-          <h3>Full-Stack Development</h3>
-          <p>Next.js, TypeScript, React, Tailwind CSS, Supabase, and Node.js — building <span class="highlight">complete products</span> from auth and databases to deployed, production-ready interfaces.</p>
-          <div class="links">
-            <a class="link" href="projects.html">View projects</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="meta"><span class="badge">AI</span><span>core</span></div>
-          <h3>AI Applications</h3>
-          <p>Python, RAG pipelines, LightRAG, pgvector, Claude API, xAI, and Groq — building <span class="highlight">practical AI tools</span> that process documents and generate structured, long-form output.</p>
-          <div class="links">
-            <a class="link" href="handbook-generator.html">AI Handbook Generator</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="meta"><span class="badge">Approach</span><span>style</span></div>
-          <h3>Minimal systems</h3>
-          <p>Planning <span class="highlight">small systems</span>, documenting decisions, and improving them through tight feedback loops.</p>
-        </article>
+    <!-- ── HERO ── -->
+    <section class="hero page-hero">
+      <div class="gridlines" aria-hidden="true"></div>
+      <div class="container hero-left">
+        <div class="kicker"><i></i> ABOUT — BATMAGNAI GANBAATAR</div>
+        <h1>Full-stack developer.<br>AI builder.</h1>
+        <div class="hero-bar" aria-hidden="true"></div>
+        <p class="lead">Building complete products — RAG pipelines, LLM integrations, full-stack SaaS — based in <span class="highlight">Tokyo, Japan</span>.</p>
       </div>
     </section>
 
+    <!-- ── BACKGROUND ── -->
+    <section class="section" id="background">
+      <div class="container about-split">
+        <div class="about-left">
+          <h2 class="index-label">// Background</h2>
+          <p class="about-lead">Full-stack developer and AI applications builder. I ship complete products — not just front-end demos — with a bias toward clarity, restraint, and usability.</p>
+          <p class="about-sub">Moving fast and shipping in public: bilingual (EN / 日本語), evidence-first, and focused on practical tools people can actually use. Meta Front-End Developer certified, with a BBA from APU.</p>
+        </div>
+        <div class="about-right">
+          <div class="skills-label">// Quick facts</div>
+          <div class="skills-table">
+            <div class="skills-row"><span>Based</span><span>Tokyo, JP</span></div>
+            <div class="skills-row"><span>Languages</span><span>EN · 日本語 (intermediate)</span></div>
+            <div class="skills-row"><span>Education</span><span>BBA — APU</span></div>
+            <div class="skills-row"><span>Certified</span><span>Meta Front-End Developer</span></div>
+            <div class="skills-row"><span>Status</span><span>Open to roles + IT support</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <!-- ── SKILLS ── -->
+    <section class="section" id="skills">
+      <div class="container about-split">
+        <div class="about-left">
+          <h2 class="index-label">// Skills</h2>
+          <p class="about-sub">Two core capabilities. Practical, evidence-first, and built through real shipping.</p>
+        </div>
+        <div class="about-right">
+          <div class="skills-table">
+            <div class="skills-row"><span>Front end</span><span>HTML · CSS · JS · React</span></div>
+            <div class="skills-row"><span>Stack</span><span>Next.js · TypeScript · Tailwind</span></div>
+            <div class="skills-row"><span>AI engineering</span><span>Python · Groq · Claude · RAG</span></div>
+            <div class="skills-row"><span>Database</span><span>Supabase · PostgreSQL · pgvector</span></div>
+            <div class="skills-row"><span>Tools</span><span>Vercel · Git · LightRAG</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <section class="section">
-      <h2>Experience</h2>
-      <p class="section-description">
-        Currently an English Instructor at Yaruki Switch Group in Tokyo (Mar 2026–Present) — teaching across multiple age groups in a high-volume environment, designing lesson materials from scratch, and working across branches as part of a larger team.
-      </p>
-      <p class="section-description" style="margin-top: 10px;">
-        Previously at NOVA Co. Ltd. in Fukuoka (Jun 2022–Dec 2025) — structured lessons across varied skill levels, strong habits in problem diagnosis and clear explanation. Background in cross-cultural communication and adapting to individual needs.
-      </p>
+    <!-- ── EXPERIENCE ── -->
+    <section class="section" id="experience">
+      <div class="container about-split">
+        <div class="about-left">
+          <h2 class="index-label">// Experience</h2>
+        </div>
+        <div class="about-right">
+          <div class="skills-table">
+            <div class="skills-row"><span>Mar 2026–Present</span><span>English Instructor — Yaruki Switch Group, Tokyo</span></div>
+            <div class="skills-row"><span>Jun 2022–Dec 2025</span><span>English Instructor — NOVA Co. Ltd., Fukuoka</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ── -->
+    <section class="section cta-section">
+      <div class="container">
+        <div class="cta-card">
+          <div class="cta-eyebrow">// Open to work</div>
+          <h2 class="cta-heading">Let's work together.</h2>
+          <p class="cta-sub">Open to front-end, full-stack, and IT support roles — remote, hybrid, or in Tokyo.</p>
+          <div class="cta-actions">
+            <a class="btn primary" href="contact.html">Get in touch →</a>
+            <a class="btn" href="resume.html">Résumé ↗</a>
+            <a class="btn" href="projects.html">View work →</a>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="footer">
       <div class="container row">
         <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
-        <div class="tiny">about / essentials</div>
+        <div class="tiny">TOKYO / JP — 35.6895°N</div>
       </div>
-
     </footer>
   </main>
 
   <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
   <script src="script.js?v=17"></script>
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

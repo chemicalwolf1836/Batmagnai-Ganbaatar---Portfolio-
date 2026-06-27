@@ -23,7 +23,7 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=18" />
+  <link rel="stylesheet" href="style.css?v=21" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -58,33 +58,23 @@
 
   <main id="main">
     <!-- ── HERO ─────────────────────────────────── -->
-    <section class="hero">
+    <section class="hero page-hero">
       <div class="gridlines" aria-hidden="true"></div>
-      <div class="angles" aria-hidden="true">
-        <div class="angle a1"></div>
-        <div class="angle a2"></div>
-      </div>
-
-      <div class="container">
-        <div class="kicker"><i></i> case study • ai tool</div>
+      <div class="container hero-left">
+        <div class="kicker"><i></i> CASE STUDY · AI · TOOL</div>
         <h1>AI Job Application Assistant</h1>
-        <p class="lead">
-          Upload your CV, paste a job description, and get five tailored application assets —
-          <span class="highlight">cover letter, CV fixes, skills-gap analysis, interview questions, and a salary estimate</span>
-          — streamed live.
-        </p>
-
+        <div class="hero-bar" aria-hidden="true"></div>
+        <p class="lead">Upload your CV, paste a job description, and get five tailored application assets — <span class="highlight">cover letter, CV fixes, skills-gap analysis, interview questions, and a salary estimate</span> — streamed live.</p>
         <div class="chips-row" aria-label="Tech stack">
           <span class="tag">Python · Gradio</span>
           <span class="tag">JavaScript · Vercel Edge</span>
           <span class="tag">Groq · Llama 3.3 70B</span>
           <span class="tag">PDF.js</span>
         </div>
-
-        <div class="cta-row">
+        <div class="hero-links">
           <a class="btn primary" href="job-assistant-app.html">Open Tool →</a>
           <a class="btn" href="https://github.com/chemicalwolf1836/job-assistant-" target="_blank" rel="noreferrer">Source ↗</a>
-          <a class="btn" href="projects.html">Back to Projects</a>
+          <a class="btn" href="projects.html">← Back</a>
         </div>
       </div>
     </section>
