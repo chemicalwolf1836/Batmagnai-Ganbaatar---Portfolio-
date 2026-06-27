@@ -1977,6 +1977,15 @@ html[data-theme="dark"] .icon-dm-invert {
    Portfolio Blueprint — UI update
    ============================================================ */
 
+/* Hero: tighter bottom padding, straight (non-skewed) grid */
+.hero { padding-bottom: 72px; }
+.hero .gridlines {
+  inset: 0;
+  height: 100%;
+  transform: none;
+  background-size: 40px 40px;
+}
+
 /* Fonts: Archivo + JetBrains Mono */
 :root {
   --font: 'Archivo', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
