@@ -20,7 +20,7 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=22" />
+  <link rel="stylesheet" href="style.css?v=23" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -57,9 +57,10 @@
 
     <!-- ── HEADER ─────────────────────────────── -->
     <section class="resume-header">
-      <div class="resume-meta">
-        <p class="kicker"><i aria-hidden="true"></i>RESUME</p>
-        <h1>Batmagnai Ganbaatar</h1>
+      <div class="resume-meta" style="flex: 1 1 420px; min-width: 0;">
+        <p class="resume-kicker">// Résumé — Updated June 2026</p>
+        <h1 style="margin: 0 0 8px; font-size: clamp(34px,5.4vw,52px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.02;">Batmagnai Ganbaatar</h1>
+        <div class="resume-bar" aria-hidden="true"></div>
         <p class="resume-subtitle">Full-Stack Developer &nbsp;·&nbsp; AI Applications &amp; Workflows</p>
         <div class="resume-contacts">
           <a href="mailto:batmagnai.ganbaatar@gmail.com" class="resume-contact-item">
@@ -68,12 +69,13 @@
           </a>
           <a href="https://github.com/chemicalwolf1836" class="resume-contact-item" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-            GitHub
+            github.com/chemicalwolf1836
           </a>
           <a href="https://batmagnai-ganbaatar-portfolio.vercel.app/" class="resume-contact-item" target="_blank" rel="noreferrer">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
             batmagnai-ganbaatar-portfolio.vercel.app
           </a>
+          <span class="resume-contact-item">Tokyo, JP</span>
         </div>
       </div>
 
@@ -86,24 +88,22 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
           Print
         </button>
-        <span class="resume-updated">Updated June 2026</span>
       </div>
     </section>
 
     <!-- ── SUMMARY ────────────────────────────── -->
     <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>SUMMARY</p>
-      <p class="resume-summary">
-        Built and shipped multiple AI-powered applications from scratch — RAG pipelines, LLM API integration, full-stack SaaS with auth and databases. Comfortable across the stack: Next.js, Python, Supabase, TypeScript. Recent projects include a document intelligence tool generating 20,000-word structured outputs and a retirement planner SaaS with Claude-generated reports and live data visualisation. Background in structured instruction and cross-cultural communication. Based in Tokyo, BBA from APU, intermediate Japanese. Open to AI engineering, full-stack, or AI-adjacent product roles — remote or Tokyo-based. Not looking for a first project to work on. Already building.
+      <h2 class="index-label">// Summary</h2>
+      <p class="resume-summary" style="margin-top: 14px;">
+        Built and shipped multiple AI-powered applications from scratch — <span class="highlight">RAG pipelines, LLM API integration, full-stack SaaS</span> with auth and databases. Comfortable across the stack: Next.js, Python, Supabase, TypeScript. Recent projects include a document intelligence tool generating 20,000-word structured outputs and a retirement planner SaaS with Claude-generated reports and live data visualisation. Background in structured instruction and cross-cultural communication. Based in Tokyo, BBA from APU, intermediate Japanese. Open to AI engineering, full-stack, or AI-adjacent product roles — remote or Tokyo-based. Not looking for a first project to work on. Already building.
       </p>
     </section>
 
     <!-- ── SKILLS & STACK ─────────────────────── -->
     <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>SKILLS & STACK</p>
-      <h2>Technical Skills</h2>
+      <h2 class="index-label">// Skills &amp; Stack</h2>
 
-      <div class="skill-blocks">
+      <div class="skill-blocks" style="margin-top: 22px;">
 
         <div class="skill-block">
           <p class="skill-block-label">Languages</p>
@@ -132,7 +132,7 @@
         </div>
 
         <div class="skill-block">
-          <p class="skill-block-label">Frameworks & Libraries</p>
+          <p class="skill-block-label">Frameworks &amp; Libraries</p>
           <div class="skill-row">
             <span class="skill-chip">
               <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="18" height="18" alt="React">
@@ -158,7 +158,7 @@
         </div>
 
         <div class="skill-block">
-          <p class="skill-block-label">Tools & Platforms</p>
+          <p class="skill-block-label">Tools &amp; Platforms</p>
           <div class="skill-row">
             <span class="skill-chip">
               <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" width="18" height="18" alt="Git">
@@ -171,10 +171,6 @@
             <span class="skill-chip">
               <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" width="18" height="18" alt="VS Code">
               VS Code
-            </span>
-            <span class="skill-chip">
-              <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/netlify/netlify-original.svg" width="18" height="18" alt="Netlify">
-              Netlify
             </span>
             <span class="skill-chip">
               <img loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" width="18" height="18" alt="Vercel" class="icon-dm-invert">
@@ -192,7 +188,7 @@
         </div>
 
         <div class="skill-block">
-          <p class="skill-block-label">AI & Workflow</p>
+          <p class="skill-block-label">AI &amp; Workflow</p>
           <div class="skill-row">
             <span class="skill-chip">
               <img loading="lazy" src="https://cdn.simpleicons.org/anthropic" width="18" height="18" alt="Anthropic" class="icon-dm-invert">
@@ -226,10 +222,9 @@
 
     <!-- ── EXPERIENCE ─────────────────────────── -->
     <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>EXPERIENCE</p>
-      <h2>Experience</h2>
+      <h2 class="index-label">// Experience</h2>
 
-      <div class="timeline">
+      <div class="timeline" style="margin-top: 22px;">
 
         <div class="timeline-entry">
           <p class="timeline-period">2026 — Present</p>
@@ -268,28 +263,26 @@
 
     <!-- ── PROJECTS ───────────────────────────── -->
     <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>PROJECTS</p>
-      <h2>Selected Projects</h2>
+      <h2 class="index-label">// Selected Projects</h2>
 
-      <div class="timeline">
+      <div class="timeline" style="margin-top: 22px;">
 
         <div class="timeline-entry">
           <div class="timeline-top">
             <h3 class="timeline-role">Wander</h3>
-            <div class="timeline-tags">
-              <span class="badge">Next.js</span>
-              <span class="badge">TypeScript</span>
-              <span class="badge">Claude API</span>
-              <span class="badge">Supabase</span>
-              <span class="badge">Framer Motion</span>
-              <span class="badge">Mapbox</span>
-            </div>
+            <span class="timeline-org" style="margin: 0;">Full-stack AI travel app · 2026</span>
           </div>
-          <p class="timeline-org">Full-stack AI travel app · 2026</p>
+          <div class="timeline-tags">
+            <span class="badge-red">Next.js</span>
+            <span class="badge-red">TypeScript</span>
+            <span class="badge-red">Claude API</span>
+            <span class="badge-red">Supabase</span>
+            <span class="badge-red">Framer Motion</span>
+            <span class="badge-red">Mapbox</span>
+          </div>
           <ul class="timeline-bullets">
             <li>Built an AI travel discovery app with a multi-mode interface — natural language chat, guided choice chips, and one-tap Surprise Me — powered by the Claude API.</li>
             <li>Engineered 5 API routes: destination suggestions with structured JSON output, packing list generator, day-by-day itinerary builder, similar destination finder, and item info enrichment.</li>
-            <li>Implemented 3D card tilt with image parallax, cinematic stagger reveal, and an animated aurora background using Framer Motion's useMotionValue and useTransform.</li>
             <li>Built result caching in Supabase using SHA-256 preference hashing; "show more" bypasses cache with modified keys to return fresh destinations every time.</li>
           </ul>
           <div class="timeline-links">
@@ -302,15 +295,15 @@
         <div class="timeline-entry">
           <div class="timeline-top">
             <h3 class="timeline-role">RetireAI</h3>
-            <div class="timeline-tags">
-              <span class="badge">Next.js</span>
-              <span class="badge">TypeScript</span>
-              <span class="badge">Tailwind</span>
-              <span class="badge">Supabase</span>
-              <span class="badge">Claude API</span>
-            </div>
+            <span class="timeline-org" style="margin: 0;">Full-stack AI SaaS · 2026</span>
           </div>
-          <p class="timeline-org">Full-stack AI SaaS · 2026</p>
+          <div class="timeline-tags">
+            <span class="badge-red">Next.js</span>
+            <span class="badge-red">TypeScript</span>
+            <span class="badge-red">Tailwind</span>
+            <span class="badge-red">Supabase</span>
+            <span class="badge-red">Claude API</span>
+          </div>
           <ul class="timeline-bullets">
             <li>Built a retirement planner SaaS with savings projections, scenario comparison, and Claude-generated personalised reports.</li>
             <li>Integrated Supabase auth, PostgreSQL with Row Level Security, and the Anthropic API via a secure server-side route.</li>
@@ -325,14 +318,14 @@
         <div class="timeline-entry">
           <div class="timeline-top">
             <h3 class="timeline-role">Tokyo Neon Kissa</h3>
-            <div class="timeline-tags">
-              <span class="badge">Next.js</span>
-              <span class="badge">TypeScript</span>
-              <span class="badge">Tailwind</span>
-              <span class="badge">Claude API</span>
-            </div>
+            <span class="timeline-org" style="margin: 0;">Bilingual full-stack web application · 2026</span>
           </div>
-          <p class="timeline-org">Bilingual full-stack web application · 2026</p>
+          <div class="timeline-tags">
+            <span class="badge-red">Next.js</span>
+            <span class="badge-red">TypeScript</span>
+            <span class="badge-red">Tailwind</span>
+            <span class="badge-red">Claude API</span>
+          </div>
           <ul class="timeline-bullets">
             <li>Built a bilingual (EN/JP) cocktail bar app with an AI virtual host "Hana" — a Claude-powered chat that answers questions about the menu, hours, and reservations, responding in whichever language the guest uses.</li>
             <li>Implemented reservation workflow with email delivery via Resend, cocktail finder with mood and sweetness scoring, and bilingual language switching with localStorage persistence.</li>
@@ -346,13 +339,13 @@
         <div class="timeline-entry">
           <div class="timeline-top">
             <h3 class="timeline-role">PromptKit v2</h3>
-            <div class="timeline-tags">
-              <span class="badge">HTML</span>
-              <span class="badge">CSS</span>
-              <span class="badge">JavaScript</span>
-            </div>
+            <span class="timeline-org" style="margin: 0;">Front-end AI workflow tool · 2026</span>
           </div>
-          <p class="timeline-org">Front-end AI workflow tool · 2026</p>
+          <div class="timeline-tags">
+            <span class="badge-red">HTML</span>
+            <span class="badge-red">CSS</span>
+            <span class="badge-red">JavaScript</span>
+          </div>
           <ul class="timeline-bullets">
             <li>Client-side tool for creating, saving, and reusing structured AI prompts with persistent state.</li>
             <li>Supports 4 output modes (portfolio, readme, linkedin, web) and 4 tone settings. Zero backend.</li>
@@ -366,14 +359,14 @@
         <div class="timeline-entry">
           <div class="timeline-top">
             <h3 class="timeline-role">AI Handbook Generator</h3>
-            <div class="timeline-tags">
-              <span class="badge">Python</span>
-              <span class="badge">Gradio</span>
-              <span class="badge">Groq API</span>
-              <span class="badge">RAG</span>
-            </div>
+            <span class="timeline-org" style="margin: 0;">AI tool · 2026</span>
           </div>
-          <p class="timeline-org">AI tool · 2026</p>
+          <div class="timeline-tags">
+            <span class="badge-red">Python</span>
+            <span class="badge-red">Gradio</span>
+            <span class="badge-red">Groq API</span>
+            <span class="badge-red">RAG</span>
+          </div>
           <ul class="timeline-bullets">
             <li>Built a custom vector RAG engine using sentence-transformers and numpy cosine similarity — no external vector DB required.</li>
             <li>Implemented the LongWriter/AgentWrite technique to generate 20,000+ word structured documents across 12–16 sections.</li>
@@ -386,37 +379,17 @@
 
         <div class="timeline-entry">
           <div class="timeline-top">
-            <h3 class="timeline-role">Minimalist Portfolio</h3>
-            <div class="timeline-tags">
-              <span class="badge">HTML</span>
-              <span class="badge">CSS</span>
-              <span class="badge">JavaScript</span>
-            </div>
-          </div>
-          <p class="timeline-org">Personal portfolio & design system · 2026</p>
-          <ul class="timeline-bullets">
-            <li>Designed an original Mirror's Edge-inspired visual system with angular geometry, red accent, and dark mode.</li>
-            <li>Built accessible, responsive layout from scratch — no frameworks, no build tools.</li>
-          </ul>
-          <div class="timeline-links">
-            <a class="link" href="https://batmagnai-ganbaatar-portfolio.vercel.app/" target="_blank" rel="noreferrer">Live site →</a>
-          </div>
-        </div>
-
-        <div class="timeline-entry">
-          <div class="timeline-top">
             <h3 class="timeline-role">AI Job Application Assistant</h3>
-            <div class="timeline-tags">
-              <span class="badge">Python</span>
-              <span class="badge">Gradio</span>
-              <span class="badge">Groq API</span>
-            </div>
+            <span class="timeline-org" style="margin: 0;">AI workflow tool · 2026</span>
           </div>
-          <p class="timeline-org">AI workflow tool · 2026</p>
+          <div class="timeline-tags">
+            <span class="badge-red">Python</span>
+            <span class="badge-red">Gradio</span>
+            <span class="badge-red">Groq API</span>
+          </div>
           <ul class="timeline-bullets">
             <li>Built a Gradio app that generates a tailored cover letter, CV suggestions, skills analysis, interview questions, and salary estimate from a job description and optional PDF CV upload.</li>
             <li>Implemented per-section streaming output with a live progress bar, single-click Markdown export, and Cmd+Enter shortcut.</li>
-            <li>Designed a full dark iOS-style interface in plain CSS — gradient background, card elevation, animated gradient button, toast notifications, and copy-all functionality.</li>
           </ul>
           <div class="timeline-links">
             <a class="link" href="job-assistant-app.html">Open tool →</a>
@@ -428,35 +401,33 @@
       </div>
     </section>
 
-    <!-- ── EDUCATION ──────────────────────────── -->
+    <!-- ── EDUCATION + CERTIFICATIONS ───────────── -->
     <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>EDUCATION</p>
-      <h2>Education</h2>
+      <div class="resume-edu-certs">
 
-      <div class="timeline">
-
-        <div class="timeline-entry">
-          <p class="timeline-period">2017 — 2022</p>
-          <h3 class="timeline-role">Bachelor of Business Administration</h3>
-          <p class="timeline-org">Ritsumeikan Asia Pacific University · Beppu, Oita</p>
+        <div>
+          <h2 class="index-label">// Education</h2>
+          <div class="timeline" style="margin-top: 22px;">
+            <div class="timeline-entry">
+              <p class="timeline-period">2017 — 2022</p>
+              <h3 class="timeline-role">Bachelor of Business Administration</h3>
+              <p class="timeline-org">Ritsumeikan Asia Pacific University · Beppu, Oita</p>
+            </div>
+          </div>
         </div>
 
-      </div>
-    </section>
-
-    <!-- ── CERTIFICATIONS ────────────────────── -->
-    <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>CERTIFICATIONS</p>
-      <h2>Certifications</h2>
-
-      <div class="timeline">
-
-        <div class="timeline-entry">
-          <h3 class="timeline-role">Meta Front-End Developer Professional Certificate <span class="timeline-at">· Meta / Coursera</span></h3>
-        </div>
-
-        <div class="timeline-entry">
-          <h3 class="timeline-role">Foundational C# with Microsoft <span class="timeline-at">· freeCodeCamp</span></h3>
+        <div>
+          <h2 class="index-label">// Certifications</h2>
+          <div class="cert-cards" style="margin-top: 22px;">
+            <div class="cert-card">
+              <h3>Meta Front-End Developer</h3>
+              <p class="cert-issuer">Meta / Coursera</p>
+            </div>
+            <div class="cert-card">
+              <h3>Foundational C# with Microsoft</h3>
+              <p class="cert-issuer">freeCodeCamp</p>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -464,15 +435,13 @@
 
     <!-- ── LANGUAGES ──────────────────────────── -->
     <section class="section">
-      <p class="kicker"><i aria-hidden="true"></i>LANGUAGES</p>
-      <h2>Languages</h2>
-
-      <div class="skill-blocks">
+      <h2 class="index-label">// Languages</h2>
+      <div class="skill-blocks" style="margin-top: 18px;">
         <div class="skill-block">
           <div class="skill-row">
-            <span class="skill-chip">English — Native / Bilingual</span>
-            <span class="skill-chip">Japanese — Intermediate</span>
-            <span class="skill-chip">Mongolian — Native / Bilingual</span>
+            <span class="skill-chip"><span class="lang-dot" aria-hidden="true"></span> English — Native / Bilingual</span>
+            <span class="skill-chip"><span class="lang-dot" aria-hidden="true"></span> Japanese — Intermediate</span>
+            <span class="skill-chip"><span class="lang-dot" aria-hidden="true"></span> Mongolian — Native / Bilingual</span>
           </div>
         </div>
       </div>
@@ -481,7 +450,7 @@
     <footer class="footer">
       <div class="container row">
         <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
-        <div class="tiny">resume / overview</div>
+        <div class="tiny">RÉSUMÉ / OVERVIEW</div>
       </div>
     </footer>
 
