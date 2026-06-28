@@ -922,8 +922,6 @@ input:focus, textarea:focus{
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  width: calc(100% - 48px);
-  max-width: none;
 }
 
 .crumbs {
@@ -2096,16 +2094,16 @@ html[data-theme="dark"] .icon-dm-invert {
   min-width: 0;
 }
 
-/* Geographic coordinates — top-right of profile card */
+/* Geographic coordinates — absolute top-right of hero */
 .coords {
-  display: block;
-  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
   font-family: var(--mono);
   font-size: 10px;
   font-weight: 400;
   letter-spacing: .08em;
   color: var(--muted);
-  margin-bottom: 10px;
   pointer-events: none;
   user-select: none;
 }
