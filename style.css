@@ -2454,7 +2454,6 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
 
 /* ── Page hero (inner pages) ── */
 .page-hero { padding: 80px 0 64px; }
-.page-hero .hero-left { max-width: 720px; }
 .page-hero .lead { max-width: 60ch; }
 
 /* ── Case study section labels ── */
