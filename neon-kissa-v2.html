@@ -23,7 +23,7 @@
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=22" />
+  <link rel="stylesheet" href="style.css?v=23" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -210,17 +210,13 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <span>© 2024 Batmagnai Ganbaatar</span>
-      <nav aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+  <footer class="footer">
+    <div class="container row">
+      <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+      <div class="tiny">case study / neon kissa v2</div>
     </div>
   </footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 
   <script src="script.js"></script>
 </body>
