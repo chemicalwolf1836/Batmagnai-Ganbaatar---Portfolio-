@@ -99,9 +99,12 @@ header.site-header{
 .nav{
   display:flex;
   align-items:center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 14px 0;
   gap: 16px;
+}
+.nav-links {
+  margin-left: auto;
 }
 
 .brand{
@@ -2091,16 +2094,16 @@ html[data-theme="dark"] .icon-dm-invert {
   min-width: 0;
 }
 
-/* Geographic coordinates — absolute top-right of hero */
+/* Geographic coordinates — top-right of profile card */
 .coords {
-  position: absolute;
-  top: -8px;
-  right: 0;
+  display: block;
+  text-align: right;
   font-family: var(--mono);
   font-size: 10px;
   font-weight: 400;
   letter-spacing: .08em;
   color: var(--muted);
+  margin-bottom: 10px;
   pointer-events: none;
   user-select: none;
 }
