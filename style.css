@@ -1389,6 +1389,10 @@ html[data-theme="dark"] select {
   flex-shrink: 0;
   padding-top: 0;
 }
+.resume-actions .btn {
+  min-width: 148px;
+  justify-content: center;
+}
 
 .resume-updated {
   font-family: var(--mono);
