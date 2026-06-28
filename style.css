@@ -2069,7 +2069,7 @@ html[data-theme="dark"] .icon-dm-invert {
   inset: 0;
   height: 100%;
   transform: none;
-  background-size: 40px 40px;
+  background-image: none;
 }
 
 /* Fonts: Archivo + JetBrains Mono */
