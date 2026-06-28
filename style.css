@@ -278,6 +278,7 @@ h1{
   cursor: pointer;
   font-family: inherit;
   font-size: 13px;
+  line-height: 1;
   color: var(--muted);
   transition: transform 180ms var(--ease), border-color 180ms var(--ease), box-shadow 180ms var(--ease);
 }
@@ -1388,10 +1389,6 @@ html[data-theme="dark"] select {
   gap: 10px;
   flex-shrink: 0;
   padding-top: 0;
-}
-.resume-actions .btn {
-  min-width: 148px;
-  justify-content: center;
 }
 
 .resume-updated {
