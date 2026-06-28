@@ -922,6 +922,8 @@ input:focus, textarea:focus{
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  width: calc(100% - 48px);
+  max-width: none;
 }
 
 .crumbs {
