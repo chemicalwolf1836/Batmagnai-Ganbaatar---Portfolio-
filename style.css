@@ -2005,8 +2005,9 @@ html[data-theme="dark"] .icon-dm-invert {
 .vs-col-h { margin: 0 0 14px; padding-bottom: 12px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .vs-col-h.vs-live { color: var(--accent); }
 .vs-list { list-style: none; margin: 0; padding: 0; }
-.vs-list li { padding: 9px 0; font-size: 14px; color: var(--text); border-top: 1px solid var(--line); }
+.vs-list li { padding: 13px 0; font-size: 14px; color: var(--text); border-top: 1px solid var(--line); }
 .vs-list li:first-child { border-top: none; padding-top: 0; }
+.vs-list li:last-child { padding-bottom: 0; }
 .vs-foot { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; }
 .vs-foot-text { margin: 0; }
 .vs-try { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--accent); border: 1px solid rgba(255,45,45,0.35); border-radius: 999px; padding: 8px 16px; background: transparent; text-decoration: none; transition: background 160ms var(--ease), border-color 160ms var(--ease); }
