@@ -1251,9 +1251,7 @@ html[data-theme="dark"] header.site-header {
 }
 
 html[data-theme="dark"] .gridlines {
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+  display: none;
 }
 
 html[data-theme="dark"] .card:hover {
