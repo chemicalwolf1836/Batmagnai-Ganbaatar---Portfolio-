@@ -708,7 +708,6 @@ h1{
 .link:hover{ border-bottom-color: var(--accent); }
 
 .footer{
-  border-top: 1px solid var(--line);
   padding: 26px 0 40px;
   color: var(--muted);
   font-size: 13px;
