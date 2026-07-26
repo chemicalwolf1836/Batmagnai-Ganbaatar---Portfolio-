@@ -21,7 +21,7 @@
   <meta property="og:image:alt" content="Batmagnai Ganbaatar - Front End • Full Stack • AI Workflow" />
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
-  <link rel="stylesheet" href="style.css?v=29" />
+  <link rel="stylesheet" href="style.css?v=30" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -135,7 +135,7 @@
 
     <section class="section">
       <div class="container">
-        <h2>Problem</h2>
+        <h2 class="case-heading">// Problem</h2>
         <p class="case-text">
           Most retirement calculators are either too simple (a single number with no context) or too complex to actually use. I wanted to build something that gave real projections based on a user's actual numbers, showed multiple possible futures, and used AI to turn the data into clear, actionable recommendations - all in a clean dashboard that works on mobile.
         </p>
@@ -144,7 +144,7 @@
 
     <section class="section">
       <div class="container">
-        <h2>Solution</h2>
+        <h2 class="case-heading">// Solution</h2>
         <p class="case-text">
           I built a multi-page SaaS app with Supabase auth and a PostgreSQL profiles table, a planner form that upserts the user's data, and a dashboard that calculates projections in real time. The AI report page sends the full profile to a server-side Claude API route and stores the result in an ai_reports table. A shared DashboardLayout handles the sidebar, mobile bottom nav, theme switching, and dark mode across all pages.
         </p>
@@ -153,7 +153,7 @@
 
     <section class="section">
       <div class="container">
-        <h2>What I Built</h2>
+        <h2 class="case-heading">// What I Built</h2>
         <div class="cards">
           <article class="card">
             <div class="meta">
@@ -200,7 +200,7 @@
 
     <section class="section">
       <div class="container">
-        <h2>Result</h2>
+        <h2 class="case-heading">// Result</h2>
         <p class="case-text">
           A fully deployed SaaS app with real auth, a live AI integration, and a complete multi-page dashboard - deployed on Vercel with environment variables managed securely. This was the most complex project I've built: it required connecting auth, a database, a third-party AI API, real-time calculations, and a responsive UI all in one app.
         </p>

@@ -2272,6 +2272,21 @@ h2.index-label {
   margin: 0;
   line-height: 1.3;
 }
+
+/* Case-study section headings (// Problem, // Result, ...). Same mono label as
+   .index-label, but higher contrast and with breathing room below - shared across
+   every case study so the pages read as one system. --text flips in dark mode. */
+.section h2.case-heading,
+h2.case-heading {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text);
+  margin: 0 0 20px;
+  line-height: 1.3;
+}
 .index-count {
   font-family: var(--mono);
   font-size: 12px;
