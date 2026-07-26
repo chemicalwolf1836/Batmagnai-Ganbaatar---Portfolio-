@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Job Application Assistant — Live Tool — Batmagnai Ganbaatar</title>
+  <title>AI Job Application Assistant - Live Tool - Batmagnai Ganbaatar</title>
 
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Run the AI Job Application Assistant — upload a CV, paste a job description, and generate a tailored cover letter, CV suggestions, skills-gap analysis, interview questions, and a salary estimate." />
+  <meta name="description" content="Run the AI Job Application Assistant - upload a CV, paste a job description, and generate a tailored cover letter, CV suggestions, skills-gap analysis, interview questions, and a salary estimate." />
 
   <!-- Open Graph (link previews on LinkedIn etc.) -->
-  <meta property="og:title" content="AI Job Application Assistant — Live Tool — Batmagnai Ganbaatar" />
-  <meta property="og:description" content="Run the AI Job Application Assistant — upload a CV, paste a job description, and generate a tailored cover letter, CV suggestions, skills-gap analysis, interview questions, and a salary estimate." />
+  <meta property="og:title" content="AI Job Application Assistant - Live Tool - Batmagnai Ganbaatar" />
+  <meta property="og:description" content="Run the AI Job Application Assistant - upload a CV, paste a job description, and generate a tailored cover letter, CV suggestions, skills-gap analysis, interview questions, and a salary estimate." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/job-assistant-app.html" />
   <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Batmagnai Ganbaatar — Front End • Full Stack • AI Workflow" />
+  <meta property="og:image:alt" content="Batmagnai Ganbaatar - Front End • Full Stack • AI Workflow" />
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css?v=18" />
@@ -93,7 +93,7 @@
         <div class="kicker"><i></i> live tool</div>
         <h1>AI Job Application Assistant</h1>
         <p class="lead" style="max-width: 60ch;">
-          Upload a CV, paste a job description, and generate tailored application assets — running live, powered by Llama 3.3 70B.
+          Upload a CV, paste a job description, and generate tailored application assets - running live, powered by Llama 3.3 70B.
         </p>
 
         <div class="cta-row" style="margin: 16px 0 20px;">
@@ -264,7 +264,7 @@
       function render(type) {
         const text = results[type];
         if (!text) {
-          out.innerHTML = '<span class="muted">No output yet — press Generate.</span>';
+          out.innerHTML = '<span class="muted">No output yet - press Generate.</span>';
         } else {
           out.innerHTML = mdToHtml(text);
         }
@@ -376,7 +376,7 @@
           }
           setStatus("ready");
         } catch (e) {
-          out.innerHTML = '<span class="muted">Network error — please try again.</span>';
+          out.innerHTML = '<span class="muted">Network error - please try again.</span>';
           setStatus("error");
         } finally {
           busy = false;

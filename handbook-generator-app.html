@@ -3,22 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Handbook Generator — Live Tool — Batmagnai Ganbaatar</title>
+  <title>AI Handbook Generator - Live Tool - Batmagnai Ganbaatar</title>
 
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Run the AI Handbook Generator — upload PDFs or give a topic and generate a structured, multi-section handbook live." />
+  <meta name="description" content="Run the AI Handbook Generator - upload PDFs or give a topic and generate a structured, multi-section handbook live." />
 
   <!-- Open Graph (link previews on LinkedIn etc.) -->
-  <meta property="og:title" content="AI Handbook Generator — Live Tool — Batmagnai Ganbaatar" />
-  <meta property="og:description" content="Run the AI Handbook Generator — upload PDFs or give a topic and generate a structured, multi-section handbook live." />
+  <meta property="og:title" content="AI Handbook Generator - Live Tool - Batmagnai Ganbaatar" />
+  <meta property="og:description" content="Run the AI Handbook Generator - upload PDFs or give a topic and generate a structured, multi-section handbook live." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/handbook-generator-app.html" />
   <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Batmagnai Ganbaatar — Front End • Full Stack • AI Workflow" />
+  <meta property="og:image:alt" content="Batmagnai Ganbaatar - Front End • Full Stack • AI Workflow" />
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
   <link rel="stylesheet" href="style.css?v=18" />
@@ -76,7 +76,7 @@
         <div class="kicker"><i></i> live tool</div>
         <h1>AI Handbook Generator</h1>
         <p class="lead" style="max-width: 62ch;">
-          Upload PDFs (or just give a topic) and generate a structured, multi-section handbook — planned, written section by section, and streamed live by Llama 3.3 70B. A full run takes a few minutes.
+          Upload PDFs (or just give a topic) and generate a structured, multi-section handbook - planned, written section by section, and streamed live by Llama 3.3 70B. A full run takes a few minutes.
         </p>
 
         <div class="cta-row" style="margin: 16px 0 20px;">
@@ -106,7 +106,7 @@
 
               <div class="app-field">
                 <label for="topicInput">Topic / instructions</label>
-                <textarea id="topicInput" class="app-ta" placeholder="e.g. A complete employee handbook from these documents — onboarding, policies, benefits, conduct, FAQ."></textarea>
+                <textarea id="topicInput" class="app-ta" placeholder="e.g. A complete employee handbook from these documents - onboarding, policies, benefits, conduct, FAQ."></textarea>
               </div>
 
               <button class="btn primary app-generate" type="button" data-generate>Generate handbook ✦</button>
@@ -117,7 +117,7 @@
             <!-- output -->
             <div class="app-output">
               <div class="app-tabs" style="border-bottom:1px solid var(--line); justify-content:space-between; align-items:center;">
-                <span class="app-metaline" data-statusline style="margin:0;">Ready — add a topic and Generate.</span>
+                <span class="app-metaline" data-statusline style="margin:0;">Ready - add a topic and Generate.</span>
                 <span style="display:flex; gap:8px;">
                   <button class="app-tab" type="button" data-copy>Copy</button>
                   <button class="app-tab" type="button" data-download>Download .md</button>
@@ -259,7 +259,7 @@
           body: JSON.stringify(payload),
         });
         if (res.status === 429 && attempt < 5 && !cancelled) {
-          setLine("Rate limited by the model — waiting 20s, then continuing…");
+          setLine("Rate limited by the model - waiting 20s, then continuing…");
           await sleep(20000);
           return callApi(payload, attempt + 1);
         }
@@ -336,25 +336,25 @@
           try {
             sections = JSON.parse(await oRes.text());
           } catch (e) {
-            out.innerHTML = '<span class="muted">The outline came back malformed — please try again.</span>';
+            out.innerHTML = '<span class="muted">The outline came back malformed - please try again.</span>';
             setStatus("error"); setLine("Outline parse failed.");
             return;
           }
           sections = (sections || []).filter((s) => s && s.title).slice(0, 8);
           if (!sections.length) {
-            out.innerHTML = '<span class="muted">No sections were produced — try a clearer topic.</span>';
+            out.innerHTML = '<span class="muted">No sections were produced - try a clearer topic.</span>';
             setStatus("error"); setLine("Empty outline.");
             return;
           }
 
-          const outlineText = sections.map((s, i) => (i + 1) + ". " + s.title + (s.scope ? " — " + s.scope : "")).join("\n");
+          const outlineText = sections.map((s, i) => (i + 1) + ". " + s.title + (s.scope ? " - " + s.scope : "")).join("\n");
           const N = sections.length;
 
           // 2) Sections
           for (let i = 0; i < N; i++) {
             if (cancelled) break;
             setStatus("writing");
-            setLine("Writing section " + (i + 1) + " of " + N + " — " + sections[i].title);
+            setLine("Writing section " + (i + 1) + " of " + N + " - " + sections[i].title);
             setBar((i / N) * 100);
             const sectionText = await streamSection(sections[i], outlineText);
             fullMd += (fullMd ? "\n\n" : "") + sectionText;
@@ -365,18 +365,18 @@
 
           if (cancelled) {
             setStatus("stopped");
-            setLine("Stopped — " + wordCount(fullMd).toLocaleString() + " words so far.");
+            setLine("Stopped - " + wordCount(fullMd).toLocaleString() + " words so far.");
           } else {
             setStatus("done");
             setBar(100);
-            setLine("Done — " + N + " sections, " + wordCount(fullMd).toLocaleString() + " words.");
+            setLine("Done - " + N + " sections, " + wordCount(fullMd).toLocaleString() + " words.");
           }
         } catch (e) {
           if (fullMd.trim()) {
             renderOut("");
             setLine("Stopped early: " + (e.message || "error") + ". Partial handbook kept below.");
           } else {
-            out.innerHTML = '<span class="muted">' + escapeHtml(e.message || "Something went wrong — please try again.") + '</span>';
+            out.innerHTML = '<span class="muted">' + escapeHtml(e.message || "Something went wrong - please try again.") + '</span>';
           }
           setStatus("error");
         } finally {

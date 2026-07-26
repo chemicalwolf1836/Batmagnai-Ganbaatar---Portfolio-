@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Handbook Generator — Batmagnai Ganbaatar</title>
+  <title>AI Handbook Generator - Batmagnai Ganbaatar</title>
 
   <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
 
   <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
 
-  <meta name="description" content="Case study: AI Handbook Generator — an AI tool that generates 20,000-word structured handbooks from uploaded PDFs using RAG and the LongWriter technique, with a live serverless version to try." />
+  <meta name="description" content="Case study: AI Handbook Generator - an AI tool that generates 20,000-word structured handbooks from uploaded PDFs using RAG and the LongWriter technique, with a live serverless version to try." />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="AI Handbook Generator — Batmagnai Ganbaatar" />
-  <meta property="og:description" content="An AI tool that generates 20,000-word structured handbooks from uploaded PDFs using a custom RAG engine and the LongWriter technique — with a live version to try." />
+  <meta property="og:title" content="AI Handbook Generator - Batmagnai Ganbaatar" />
+  <meta property="og:description" content="An AI tool that generates 20,000-word structured handbooks from uploaded PDFs using a custom RAG engine and the LongWriter technique - with a live version to try." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/handbook-generator.html" />
   <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Batmagnai Ganbaatar — Front End • Full Stack • AI Workflow" />
+  <meta property="og:image:alt" content="Batmagnai Ganbaatar - Front End • Full Stack • AI Workflow" />
 
   <meta name="theme-color" content="#ff2d2d" />
   <meta name="color-scheme" content="light" />
@@ -65,7 +65,7 @@
         <div class="kicker"><i></i> CASE STUDY · AI · TOOL</div>
         <h1>AI Handbook Generator</h1>
         <div class="hero-bar" aria-hidden="true"></div>
-        <p class="lead">Upload PDFs, ask questions grounded in them, and generate a <span class="highlight">20,000-word structured handbook</span> — built with a custom RAG engine and the LongWriter technique.</p>
+        <p class="lead">Upload PDFs, ask questions grounded in them, and generate a <span class="highlight">20,000-word structured handbook</span> - built with a custom RAG engine and the LongWriter technique.</p>
         <div class="chips-row" aria-label="Tech stack">
           <span class="tag">Python · Gradio</span>
           <span class="tag">JavaScript · Vercel Edge</span>
@@ -106,7 +106,7 @@
             </div>
           </div>
           <div class="vs-foot">
-            <span class="vs-foot-text">Same approach — plan → write per section → assemble.</span>
+            <span class="vs-foot-text">Same approach - plan → write per section → assemble.</span>
             <a class="vs-try" href="handbook-generator-app.html">Try the live version →</a>
           </div>
         </div>
@@ -137,7 +137,7 @@
 
               <div class="app-field">
                 <label>Prompt</label>
-                <textarea class="app-ta" readonly aria-label="Prompt sample">Generate a complete employee handbook from these documents — onboarding, policies, benefits, code of conduct, and FAQ.</textarea>
+                <textarea class="app-ta" readonly aria-label="Prompt sample">Generate a complete employee handbook from these documents - onboarding, policies, benefits, code of conduct, and FAQ.</textarea>
               </div>
 
               <button class="btn primary app-generate" type="button" data-generate>Generate handbook ✦</button>
@@ -160,7 +160,7 @@
               </div>
 
               <div class="app-panel" data-panel="outline" role="tabpanel" hidden>
-                <p class="app-metaline">Plan step — 16 sections, ~1,250 words each</p>
+                <p class="app-metaline">Plan step - 16 sections, ~1,250 words each</p>
                 <ul class="app-toc">
                   <li><span class="done">1. Introduction &amp; Welcome</span><span class="wc">✓ 1,200</span></li>
                   <li><span class="done">2. Company Overview</span><span class="wc">✓ 1,300</span></li>
@@ -173,9 +173,9 @@
               </div>
 
               <div class="app-panel" data-panel="qa" role="tabpanel" hidden>
-                <h4>Q&amp;A — grounded in your PDFs</h4>
+                <h4>Q&amp;A - grounded in your PDFs</h4>
                 <p><strong>Q:</strong> How many paid vacation days do new hires get?</p>
-                <p><strong>A:</strong> New full-time hires receive 14 paid vacation days in their first year, accruing monthly, plus national holidays. <span class="wc" style="font-family:var(--mono);font-size:12px;">— source: employee-policy.pdf, p.7</span></p>
+                <p><strong>A:</strong> New full-time hires receive 14 paid vacation days in their first year, accruing monthly, plus national holidays. <span class="wc" style="font-family:var(--mono);font-size:12px;"> -  source: employee-policy.pdf, p.7</span></p>
               </div>
             </div>
           </div>
@@ -224,14 +224,14 @@
             <div class="meta"><span class="badge">Stack</span></div>
             <h3>Stack &amp; Architecture</h3>
             <ul class="stack-list">
-              <li><strong>Python</strong> — application layer</li>
-              <li><strong>Gradio</strong> — chat UI with streaming output</li>
-              <li><strong>Groq API</strong> — Llama 3.3 70B for generation</li>
-              <li><strong>sentence-transformers</strong> — local text embeddings</li>
-              <li><strong>numpy</strong> — cosine similarity vector search</li>
-              <li><strong>pdfplumber / pypdf</strong> — PDF text extraction</li>
-              <li><strong>Supabase</strong> — optional persistent storage</li>
-              <li><strong>Hugging Face Spaces</strong> — deployment</li>
+              <li><strong>Python</strong> - application layer</li>
+              <li><strong>Gradio</strong> - chat UI with streaming output</li>
+              <li><strong>Groq API</strong> - Llama 3.3 70B for generation</li>
+              <li><strong>sentence-transformers</strong> - local text embeddings</li>
+              <li><strong>numpy</strong> - cosine similarity vector search</li>
+              <li><strong>pdfplumber / pypdf</strong> - PDF text extraction</li>
+              <li><strong>Supabase</strong> - optional persistent storage</li>
+              <li><strong>Hugging Face Spaces</strong> - deployment</li>
             </ul>
           </article>
 
@@ -239,11 +239,11 @@
             <div class="meta"><span class="badge">Challenges</span></div>
             <h3>Challenges &amp; Learnings</h3>
             <ul class="feature-list">
-              <li><strong>LLM output limits</strong> — solved with LongWriter: split generation into 12–16 sections, each ~1,500 words, then assembled</li>
-              <li><strong>Slow RAG indexing</strong> — original LightRAG approach made LLM calls during indexing (slow); replaced with local numpy cosine similarity search</li>
-              <li><strong>Dependency conflicts</strong> — sentence-transformers 5.x broke PyTorch; pinned to &lt;4</li>
-              <li><strong>Gradio breaking changes</strong> — v6 removed several parameters and changed chat history format; updated all affected code</li>
-              <li><strong>API pivots</strong> — switched from xAI to Groq after hitting credit limits; OpenAI-compatible SDK made this a one-line change</li>
+              <li><strong>LLM output limits</strong> - solved with LongWriter: split generation into 12–16 sections, each ~1,500 words, then assembled</li>
+              <li><strong>Slow RAG indexing</strong> - original LightRAG approach made LLM calls during indexing (slow); replaced with local numpy cosine similarity search</li>
+              <li><strong>Dependency conflicts</strong> - sentence-transformers 5.x broke PyTorch; pinned to &lt;4</li>
+              <li><strong>Gradio breaking changes</strong> - v6 removed several parameters and changed chat history format; updated all affected code</li>
+              <li><strong>API pivots</strong> - switched from xAI to Groq after hitting credit limits; OpenAI-compatible SDK made this a one-line change</li>
             </ul>
           </article>
         </div>
@@ -258,21 +258,21 @@
           <div class="ja-note">
             <p class="label">PROBLEM</p>
             <p>
-              Standard LLMs can't generate a full 20,000-word document in one API call — they hit output token limits and truncate. I wanted to build something that could take uploaded PDFs and produce a complete, structured handbook from them — not a summary, but a full long-form document grounded in the source material.
+              Standard LLMs can't generate a full 20,000-word document in one API call - they hit output token limits and truncate. I wanted to build something that could take uploaded PDFs and produce a complete, structured handbook from them - not a summary, but a full long-form document grounded in the source material.
             </p>
           </div>
 
           <div class="ja-note">
             <p class="label">APPROACH</p>
             <p>
-              I implemented the LongWriter / AgentWrite technique from AI research: first generate a full table of contents with word-count targets per section, then write each section in a separate API call using relevant RAG context, then assemble the sections into a single document. For the RAG layer, I built a custom vector search engine using sentence-transformers for local embeddings and numpy cosine similarity for retrieval — no external vector database required.
+              I implemented the LongWriter / AgentWrite technique from AI research: first generate a full table of contents with word-count targets per section, then write each section in a separate API call using relevant RAG context, then assemble the sections into a single document. For the RAG layer, I built a custom vector search engine using sentence-transformers for local embeddings and numpy cosine similarity for retrieval - no external vector database required.
             </p>
           </div>
 
           <div class="ja-note">
             <p class="label">RESULT</p>
             <p>
-              The app can generate a 20,000+ word structured handbook from uploaded PDFs in 5–15 minutes, streamed live. This project pushed me into Python backend work, RAG architecture, real dependency debugging, and practical LLM engineering — closer to production AI tooling than anything I'd built before.
+              The app can generate a 20,000+ word structured handbook from uploaded PDFs in 5–15 minutes, streamed live. This project pushed me into Python backend work, RAG architecture, real dependency debugging, and practical LLM engineering - closer to production AI tooling than anything I'd built before.
             </p>
           </div>
         </div>

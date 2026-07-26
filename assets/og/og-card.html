@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>OG card source — render at 1200×630</title>
+<title>OG card source - render at 1200×630</title>
 <!--
   Source for assets/og/og-card.png (the LinkedIn/social share preview).
   To regenerate after edits:
@@ -10,7 +10,7 @@
     --window-size=1200,630 --screenshot=og-card.png og-card.html
 -->
 <style>
-  /* Mirrors the site design tokens (style.css :root) — kept inline so the
+  /* Mirrors the site design tokens (style.css :root) - kept inline so the
      card renders identically with no external dependencies. */
   :root{
     --bg: #ffffff;
@@ -34,7 +34,7 @@
     align-items: center;
   }
 
-  /* Skewed gridlines — echoes .gridlines from style.css */
+  /* Skewed gridlines - echoes .gridlines from style.css */
   .gridlines{
     position: absolute;
     inset: -60px -60px auto -60px;
@@ -47,7 +47,7 @@
     transform-origin: top left;
   }
 
-  /* Angled panels — echoes .angle.a1 / .angle.a2 */
+  /* Angled panels - echoes .angle.a1 / .angle.a2 */
   .angle{
     position: absolute;
     border: 1px solid var(--line);
@@ -82,7 +82,7 @@
     color: var(--muted);
     margin-bottom: 28px;
   }
-  /* Red parallelogram — echoes .brand-mark / .kicker i */
+  /* Red parallelogram - echoes .brand-mark / .kicker i */
   .mark{
     width: 18px; height: 18px;
     background: #ff3b30;
@@ -111,7 +111,7 @@
     color: var(--muted);
     letter-spacing: 0.04em;
   }
-  /* Red baseline sweep — echoes the .card::after hover underline */
+  /* Red baseline sweep - echoes the .card::after hover underline */
   .redline{
     position: absolute;
     left: 0; bottom: 0;
@@ -128,7 +128,7 @@
   <div class="content">
     <div class="kicker"><span class="mark"></span> clean • sharp • fast</div>
     <h1>Batmagnai<br /><span class="accent">Ganbaatar</span></h1>
-    <p class="tagline">Front End • Full Stack • AI Workflow — based in Tokyo</p>
+    <p class="tagline">Front End • Full Stack • AI Workflow - based in Tokyo</p>
   </div>
 
   <div class="url">batmagnai-ganbaatar-portfolio.vercel.app</div>

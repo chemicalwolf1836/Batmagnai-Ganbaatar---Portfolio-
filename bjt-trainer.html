@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BJT Trainer - Batmagnai Ganbaatar</title>
+
+  <link rel="icon" href="/assets/icons/favicon-v2.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/icons/web-app-manifest-512x512.png">
+
+  <meta name="description" content="Case study: BJT Trainer - an offline-first Japanese vocabulary trainer built with Next.js, TypeScript, and a hand-written PWA service worker." />
+
+  <!-- Open Graph (link previews on LinkedIn etc.) -->
+  <meta property="og:title" content="BJT Trainer - Batmagnai Ganbaatar" />
+  <meta property="og:description" content="Case study: BJT Trainer - an offline-first Japanese vocabulary trainer built with Next.js, TypeScript, and a hand-written PWA service worker." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://batmagnai-ganbaatar-portfolio.vercel.app/bjt-trainer.html" />
+  <meta property="og:image" content="https://batmagnai-ganbaatar-portfolio.vercel.app/assets/og/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Batmagnai Ganbaatar - Front End • Full Stack • AI Workflow" />
+  <meta name="theme-color" content="#ff2d2d" />
+  <meta name="color-scheme" content="light" />
+  <link rel="stylesheet" href="style.css?v=29" />
+  <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" data-nav>
+    <div class="container nav">
+      <a class="brand" href="index.html">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <strong>BATMAGNAI GANBAATAR</strong>
+        <span>/ BJT Trainer</span>
+      </a>
+
+      <nav id="navLinks" class="nav-links" data-nav-links aria-label="Primary navigation">
+        <a href="index.html" data-nav-link>Home</a>
+        <a href="projects.html" data-nav-link>Work</a>
+        <a href="about.html" data-nav-link>About</a>
+        <a href="resume.html" data-nav-link>Résumé</a>
+        <a href="contact.html" data-nav-link>Contact</a>
+        <a href="promptkit.html" data-nav-link>PromptKit</a>
+      </nav>
+
+      <div class="nav-controls">
+        <button class="theme-btn" data-theme-btn aria-label="Toggle dark mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <button class="menu-btn" data-menu-btn aria-expanded="false" aria-controls="navLinks">Menu</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero page-hero">
+      <div class="gridlines" aria-hidden="true"></div>
+      <div class="container hero-left">
+        <div class="kicker"><i></i> CASE STUDY · FRONT-END · PWA</div>
+        <h1>BJT Trainer</h1>
+        <div class="hero-bar" aria-hidden="true"></div>
+        <p class="lead">An <span class="highlight">offline-first Japanese vocabulary trainer</span> for the Business Japanese Proficiency Test - audio-first recall, Leitner spaced repetition, and an installable PWA that works on a train with no signal.</p>
+        <div class="hero-links">
+          <!-- Live demo goes here once deployed to Vercel: <a class="btn primary" href="LIVE_URL" target="_blank" rel="noreferrer">Live Demo ↗</a> -->
+          <a class="btn primary" href="https://github.com/chemicalwolf1836/bjt-trainer" target="_blank" rel="noreferrer">Source ↗</a>
+          <a class="btn" href="projects.html">← Back</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cards">
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Overview</span>
+            </div>
+            <h3>Project Summary</h3>
+            <p>
+              BJT Trainer is a personal study tool I use daily and built as a portfolio piece. It plays a Japanese word or phrase, you produce the reading and meaning from memory, then reveal and grade yourself. The whole app runs with no network - vocabulary is bundled in and audio comes from the browser's own speech engine - so it keeps working on the commute where there is no signal.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Stack</span>
+            </div>
+            <h3>Stack & Architecture</h3>
+            <ul class="stack-list">
+              <li><strong>Next.js 16</strong> - App Router, static export (no server at runtime)</li>
+              <li><strong>TypeScript</strong> - strict mode throughout</li>
+              <li><strong>Tailwind CSS</strong> - styling system</li>
+              <li><strong>Web Speech API</strong> - native SpeechSynthesis for Japanese audio, no audio files</li>
+              <li><strong>Vitest</strong> - 136 unit tests over the pure logic core</li>
+              <li><strong>Service Worker</strong> - hand-written, cache-first offline shell</li>
+              <li><strong>Vercel</strong> - deployment</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Modes</span>
+            </div>
+            <h3>Practice Modes</h3>
+            <ul class="feature-list">
+              <li><strong>Vocabulary recall</strong> - audio plays, you recall the reading and meaning, then reveal and self-grade; typing the reading is optional</li>
+              <li><strong>First-exposure step</strong> - a word you have never seen introduces itself with text before it is ever quizzed blind by ear</li>
+              <li><strong>Business phrases</strong> - a deck of keigo and workplace set-phrases using the same flow</li>
+              <li><strong>Unit browser</strong> - all 24 themed weeks, each with its own progress, drill a single week at a time</li>
+              <li><strong>Shadowing mode</strong> - a full sentence plays, then a timed beat gives you space to repeat it aloud</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Progress</span>
+            </div>
+            <h3>Scheduling & Goals</h3>
+            <ul class="feature-list">
+              <li><strong>Leitner boxes</strong> - a correct answer promotes a card one box, a miss sends it back to box 1, so weak cards surface first</li>
+              <li><strong>No calendar</strong> - the next unit unlocks when 75% of the previous one is learned, so pace follows how much you actually study rather than a fixed schedule</li>
+              <li><strong>Unit unlock ring</strong> - on the study screen, a countdown to the next unit that reads toward the unlock point, not the whole unit</li>
+              <li><strong>Course mastery bar</strong> - on the home screen, every card tracked from box 1 to box 5, plus an honest pace estimate that hides itself after a break instead of shaming you</li>
+              <li><strong>Local persistence</strong> - progress lives in the browser and survives closing the tab, no account needed</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Engineering</span>
+            </div>
+            <h3>Challenges & Learnings</h3>
+            <ul class="feature-list">
+              <li><strong>Offline as a hard constraint</strong> - static export makes any accidental server dependency a build error; bundling the data and using native text-to-speech means zero network calls at runtime</li>
+              <li><strong>A pure, testable core</strong> - the Leitner scheduler reads no clock and no randomness of its own; the caller injects the time, which makes every scheduling rule deterministic to test</li>
+              <li><strong>Hydration-safe storage</strong> - reading local storage through useSyncExternalStore so a statically-exported page never mismatches between server and client render</li>
+              <li><strong>A real state machine</strong> - the card lifecycle (introduce, prompt, reveal) is modelled so illegal transitions cannot happen, not just guarded by the UI</li>
+              <li><strong>A modular course model</strong> - the scheduler knows nothing course-specific, so a second course such as JLPT is one data file plus one line, with no change to the engine</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="index-label">// Problem</h2>
+        <p class="lead" style="max-width: 60ch;">I study for the BJT exam on the train, where there is no signal, and most flashcard apps either need a connection, fetch their audio, or drown you in settings. I wanted something that starts the moment I open it, works entirely offline, and trains the one skill the exam actually tests - understanding spoken business Japanese.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="index-label">// Solution</h2>
+        <p class="lead" style="max-width: 60ch;">BJT Trainer bundles its whole vocabulary into the app and speaks Japanese with the device's built-in voice, so it needs no network once loaded. A Leitner scheduler surfaces your weakest cards first, units unlock by mastery rather than by date, and a hand-written service worker caches the app shell so it even launches with no signal at all.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="index-label">// What I Built</h2>
+        <div class="cards">
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Logic</span>
+            </div>
+            <h3>Spaced-Repetition Engine</h3>
+            <p>
+              Built the Leitner box scheduler and the mastery-gated unlocking as pure functions with no side effects - time is passed in, ordering is deterministic, and every rule is covered by unit tests. This is the part I can reason about and explain end to end.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">Audio</span>
+            </div>
+            <h3>Offline Speech</h3>
+            <p>
+              Wrapped the browser SpeechSynthesis API so Japanese plays with no fetched audio, handled the async voice-loading quirk, and added a warning when no Japanese voice is installed - because otherwise the app would read Japanese with an English voice and teach the wrong pronunciation.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">UX</span>
+            </div>
+            <h3>Goals You Can See</h3>
+            <p>
+              Designed two progress surfaces from the same data: a unit unlock ring that counts down to the next week on the study screen, and a course mastery bar on the home screen that watches every card move from box 1 to box 5 - with a pace estimate that suppresses itself after a break rather than reporting you as behind.
+            </p>
+          </article>
+
+          <article class="card">
+            <div class="meta">
+              <span class="badge">PWA</span>
+            </div>
+            <h3>Installable & Offline</h3>
+            <p>
+              Wrote the service worker by hand rather than pulling a plugin: a versioned cache, cleanup of old caches on activate, a resilient install that will not fail the whole app over one asset, and a manifest so the trainer installs to the home screen and launches with no connection.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="index-label">// Result</h2>
+        <p class="lead" style="max-width: 60ch;">BJT Trainer is the project where I focused on engineering rigour rather than surface polish: a pure, fully tested logic core, an offline constraint enforced by the build, and a state machine that makes broken UI states impossible. It holds 192 vocabulary cards across 24 themed units and is built so a second course, such as JLPT, can be added without touching the engine.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container row">
+      <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
+      <div class="tiny">case study / bjt trainer</div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Back to top"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="6 11 12 5 18 11"/></svg></button>
+  <script src="script.js?v=17"></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
