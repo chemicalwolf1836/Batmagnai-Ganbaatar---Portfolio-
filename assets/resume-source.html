@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+  Print source for assets/resume.pdf.
+  Regenerate the PDF:
+    (serve the portfolio, then)
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless --disable-gpu --no-pdf-header-footer \
+      --print-to-pdf=assets/resume.pdf http://localhost:PORT/assets/resume-source.html
+  Curated to 4 strongest projects; the portfolio URL in the header carries the rest.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Batmagnai Ganbaatar - Resume</title>
+<style>
+  @page { size: letter; margin: 0.7in 0.75in; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #232323;
+    font-size: 10.8px;
+    line-height: 1.42;
+  }
+  .name { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; color: #141414; }
+  .title { font-size: 13px; color: #6a6a6a; margin-top: 2px; }
+
+  .contact { margin-top: 12px; display: flex; flex-direction: column; gap: 3px; }
+  .contact a { color: #444; text-decoration: none; }
+  .contact .row { display: flex; align-items: center; gap: 8px; color: #444; }
+  .contact svg { flex: none; width: 13px; height: 13px; stroke: #8a8a8a; }
+
+  h2 {
+    font-size: 14px; font-weight: 700; color: #141414;
+    margin: 20px 0 0; padding-bottom: 4px; border-bottom: 1px solid #dcdcdc;
+  }
+  .block { margin-top: 11px; }
+  .entry { margin-top: 12px; }
+  .entry:first-child { margin-top: 11px; }
+  .entry-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .entry-title { font-weight: 700; color: #191919; font-size: 11.6px; }
+  .entry-title a { color: inherit; text-decoration: none; }
+  .entry-when { color: #7a7a7a; font-size: 10.5px; white-space: nowrap; }
+  .entry-sub { font-style: italic; color: #6f6f6f; margin-top: 1px; }
+  ul { list-style: none; margin-top: 4px; }
+  li { position: relative; padding-left: 15px; margin-top: 3px; }
+  li::before { content: "\2013"; position: absolute; left: 0; color: #555; }
+
+  .summary { margin-top: 11px; max-width: 62em; }
+  .skills-line { margin-top: 3px; }
+  .skills-line b { color: #191919; }
+  .lang-line { margin-top: 3px; }
+  .lang-line b { color: #191919; }
+  .cert { margin-top: 10px; }
+  .cert .entry-title { font-size: 11.4px; }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="name">Batmagnai Ganbaatar</div>
+    <div class="title">Full-Stack Developer &nbsp;·&nbsp; AI Applications &amp; Workflows</div>
+    <div class="contact">
+      <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> Tokyo, Japan &nbsp;·&nbsp; Open to Remote</span>
+      <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg> +81-070-6528-7754</span>
+      <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7L22 6"/></svg> <a href="mailto:batmagnai.ganbaatar@gmail.com">batmagnai.ganbaatar@gmail.com</a></span>
+      <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg> <a href="https://batmagnai-ganbaatar-portfolio.vercel.app">batmagnai-ganbaatar-portfolio.vercel.app</a></span>
+      <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.7A5.2 5.2 0 0 0 20 4.8 4.9 4.9 0 0 0 19.9 1S18.7.6 16 2.5a13.4 13.4 0 0 0-7 0C6.3.6 5.1 1 5.1 1A4.9 4.9 0 0 0 5 4.8a5.2 5.2 0 0 0-1.4 3.6c0 5.2 3.1 6.4 6.1 6.7a3.4 3.4 0 0 0-.9 2.6V22"/></svg> <a href="https://github.com/chemicalwolf1836">github.com/chemicalwolf1836</a></span>
+      <span class="row"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4"/></svg> <a href="https://linkedin.com/in/batmagnai-ganbaatar-025a94211">linkedin.com/in/batmagnai-ganbaatar-025a94211</a></span>
+    </div>
+  </header>
+
+  <h2>Summary</h2>
+  <p class="summary">Full-stack developer who ships complete, tested products from scratch - AI-powered web apps, SaaS with auth and live data, and offline-first PWAs. Comfortable across the stack: Next.js, TypeScript, serverless APIs, and LLM integration (Claude, Groq). Open to full-stack, front-end, or AI-adjacent product roles in Tokyo or remote.</p>
+
+  <h2>Projects</h2>
+
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title"><a href="https://wander-travel-app-jade.vercel.app">Wander</a></span><span class="entry-when">2026</span></div>
+    <div class="entry-sub">Next.js · TypeScript · Claude API · Supabase · Framer Motion · Mapbox</div>
+    <ul>
+      <li>Built an AI travel-discovery app with a multi-mode interface - natural-language chat, guided choice chips, and one-tap Surprise Me - powered by the Claude API</li>
+      <li>Engineered 5 API routes: destination suggestions, packing list, itinerary builder, similar-destination finder, and item enrichment</li>
+      <li>Implemented 3D card tilt with image parallax, a cinematic stagger reveal, and an animated aurora background with Framer Motion</li>
+      <li>Built result caching in Supabase with SHA-256 preference hashing - "show more" bypasses cache to return fresh destinations every time</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title"><a href="https://verba-lang.vercel.app">Verba</a></span><span class="entry-when">2026</span></div>
+    <div class="entry-sub">Next.js · TypeScript · Tailwind CSS · Web Speech API · PWA · Vitest</div>
+    <ul>
+      <li>Built an offline-first vocabulary trainer for language exams - audio-first recall via the browser's SpeechSynthesis API, so it speaks with zero network and no audio files</li>
+      <li>Engineered a Leitner spaced-repetition core as pure, deterministic functions with injected time, covered by 147 unit tests; units unlock by mastery, not a fixed calendar</li>
+      <li>Designed a modular multi-course engine - a new language or test is one data file plus one registry line, with no change to the scheduler</li>
+      <li>Shipped an installable PWA with a hand-written service worker; Next.js static export enforces the offline constraint at build time</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title"><a href="https://retirement-planner-chi.vercel.app">RetireAI</a></span><span class="entry-when">2026</span></div>
+    <div class="entry-sub">Next.js · TypeScript · Tailwind CSS v4 · Supabase · Claude API · Recharts</div>
+    <ul>
+      <li>Built a retirement-planner SaaS with savings projections, scenario comparison, and Claude-generated personalised reports</li>
+      <li>Integrated Supabase auth and PostgreSQL with Row-Level Security for secure per-user data</li>
+      <li>Built a secure server-side API route to call the Claude API - the key is never exposed to the client</li>
+      <li>Created interactive projection charts with Recharts, deployed to Vercel with managed environment variables</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title"><a href="https://batmagnai-ganbaatar-portfolio.vercel.app/handbook-generator-app.html">AI Handbook Generator</a></span><span class="entry-when">2026</span></div>
+    <div class="entry-sub">JavaScript · Vercel Edge Functions · Groq (Llama 3.3 70B) · pdf.js</div>
+    <ul>
+      <li>Rebuilt from a Python/Gradio prototype into vanilla JavaScript on a Vercel Edge Function backend</li>
+      <li>Architected a two-mode API - one fast outline call, then one streamed call per section - so the browser orchestrates a multi-minute generation within serverless time limits</li>
+      <li>Streams each ~1,200-word section live via the Groq API, with client-side PDF text extraction using pdf.js</li>
+      <li>Keeps the API key server-side behind the edge function, with Markdown export of the finished handbook</li>
+    </ul>
+  </div>
+
+  <h2>Skills</h2>
+  <div class="block">
+    <div class="skills-line"><b>Languages:</b> JavaScript, TypeScript, Python, HTML, CSS, C# (foundational)</div>
+    <div class="skills-line"><b>Frameworks &amp; Libraries:</b> React, Next.js, Tailwind CSS, Node.js, Framer Motion</div>
+    <div class="skills-line"><b>AI &amp; Data:</b> LLM API integration (Claude / Groq / xAI), RAG pipelines, pgvector, prompt engineering</div>
+    <div class="skills-line"><b>Back-End &amp; DBs:</b> REST &amp; serverless API routes, Vercel Edge Functions, Supabase, PostgreSQL (RLS), Resend</div>
+    <div class="skills-line"><b>Front-End &amp; PWA:</b> responsive UI, accessibility, service workers, offline-first PWAs, static export</div>
+    <div class="skills-line"><b>Testing &amp; Tooling:</b> Vitest, Git, GitHub, Vercel, VS Code</div>
+  </div>
+
+  <h2>Certifications</h2>
+  <div class="cert">
+    <div class="entry-title">Meta Front-End Developer Professional Certificate</div>
+    <div class="entry-sub">Meta / Coursera</div>
+  </div>
+  <div class="cert">
+    <div class="entry-title">Foundational C# with Microsoft</div>
+    <div class="entry-sub">freeCodeCamp</div>
+  </div>
+
+  <h2>Experience</h2>
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title">English Instructor</span><span class="entry-when">Mar 2026 - Present</span></div>
+    <div class="entry-sub">Yaruki Switch Group · Tokyo, Japan</div>
+    <ul>
+      <li>Teaching across multiple age groups and proficiency levels in a high-volume, fast-paced environment</li>
+      <li>Designing lesson materials from scratch - clear structure, measurable outcomes, adapted per learner</li>
+      <li>Working within a larger team across branches - communication, handoffs, and consistency across instructors</li>
+    </ul>
+  </div>
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title">English Instructor</span><span class="entry-when">Jun 2022 - Dec 2025</span></div>
+    <div class="entry-sub">NOVA Co. Ltd. · Fukuoka, Japan</div>
+    <ul>
+      <li>Planned and delivered structured lessons across varied skill levels and backgrounds</li>
+      <li>Adapted communication style to individual needs - strong habits in problem diagnosis, clear explanation, and iterative improvement</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="entry-top"><span class="entry-title">Bachelor of Business Administration</span><span class="entry-when">2017 - 2022</span></div>
+    <div class="entry-sub">Ritsumeikan Asia Pacific University, Beppu, Japan</div>
+  </div>
+
+  <h2>Languages</h2>
+  <div class="block">
+    <div class="lang-line"><b>English</b> - Native / Bilingual</div>
+    <div class="lang-line"><b>Mongolian</b> - Native / Bilingual</div>
+    <div class="lang-line"><b>Japanese</b> - Intermediate</div>
+  </div>
+
+</body>
+</html>
