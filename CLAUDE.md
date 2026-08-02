@@ -349,7 +349,7 @@ Check and suggest updates to:
 
 **About / Summary section:**
 - 3–5 sentences: who I am, what I build, what I'm looking for
-- Mention: bilingual (English/Japanese), based in Tokyo, CompTIA A+, open to IT Support + developer roles
+- Mention: bilingual (English/Japanese), based in Tokyo, CompTIA A+, open to front-end and full-stack roles
 - End with a call to action: "Open to opportunities in..."
 
 **Projects section:**
