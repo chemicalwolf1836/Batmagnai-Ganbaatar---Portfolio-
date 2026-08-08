@@ -94,7 +94,8 @@
               <li><strong>TypeScript</strong> - strict mode throughout</li>
               <li><strong>Tailwind CSS</strong> - styling system</li>
               <li><strong>Web Speech API</strong> - native SpeechSynthesis for Japanese audio, no audio files</li>
-              <li><strong>Vitest</strong> - 136 unit tests over the pure logic core</li>
+              <li><strong>Hand-rolled romaji to kana</strong> - a live transliterator so typed romaji echoes back as kana while the answer is still hidden</li>
+              <li><strong>Vitest</strong> - 157 unit tests over the pure logic core, 220 across the suite</li>
               <li><strong>Service Worker</strong> - hand-written, cache-first offline shell</li>
               <li><strong>Vercel</strong> - deployment</li>
             </ul>
@@ -109,7 +110,8 @@
               <li><strong>Vocabulary recall</strong> - audio plays, you recall the reading and meaning, then reveal and self-grade; typing the reading is optional</li>
               <li><strong>First-exposure step</strong> - a word you have never seen introduces itself with text before it is ever quizzed blind by ear</li>
               <li><strong>Business phrases</strong> - a deck of keigo and workplace set-phrases using the same flow</li>
-              <li><strong>Unit browser</strong> - all 24 themed weeks, each with its own progress, drill a single week at a time</li>
+              <li><strong>Session setup</strong> - before a sitting you say how long you have (3, 7 or 15 minutes), whether new words, reviews or both are in the queue, and whether you want to type as well as speak</li>
+              <li><strong>The line</strong> - all 24 themed weeks as a rail beside a detail pane, each word showing which Leitner box it sits in; drill a single week from there</li>
               <li><strong>Shadowing mode</strong> - a full sentence plays, then a timed beat gives you space to repeat it aloud</li>
             </ul>
           </article>
@@ -124,6 +126,7 @@
               <li><strong>No calendar</strong> - the next unit unlocks when 75% of the previous one is learned, so pace follows how much you actually study rather than a fixed schedule</li>
               <li><strong>Unit unlock ring</strong> - on the study screen, a countdown to the next unit that reads toward the unlock point, not the whole unit</li>
               <li><strong>Course mastery bar</strong> - on the home screen, every card tracked from box 1 to box 5, plus an honest pace estimate that hides itself after a break instead of shaming you</li>
+              <li><strong>Pace kept out of the scheduler</strong> - the Leitner engine decides which card is worth showing; a separate module decides how many you are in the mood for, so "I have three minutes" changes the sitting without touching spaced repetition</li>
               <li><strong>Local persistence</strong> - progress lives in the browser and survives closing the tab, no account needed</li>
             </ul>
           </article>
@@ -138,6 +141,8 @@
               <li><strong>A pure, testable core</strong> - the Leitner scheduler reads no clock and no randomness of its own; the caller injects the time, which makes every scheduling rule deterministic to test</li>
               <li><strong>Hydration-safe storage</strong> - reading local storage through useSyncExternalStore so a statically-exported page never mismatches between server and client render</li>
               <li><strong>A real state machine</strong> - the card lifecycle (introduce, prompt, reveal) is modelled so illegal transitions cannot happen, not just guarded by the UI</li>
+              <li><strong>Freezing the session pool</strong> - the queue is built from progress, and progress changes on every grade, so a live pool would drop a card the moment you answered it correctly and quietly move the finish line; the card ids are frozen when the sitting starts, read straight from storage rather than from a render snapshot that is still empty during hydration</li>
+              <li><strong>A design implemented against real data</strong> - the redesign arrived as a prototype whose contents were illustrative, listing weeks and words the app does not have; I built the structure and interaction and drove it from the real course registry, rather than hard-coding what the mockup happened to show</li>
               <li><strong>A modular course model</strong> - the scheduler knows nothing course-specific, so a second course such as JLPT is one data file plus one line, with no change to the engine</li>
             </ul>
           </article>
@@ -212,7 +217,7 @@
     <section class="section">
       <div class="container">
         <h2 class="case-heading">// Result</h2>
-        <p class="lead" style="max-width: 60ch;">Verba is the project where I focused on engineering rigour rather than surface polish: a pure, fully tested logic core, an offline constraint enforced by the build, and a state machine that makes broken UI states impossible. It holds 192 vocabulary cards across 24 themed units and is built so a second course, such as JLPT, can be added without touching the engine.</p>
+        <p class="lead" style="max-width: 60ch;">Verba is the project where I focused on engineering rigour rather than surface polish: a pure, fully tested logic core, an offline constraint enforced by the build, and a state machine that makes broken UI states impossible. It holds 192 vocabulary cards across 24 themed units and is built so a second course, such as JLPT, can be added without touching the engine. It has since been through a full redesign - a session setup step, a master-detail route browser, and a live kana echo - which the separation between engine and interface absorbed without the scheduler changing at all.</p>
       </div>
     </section>
   </main>
@@ -220,7 +225,7 @@
   <footer class="footer">
     <div class="container row">
       <div>© <span id="year"></span> Batmagnai Ganbaatar</div>
-      <div class="tiny">case study / bjt trainer</div>
+      <div class="tiny">case study / verba</div>
     </div>
   </footer>
 
