@@ -95,7 +95,7 @@
               <li><strong>Tailwind CSS</strong> - styling system</li>
               <li><strong>Web Speech API</strong> - native SpeechSynthesis for Japanese audio, no audio files</li>
               <li><strong>Hand-rolled romaji to kana</strong> - a live transliterator so typed romaji echoes back as kana while the answer is still hidden</li>
-              <li><strong>Vitest</strong> - 157 unit tests over the pure logic core, 220 across the suite</li>
+              <li><strong>Vitest</strong> - 157 tests over the pure logic core, 234 across the suite including the service worker</li>
               <li><strong>Service Worker</strong> - hand-written offline shell; pages are network-first with a cached fallback, hashed assets cache-first</li>
               <li><strong>Vercel</strong> - deployment</li>
             </ul>
@@ -143,6 +143,7 @@
               <li><strong>A real state machine</strong> - the card lifecycle (introduce, prompt, reveal) is modelled so illegal transitions cannot happen, not just guarded by the UI</li>
               <li><strong>Freezing the session pool</strong> - the queue is built from progress, and progress changes on every grade, so a live pool would drop a card the moment you answered it correctly and quietly move the finish line; the card ids are frozen when the sitting starts, read straight from storage rather than from a render snapshot that is still empty during hydration</li>
               <li><strong>A design implemented against real data</strong> - the redesign arrived as a prototype whose contents were illustrative, listing weeks and words the app does not have; I built the structure and interaction and drove it from the real course registry, rather than hard-coding what the mockup happened to show</li>
+              <li><strong>Testing the service worker</strong> - it was the only file with real logic and no tests, and it had shipped two bugs, so I covered its install, activate and fetch handlers with a real cache fake rather than call stubs; I then reintroduced the bug on purpose to confirm the regression test actually fails, since a test never seen failing is only a guess that it is wired up</li>
               <li><strong>A modular course model</strong> - the scheduler knows nothing course-specific, so a second course such as JLPT is one data file plus one line, with no change to the engine</li>
             </ul>
           </article>

@@ -282,7 +282,7 @@
           <ul class="timeline-bullets">
             <li>Built Verba, an offline-first vocabulary trainer for language exams (first course: the BJT Business Japanese exam) - audio-first recall via the browser's SpeechSynthesis API, so it speaks with zero network and no audio files.</li>
             <li>Engineered a Leitner spaced-repetition core as pure, deterministic functions with injected time, covered by 157 unit tests; units unlock by mastery rather than on a fixed calendar.</li>
-            <li>Enforced offline support at build time via Next.js static export and a hand-written service worker (versioned cache, resilient install), so the app installs to the home screen and launches with no connection.</li>
+            <li>Enforced offline support at build time via Next.js static export and a hand-written, unit-tested service worker - pages network-first with a cached fallback, hashed assets cache-first - so the app installs to the home screen and launches with no connection.</li>
           </ul>
           <div class="timeline-links">
             <a class="link" href="verba.html">Case study →</a>
