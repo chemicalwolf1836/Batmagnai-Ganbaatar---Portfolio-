@@ -1565,7 +1565,7 @@ html[data-theme="dark"] .icon-dm-invert {
 
 .timeline-bullets {
   margin: 10px 0 0;
-  padding-left: 16px;
+  padding-left: var(--space-4);
   display: grid;
   gap: 7px;
 }
@@ -1578,7 +1578,11 @@ html[data-theme="dark"] .icon-dm-invert {
 
 .timeline-links {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 10px var(--space-4);
+  /* Same indent as .timeline-bullets padding-left, so the links start on the
+     same vertical line as the bullet text above them. */
+  padding-left: var(--space-4);
   margin-top: 16px;
 }
 
