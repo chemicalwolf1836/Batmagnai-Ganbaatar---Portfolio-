@@ -1433,9 +1433,21 @@ html[data-theme="dark"] select {
 
 .resume-subtitle {
   font-family: var(--mono);
-  font-size: 13px;
+  /* At 13px this line measures 399px. A 320px phone gives it 280px and a 390px
+     phone 350px, so it cannot sit on one row at full size - and the old
+     61-character wording needed 517px, which no readable size could satisfy
+     at all. Hence the trim to "AI Workflows". min() then holds
+     13px everywhere above 465px and only steps down on the narrowest phones
+     (10.9px at 390, 9.0px at 320) so it stays on one line without overflowing.
+     2.8vw, not 3vw: measured against JetBrains Mono once it has actually
+     loaded. Measuring before document.fonts.ready gives the fallback mono's
+     narrower metrics and a value that wraps on the real page. */
+  font-size: min(13px, 2.8vw);
   color: var(--muted);
-  margin: 12px 0 26px;
+  /* No bottom margin: the contact links are a sibling row of .resume-header
+     now, so the header's own 28px row-gap (16px on mobile) is the spacing.
+     Keeping the old 26px on top of that left a ~70px hole under this line. */
+  margin: 12px 0 0;
   /* No max-width. The measure cap was 438px and the line needs 439px, so it
      wrapped on desktop by a single pixel. Uncapped it sits on one line from
      about 480px up. Below that the viewport itself is narrower than the line
@@ -1443,9 +1455,21 @@ html[data-theme="dark"] select {
      puts 61 characters on one line at 320px. */
 }
 
+/* The three links need 791px to sit on one row. Inside .resume-meta they only
+   ever had 766px - the 1080px container minus the 274px of buttons minus the
+   40px gap between the two columns - so they wrapped to two rows at every
+   desktop width, missing by 25px. Giving them their own full-width row removes
+   the competition: they get the whole container with ~148px to spare, and the
+   header ends up shorter than it was with two rows (346px against 378px).
+   order:1 puts that row below the buttons while leaving the links next to the
+   name in the markup, which is where a screen reader wants them. */
 .resume-contacts {
   display: flex;
-  gap: 20px;
+  flex-basis: 100%;
+  order: 1;
+  /* Each link is already a 44px tap target, so a row gap was padding stacked on
+     padding. Only the gap between links needs to exist. */
+  gap: 0 24px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -1861,7 +1885,10 @@ html[data-theme="dark"] .icon-dm-invert {
   .resume-meta { flex-basis: auto; }
   /* Each contact is already a 44px tap target, so that box is the spacing.
      A 10px gap on top of it made a 54px pitch for 12px text. */
-  .resume-contacts { flex-direction: column; gap: 0; align-items: flex-start; }
+  /* Column layout: flex-basis is a height here, and the links belong above the
+     buttons, which is the markup order - so both desktop overrides come off. */
+  .resume-contacts { flex-direction: column; gap: 0; align-items: flex-start;
+                     flex-basis: auto; order: 0; margin-top: 0; }
   .resume-actions { width: 100%; flex-wrap: wrap; }
   .resume-actions .btn { flex: 1; justify-content: center; }
   .resume-edu-certs { flex-direction: column; }
