@@ -1425,7 +1425,11 @@ html[data-theme="dark"] select {
   font-size: 13px;
   color: var(--muted);
   margin: 12px 0 26px;
-  max-width: var(--measure);
+  /* No max-width. The measure cap was 438px and the line needs 439px, so it
+     wrapped on desktop by a single pixel. Uncapped it sits on one line from
+     about 480px up. Below that the viewport itself is narrower than the line
+     needs (439px), so it still wraps - there is no readable font size that
+     puts 61 characters on one line at 320px. */
 }
 
 .resume-contacts {
@@ -1615,13 +1619,6 @@ html[data-theme="dark"] .icon-dm-invert {
   font-weight: 700;
 }
 
-.timeline-at {
-  color: var(--muted);
-  font-weight: 400;
-  font-family: var(--mono);
-  font-size: 13px;
-}
-
 .timeline-entry .timeline-org {
   font-family: var(--mono);
   font-size: 12px;
@@ -1661,6 +1658,24 @@ html[data-theme="dark"] .icon-dm-invert {
   align-items: baseline;
   gap: 8px 14px;
   margin-bottom: 6px;
+}
+
+/* Education sits in a narrow two-up column beside Certifications, so its degree
+   and university are far too long to share a line at any width. It keeps the
+   stacked layout and the horizontal divider everywhere, rather than trying to
+   go inline above 760px the way Experience and Projects do. */
+.resume-edu-certs .timeline-top { display: block; }
+.resume-edu-certs .timeline-top .timeline-role { margin-bottom: 8px; }
+.resume-edu-certs .timeline-top .timeline-org {
+  display: block;
+  padding-left: 0;
+  padding-top: 11px;
+}
+.resume-edu-certs .timeline-top .timeline-org::before {
+  top: 0;
+  width: 28px;
+  height: 3px;
+  clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
 }
 
 /* The project names are different lengths, so on a narrow column some of them
