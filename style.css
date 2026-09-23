@@ -1619,10 +1619,24 @@ html[data-theme="dark"] .icon-dm-invert {
    lines under each job and for the university, where a divider makes no sense.
    The rule lives on the type itself rather than being a separate element
    between the two, so when a long name pushes the type onto its own line the
-   rule travels with it instead of being stranded at the end of the name. */
+   rule travels with it instead of being stranded at the end of the name.
+
+   Drawn as a pseudo-element rather than border-left because a border always
+   spans the full line box - 19px against 12px text, which read as too long.
+   This is 1em, anchored to the first line so it stays put if the type itself
+   wraps. */
 .timeline-top .timeline-org {
-  border-left: 2px solid var(--accent);
-  padding-left: 10px;
+  position: relative;
+  padding-left: 11px;
+}
+.timeline-top .timeline-org::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  width: 2px;
+  height: 1em;
+  background: var(--accent);
 }
 
 .timeline-top {
@@ -1631,6 +1645,18 @@ html[data-theme="dark"] .icon-dm-invert {
   align-items: baseline;
   gap: 8px 14px;
   margin-bottom: 6px;
+}
+
+/* The project names are different lengths, so on a narrow column some of them
+   fit beside their type line and some push it onto a second line - the divider
+   then sat inline on four entries and led a wrapped line on three, which read
+   as an inconsistency between projects. Stacking every entry below 760px makes
+   all seven identical. 760 rather than 560 because "Tokyo Neon Kissa" is the
+   longest pair and still wraps at 610; 760 is already a breakpoint in this
+   file, so it does not add a new one. */
+@media (max-width: 760px) {
+  .timeline-top { display: block; }
+  .timeline-top .timeline-role { margin-bottom: 7px; }
 }
 
 .timeline-tags {
@@ -1971,7 +1997,7 @@ html[data-theme="dark"] .icon-dm-invert {
   .resume-summary { color: #333; }
   .kicker, .skill-block-label, .timeline-period, .timeline-org { color: #666; }
   .timeline-entry { border-left-color: #ccc; }
-  .timeline-top .timeline-org { border-left-color: #999; }
+  .timeline-top .timeline-org::before { background: #999; }
   .timeline-entry::before { background: #999; }
 }
 
