@@ -1,4 +1,8 @@
-@import url(‘https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap’);
+/* Fonts (Archivo + JetBrains Mono) load from a <link> in each page's <head>.
+   An @import used to live here but its URL was wrapped in curly quotes, so the
+   browser treated it as a relative path and 404'd - the faces never loaded on
+   any page but index.html. A <link> is also faster: @import blocks on the CSS
+   being parsed first, so the font request starts one round trip late. */
 
 /* Mirror’s Edge–inspired minimalist (original design)
    White space + red accent + angular geometry + subtle motion */
@@ -26,6 +30,26 @@
   --space-7: 48px;
   --space-8: 64px;
 
+  /* Line length. Running text past ~75 characters a line gets hard to track
+     back to the next line, so every block of prose caps at this one value
+     instead of the five different caps this file used to carry. */
+  --measure: 68ch;
+
+  /* Breakpoints. CSS can't read custom properties inside a media query, so these
+     are written out as literals below - but only these three values appear, so
+     components change shape together instead of at ten unrelated widths:
+       max-width: 560px   phone
+       max-width: 760px   large phone / small tablet
+       max-width: 860px   tablet  (min-width: 861px is desktop)
+     The nav, the hero type scale and the hero stacking all turn at 860/861, so
+     the headline can no longer go desktop-sized while the nav is still a
+     hamburger. */
+
+  /* Minimum hit area for anything tappable. Both Apple and Google put the floor
+     at ~44px; a control can still look small, it just needs 44px of reachable
+     area around it. */
+  --tap: 44px;
+
   --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
@@ -36,6 +60,15 @@
 html{ scroll-behavior: smooth; }
 
 body {
+  /* Pin the footer to the bottom on pages shorter than the window. Without this
+     the 404 page's footer floated mid-screen with ~390px of white beneath it.
+     A flex column (rather than grid rows) means this doesn't care how many
+     children a page has or what order they're in. 100svh, not 100vh, so mobile
+     browser chrome doesn't push the page taller than the visible area. */
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+
   margin: 0;
   font-family: var(--font);
   color: var(--text);
@@ -106,6 +139,7 @@ header.site-header{
 .brand{
   display:flex;
   align-items:center;
+  min-height: var(--tap);
   gap: 10px;
 }
 .brand-mark {
@@ -151,10 +185,12 @@ header.site-header{
 
 .menu-btn{
   display:none;
+  align-items: center;
   border: 1px solid var(--line);
   background: var(--surface);
   border-radius: 12px;
   padding: 10px 12px;
+  min-height: var(--tap);
   cursor: pointer;
 }
 
@@ -269,6 +305,7 @@ h1{
   gap: var(--space-2);
   border-radius: 12px;
   padding: 10px 18px;
+  min-height: var(--tap);
   border: 1px solid var(--line);
   background: transparent;
   cursor: pointer;
@@ -434,6 +471,7 @@ h1{
 .section p{
   margin: 0;
   color: var(--muted);
+  max-width: var(--measure);
 }
 
 .contact-list {
@@ -470,6 +508,7 @@ h1{
   font-size: 12px;
   color: var(--muted);
   margin-bottom: 10px;
+  max-width: var(--measure);
 }
 
 
@@ -482,6 +521,10 @@ h1{
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--space-5);
   justify-content: start;
+  /* Let each card end where its content ends. The default (stretch) sizes every
+     card in a row to the tallest one, which left up to 833px of empty space
+     inside the short cards on the case-study pages. */
+  align-items: start;
   margin-bottom: var(--space-7);
 }
 .card{
@@ -698,6 +741,10 @@ h1{
 
 
 .link{
+  /* inline-flex so the 44px floor applies without the underline growing with it */
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
   font-family: var(--mono);
   font-size: 12px;
   color: var(--text);
@@ -708,10 +755,23 @@ h1{
 }
 .link:hover{ border-bottom-color: var(--accent); }
 
+/* body > * must not shrink, or long pages get squeezed toward the viewport
+   height. main takes the leftover space, and the footer inside it is pushed to
+   the bottom by its own margin-top:auto. */
+body > *{ flex-shrink: 0; }
+main{ flex: 1 0 auto; display: flex; flex-direction: column; min-width: 0; }
+main > *{ flex-shrink: 0; }
+
 .footer{
-  padding: 26px 0 40px;
+  /* The back-to-top button is position:fixed in the bottom-right corner, so at
+     narrow widths it landed on top of the breadcrumb - on the homepage at 390px
+     it covered half of "portfolio". The extra bottom padding gives the button
+     empty space to sit over once you reach the end of the page. */
+  padding: 26px 0 calc(var(--tap) + 44px);
   color: var(--muted);
   font-size: 13px;
+  border-top: 1px solid var(--line);
+  margin-top: auto;
 }
 .footer .row{
   display:flex;
@@ -722,6 +782,10 @@ h1{
 .footer .tiny{
   font-family: var(--mono);
 }
+
+/* Intro copy under a page title lives outside .section, so it needs the shared
+   cap spelled out. Same value, same reason. */
+.page-title p{ max-width: var(--measure); }
 
 /* Page header block */
 .page-title{
@@ -838,11 +902,11 @@ input:focus, textarea:focus{
 }
 
 /* Mobile: hide decorative red lines on smaller screens */
-@media (max-width: 768px){
+@media (max-width: 860px){
   .angle{ display:none; }
 }
 
-@media (min-width: 768px){
+@media (min-width: 861px){
   h1{
     font-size: 40px;
   }
@@ -857,11 +921,13 @@ input:focus, textarea:focus{
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* No height:100% here. On a grid item that resolves against the row, which is
+     as tall as the tallest card - so it re-stretched every short card and
+     cancelled out the `align-items: start` on .cards. */
 }
 
 /* MOBILE */
-@media (max-width: 768px){
+@media (max-width: 860px){
 
   .nav-links{
     display: none;
@@ -900,7 +966,7 @@ input:focus, textarea:focus{
 }
 
 
-@media (min-width: 768px){
+@media (min-width: 861px){
   .hero h1{
     font-size: clamp(48px, 6vw, 68px);
   }
@@ -1083,16 +1149,17 @@ p {
 .case-text {
   color: var(--text);
   line-height: 1.7;
+  max-width: var(--measure);
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .hero {
     padding-top: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .actions {
     display: grid;
     grid-template-columns: 1fr;
@@ -1105,7 +1172,7 @@ p {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   /* =========================
      HOMEPAGE HERO BUTTONS
      ========================= */
@@ -1155,7 +1222,7 @@ p {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
 
   button:not(.primary):not(.theme-btn):not(.back-to-top),
   .btn:not(.primary) {
@@ -1165,7 +1232,7 @@ p {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .brand {
     flex-direction: column;
     align-items: flex-start;
@@ -1203,8 +1270,8 @@ p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: var(--tap);
+  height: var(--tap);
   padding: 0;
   line-height: 1;
   border-radius: 50%;
@@ -1340,6 +1407,7 @@ html[data-theme="dark"] select {
   font-size: 13px;
   color: var(--muted);
   margin: 12px 0 26px;
+  max-width: var(--measure);
 }
 
 .resume-contacts {
@@ -1352,6 +1420,7 @@ html[data-theme="dark"] select {
 .resume-contact-item {
   display: inline-flex;
   align-items: center;
+  min-height: var(--tap);
   gap: 6px;
   font-family: var(--mono);
   font-size: 12px;
@@ -1393,7 +1462,7 @@ html[data-theme="dark"] select {
   color: var(--text) !important;
   font-size: 15px;
   line-height: 1.7;
-  max-width: 72ch;
+  max-width: var(--measure);
   margin: 0;
 }
 
@@ -1574,6 +1643,7 @@ html[data-theme="dark"] .icon-dm-invert {
   font-size: 14px;
   color: var(--muted);
   line-height: 1.55;
+  max-width: var(--measure);
 }
 
 .timeline-links {
@@ -1663,7 +1733,7 @@ html[data-theme="dark"] .icon-dm-invert {
 }
 
 /* Mobile adjustments */
-@media (max-width: 600px) {
+@media (max-width: 560px) {
   .resume-header { flex-direction: column; gap: 20px; }
   .resume-contacts { flex-direction: column; gap: 10px; align-items: flex-start; }
   .resume-actions { width: 100%; flex-wrap: wrap; }
@@ -1790,8 +1860,8 @@ html[data-theme="dark"] .icon-dm-invert {
   position: fixed;
   bottom: 28px;
   right: 24px;
-  width: 40px;
-  height: 40px;
+  width: var(--tap);
+  height: var(--tap);
   border-radius: 50%;
   background: var(--accent);
   color: #fff;
@@ -1942,7 +2012,7 @@ html[data-theme="dark"] .icon-dm-invert {
 .app-tab {
   font-family: var(--mono); font-size: 12px; color: var(--muted);
   border: 1px solid var(--line); background: transparent; border-radius: 999px;
-  padding: 6px 12px; cursor: pointer; transition: color 160ms var(--ease), border-color 160ms var(--ease), background 160ms var(--ease);
+  padding: 6px 12px; min-height: var(--tap); cursor: pointer; transition: color 160ms var(--ease), border-color 160ms var(--ease), background 160ms var(--ease);
 }
 .app-tab:hover { color: var(--text); border-color: rgba(255,45,45,.4); }
 .app-tab.is-active { color: #fff; background: var(--accent); border-color: var(--accent); }
@@ -1957,7 +2027,7 @@ html[data-theme="dark"] .icon-dm-invert {
 @keyframes ja-blink { 50% { opacity: 0; } }
 
 /* Generation progress (handbook) */
-.app-metaline { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 0 8px; }
+.app-metaline { font-family: var(--mono); font-size: 11px; color: var(--muted); margin: 0 0 8px; max-width: var(--measure); }
 .app-progress { height: 6px; border-radius: 999px; background: var(--line); overflow: hidden; margin: 2px 0 16px; }
 .app-progress > i { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
 .app-toc { list-style: none; margin: 0; padding: 0; }
@@ -1966,7 +2036,7 @@ html[data-theme="dark"] .icon-dm-invert {
 .app-toc .wc { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
 .app-toc .done { color: var(--accent); }
 
-@media (max-width: 820px) {
+@media (max-width: 860px) {
   .app-body { grid-template-columns: 1fr; }
   .app-inputs { border-right: none; border-bottom: 1px solid var(--line); }
 }
@@ -1996,7 +2066,7 @@ html[data-theme="dark"] .icon-dm-invert {
 .ja-step h3 { margin: 0 0 6px; font-size: 15px; }
 .ja-step p { margin: 0; color: var(--muted); font-size: 13.5px; }
 @media (max-width: 760px) { .ja-flow { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .ja-flow { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .ja-flow { grid-template-columns: 1fr; } }
 
 /* --- Case notes (accented panels) --- */
 .ja-notes { display: grid; gap: 14px; }
@@ -2014,9 +2084,9 @@ html[data-theme="dark"] .icon-dm-invert {
 .vs-list li:last-child { padding-bottom: 0; }
 .vs-foot { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; }
 .vs-foot-text { margin: 0; }
-.vs-try { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--accent); border: 1px solid rgba(255,45,45,0.35); border-radius: 999px; padding: 8px 16px; background: transparent; text-decoration: none; transition: background 160ms var(--ease), border-color 160ms var(--ease); }
+.vs-try { display: inline-flex; align-items: center; min-height: var(--tap); gap: 6px; font-size: 13px; color: var(--accent); border: 1px solid rgba(255,45,45,0.35); border-radius: 999px; padding: 8px 16px; background: transparent; text-decoration: none; transition: background 160ms var(--ease), border-color 160ms var(--ease); }
 .vs-try:hover { background: rgba(255,45,45,0.06); border-color: rgba(255,45,45,0.5); }
-@media (max-width: 620px) { .vs-compare { grid-template-columns: 1fr; gap: 18px; } }
+@media (max-width: 760px) { .vs-compare { grid-template-columns: 1fr; gap: 18px; } }
 /* ── Motion: hero entrance + scroll reveal ──
    The design brief is "subtle motion" — one orchestrated rise on page load,
    then cards reveal as they enter the viewport. All gated behind
@@ -2063,6 +2133,14 @@ html[data-theme="dark"] .icon-dm-invert {
 /* ── Editorial card numbers (01, 02, …) ──
    CSS counters — no HTML changes. Inherits the mono 12px style from .meta. */
 .cards{ counter-reset: card; }
+/* Column counts that the cards actually fill. auto-fit alone gives 3 columns at
+   desktop, so a 4-card set wraps to 3 + 1 and the last card sits alone at a
+   third of the width. Pinning even-numbered sets to 2 columns keeps every row
+   full. :has() lets us count the children without touching the markup. */
+@media (min-width: 861px){
+  .cards:has(> :last-child:nth-child(4)){ grid-template-columns: repeat(2, 1fr); }
+  .cards:has(> :last-child:nth-child(2)){ grid-template-columns: repeat(2, 1fr); }
+}
 .cards .card{ counter-increment: card; }
 .cards .card .meta::after{
   content: counter(card, decimal-leading-zero);
@@ -2116,7 +2194,7 @@ html[data-theme="dark"] .icon-dm-invert {
   pointer-events: none;
   user-select: none;
 }
-@media (max-width: 520px) { .coords { display: none; } }
+@media (max-width: 560px) { .coords { display: none; } }
 
 /* Kicker — wider letter-spacing per blueprint */
 .hero .kicker {
@@ -2135,7 +2213,7 @@ html[data-theme="dark"] .icon-dm-invert {
   margin: 0;
 }
 /* Cancel mobile override above now that clamp handles it */
-@media (min-width: 768px) { .hero h1 { font-size: clamp(38px, 6.4vw, 62px); } }
+@media (min-width: 861px) { .hero h1 { font-size: clamp(38px, 6.4vw, 62px); } }
 
 /* Remove the old angled ::after red bar; hero-bar div replaces it */
 .hero h1::after { display: none; }
@@ -2194,6 +2272,9 @@ html[data-theme="dark"] .icon-dm-invert {
   font-weight: 600;
 }
 .hero-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
   color: var(--muted);
   text-decoration: none;
   letter-spacing: .02em;
@@ -2314,6 +2395,7 @@ h2.case-heading {
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 8px 15px;
+  min-height: var(--tap);
   border-radius: 2px;
   border: 1px solid var(--line);
   background: transparent;
@@ -2538,7 +2620,7 @@ h2.case-heading {
   .project-row { flex-wrap: wrap; }
   .project-year { padding-top: 0; margin-top: 4px; }
 }
-@media (max-width: 540px) {
+@media (max-width: 560px) {
   .hero-links { gap: 6px 18px; }
   .filter-chips { gap: 6px; }
   .filter-chip { font-size: 10px; padding: 7px 11px; }
@@ -2565,7 +2647,7 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
 
 /* ── Page hero (inner pages) ── */
 .page-hero { padding: 80px 0 64px; }
-.page-hero .lead { max-width: 60ch; }
+.page-hero .lead { max-width: var(--measure); }
 
 /* ── Case study section labels ── */
 .cs-label {
@@ -2581,9 +2663,9 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
 .cs-section { padding: 48px 0; border-top: 1px solid var(--line); }
 .cs-section:first-of-type { border-top: none; }
 .cs-grid { display: grid; grid-template-columns: 220px 1fr; gap: 40px 56px; align-items: start; }
-@media (max-width: 640px) { .cs-grid { grid-template-columns: 1fr; gap: 16px; } }
+@media (max-width: 760px) { .cs-grid { grid-template-columns: 1fr; gap: 16px; } }
 .cs-key { font-family: var(--mono); font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); padding-top: 2px; }
-.cs-val { line-height: 1.7; }
+.cs-val { line-height: 1.7; max-width: var(--measure); }
 .cs-val ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
 .cs-val ul li { color: var(--text); }
 
