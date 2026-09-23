@@ -2694,8 +2694,10 @@ h2.case-heading {
   color: var(--muted);
   margin-bottom: 14px;
 }
+/* No border-top. Every .skills-row already draws its own bottom rule, so the
+   top one only added a second line directly above the first label - a lid on a
+   list that doesn't need one. The rows still read as a table without it. */
 .skills-table {
-  border-top: 1px solid var(--line);
   margin-bottom: 20px;
 }
 .skills-row {
