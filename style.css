@@ -795,15 +795,18 @@ main > *{ flex-shrink: 0; }
   font-family: var(--mono);
 }
 
-/* The copyright and the breadcrumb are one flex row that wraps only when the
-   breadcrumb happens to be long enough. At 390px "home / portfolio" fit, so the
-   homepage stayed on one line while all sixteen other pages broke onto two -
-   the footer looked different depending on which page you were on. Below 560px
-   it stacks on purpose, so every page reads the same whatever the crumb says.
-   12px keeps the exact spacing the wrapped pages already had. */
-@media (max-width: 560px){
-  .footer .row{ display: block; }
-  .footer .tiny{ margin-top: var(--space-3); }
+/* The copyright and the breadcrumb stay on one line at every width and on every
+   page. They cannot both do that at 13px: the widest pairing (the copyright at
+   198px plus "case study / handbook-generator" at 243px) needs 453px, and a
+   390px phone gives the row 350px. So below 540px the whole footer scales with
+   the viewport instead of wrapping - 13px above 540px, 9.6px at 390, 7.8px at
+   320. nowrap on both halves is what stops a long crumb from breaking the rule;
+   without it the row would silently wrap again on whichever pages happen to be
+   long, which is the inconsistency this replaces. */
+.footer .row{ flex-wrap: nowrap; }
+.footer .row > *{ white-space: nowrap; }
+@media (max-width: 540px){
+  .footer{ font-size: min(13px, 2.45vw); }
 }
 
 /* Intro copy under a page title lives outside .section, so it needs the shared
