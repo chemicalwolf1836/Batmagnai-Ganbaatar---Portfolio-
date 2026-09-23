@@ -1656,7 +1656,24 @@ html[data-theme="dark"] .icon-dm-invert {
    file, so it does not add a new one. */
 @media (max-width: 760px) {
   .timeline-top { display: block; }
-  .timeline-top .timeline-role { margin-bottom: 7px; }
+  .timeline-top .timeline-role { margin-bottom: 8px; }
+
+  /* Stacked, so the divider turns horizontal and sits between the two lines.
+     A vertical rule reads as a separator between two things on one line; once
+     they are on separate lines it reads as a quote marker instead. Same
+     pseudo-element, different geometry - the angle matches the other red marks
+     in the design. */
+  .timeline-top .timeline-org {
+    display: block;
+    padding-left: 0;
+    padding-top: 11px;
+  }
+  .timeline-top .timeline-org::before {
+    top: 0;
+    width: 28px;
+    height: 3px;
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  }
 }
 
 .timeline-tags {
