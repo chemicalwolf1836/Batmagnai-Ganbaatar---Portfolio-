@@ -1412,7 +1412,13 @@ html[data-theme="dark"] select {
   flex-wrap: wrap;
 }
 
-.resume-meta { flex: 1; min-width: 0; }
+/* The 420px basis used to live in an inline style on resume.html. It is a
+   preferred WIDTH for the row layout, but below 560px the header becomes a
+   flex column, the main axis turns vertical, and a basis of 420px silently
+   becomes a height floor - the block was forced to 420px tall whatever was in
+   it, leaving 62px of dead space at 390px and 97px at 480px. The override in
+   the 560px block below is what stops that. */
+.resume-meta { flex: 1 1 420px; min-width: 0; }
 
 .resume-subtitle {
   font-family: var(--mono);
@@ -1810,8 +1816,12 @@ html[data-theme="dark"] .icon-dm-invert {
 
 /* Mobile adjustments */
 @media (max-width: 560px) {
-  .resume-header { flex-direction: column; gap: 20px; }
-  .resume-contacts { flex-direction: column; gap: 10px; align-items: flex-start; }
+  .resume-header { flex-direction: column; gap: 16px; padding-bottom: 28px; }
+  /* Column layout: basis is a height here, so it must not carry the row width. */
+  .resume-meta { flex-basis: auto; }
+  /* Each contact is already a 44px tap target, so that box is the spacing.
+     A 10px gap on top of it made a 54px pitch for 12px text. */
+  .resume-contacts { flex-direction: column; gap: 0; align-items: flex-start; }
   .resume-actions { width: 100%; flex-wrap: wrap; }
   .resume-actions .btn { flex: 1; justify-content: center; }
   .resume-edu-certs { flex-direction: column; }
