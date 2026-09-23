@@ -795,6 +795,17 @@ main > *{ flex-shrink: 0; }
   font-family: var(--mono);
 }
 
+/* The copyright and the breadcrumb are one flex row that wraps only when the
+   breadcrumb happens to be long enough. At 390px "home / portfolio" fit, so the
+   homepage stayed on one line while all sixteen other pages broke onto two -
+   the footer looked different depending on which page you were on. Below 560px
+   it stacks on purpose, so every page reads the same whatever the crumb says.
+   12px keeps the exact spacing the wrapped pages already had. */
+@media (max-width: 560px){
+  .footer .row{ display: block; }
+  .footer .tiny{ margin-top: var(--space-3); }
+}
+
 /* Intro copy under a page title lives outside .section, so it needs the shared
    cap spelled out. Same value, same reason. */
 .page-title p{ max-width: var(--measure); }
