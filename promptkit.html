@@ -102,6 +102,11 @@
 </section>
 
 
+    <!-- Desktop: the form on the left, the generated prompt and live preview
+         pinned on the right so you can see the result change as you type.
+         Below 861px this is a single column in the original order. -->
+    <div class="pk-split">
+      <div class="pk-main">
     <section class="section">
       <h2>Input</h2>
 
@@ -221,6 +226,24 @@
 
       </div>
     </section>
+      </div>
+
+      <aside class="pk-aside">
+        <div class="pk-aside-inner">
+    <section class="section">
+      <h2>Preview</h2>
+      <p>Preview of how your prompt will be structured.</p>
+
+      <div id="previewMount">
+  <div class="card">
+    <div class="badge" id="previewBadge">Front End</div>
+    <h3 id="previewTitle">Project title</h3>
+    <p id="previewProblem">What problem were you solving?</p>
+    <ul id="previewActions"></ul>
+    <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
+  </div>
+</div>
+   </section>
 
     <section class="section">
       <h2>Generated prompt</h2>
@@ -238,22 +261,10 @@
         </div>
       </div>
     </section>
+        </div>
+      </aside>
+    </div>
 
-
-    <section class="section">
-      <h2>Preview</h2>
-      <p>Preview of how your prompt will be structured.</p>
-
-      <div id="previewMount">
-  <div class="card">
-    <div class="badge" id="previewBadge">Front End</div>
-    <h3 id="previewTitle">Project title</h3>
-    <p id="previewProblem">What problem were you solving?</p>
-    <ul id="previewActions"></ul>
-    <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
-  </div>
-</div>
-   </section>
 
 
     <section class="section">

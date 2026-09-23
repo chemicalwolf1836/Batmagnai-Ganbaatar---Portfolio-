@@ -32,8 +32,11 @@
 
   /* Line length. Running text past ~75 characters a line gets hard to track
      back to the next line, so every block of prose caps at this one value
-     instead of the five different caps this file used to carry. */
-  --measure: 68ch;
+     instead of the five different caps this file used to carry.
+     Note the unit: 1ch is the width of the "0" glyph, which in Archivo is well
+     wider than the average lowercase letter - 68ch measured out at ~86 real
+     characters a line. 56ch lands at ~70, which is what we actually want. */
+  --measure: 56ch;
 
   /* Breakpoints. CSS can't read custom properties inside a media query, so these
      are written out as literals below - but only these three values appear, so
@@ -44,6 +47,10 @@
      The nav, the hero type scale and the hero stacking all turn at 860/861, so
      the headline can no longer go desktop-sized while the nav is still a
      hamburger. */
+
+  /* Height of the sticky site header, so anything else that sticks can clear it
+     instead of hiding underneath. Measured at 73px from 861px up. */
+  --header-h: 73px;
 
   /* Minimum hit area for anything tappable. Both Apple and Google put the floor
      at ~44px; a control can still look small, it just needs 44px of reachable
@@ -2672,4 +2679,106 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
 /* ── Inner page media ── */
 @media (max-width: 860px) {
   .profile-card { max-width: 100%; flex: 1 1 100%; }
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PromptKit split view
+   The tool was a single 640px column inside a 1080px container: the right half
+   of a laptop screen sat empty, the page ran 4,070px tall, and the "live"
+   preview was about three screens below the inputs driving it. Above 861px the
+   form takes the left column and the generated prompt + preview stick to the
+   right, so the result is visible while you type.
+   Below 861px this whole block does nothing and the source order — form, then
+   prompt, then preview — is what renders.
+   ────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 861px){
+  .pk-split{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: var(--space-7);
+    align-items: start;
+  }
+  /* min-width:0 lets a grid child shrink below its content width; without it a
+     long textarea or an unbroken URL would push the column wider than its
+     track. */
+  .pk-main,
+  .pk-aside{ min-width: 0; }
+
+  /* align-items:start above shrinks each column to its content, which would
+     leave the sticky panel nothing to travel through - it would scroll away
+     with the top of the column. Stretching this one column back to the full row
+     height gives the sticky child the whole form's height to stick against. */
+  .pk-aside{ align-self: stretch; }
+
+  .pk-aside-inner{
+    position: sticky;
+    /* clears the sticky site header */
+    top: calc(var(--header-h) + var(--space-4));
+    max-height: calc(100svh - var(--header-h) - var(--space-6));
+    overflow-y: auto;
+    /* room for the scrollbar so it doesn't sit on the text */
+    padding-right: var(--space-2);
+  }
+
+  /* The sections inside the split already sit in a column, so their own top and
+     bottom padding would double up the rhythm. The aside is tighter still: its
+     content has to fit the window height before the panel starts scrolling. */
+  .pk-split .section{ padding-top: 0; }
+  .pk-aside .section{ padding-top: 0; padding-bottom: var(--space-5); }
+  .pk-aside .section:last-child{ padding-bottom: 0; }
+  .pk-aside #output{ min-height: 110px; }
+
+  /* Fields fill their column here rather than holding the old fixed 640px. */
+  .pk-split .formish input,
+  .pk-split .formish textarea,
+  .pk-split .formish select{ max-width: 100%; }
+}
+
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Case-study rail
+   Every narrative section on a case study is the same shape in the markup:
+   .section > .container > h2.case-heading + content. Above 861px that becomes
+   two columns — the section label parked in a sticky left rail, the prose in
+   the right column where the shared --measure cap holds it to a readable line.
+   Before this the label sat above full-width text running ~135 characters a
+   line, so the page read as one undifferentiated column.
+   No markup changed: :has() picks out the containers that carry a heading.
+   Below 861px the grid never applies and the original stacked order renders.
+   ────────────────────────────────────────────────────────────────────────── */
+@media (min-width: 861px){
+  .container:has(> .case-heading){
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 0 var(--space-7);
+    align-items: start;
+  }
+
+  .container > .case-heading{
+    grid-column: 1;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-5));
+    margin: 0;
+  }
+
+  /* Everything that isn't the label goes in the right column; auto-placement
+     then stacks those children down that column in source order. */
+  .container:has(> .case-heading) > :not(.case-heading){
+    grid-column: 2;
+  }
+
+  /* The cards inside "How I built it" already have their own grid; they just
+     need to start flush with the prose above them. The right column is ~830px,
+     so the 300px floor .cards uses at full width only fits two across - a
+     three-card set would wrap to 2 + 1. A smaller floor here fits all three. */
+  .container:has(> .case-heading) > .cards{
+    margin-top: var(--space-5);
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  }
+  /* ...but keep even-numbered sets at two columns so no row is left short. */
+  .container:has(> .case-heading) > .cards:has(> :last-child:nth-child(4)),
+  .container:has(> .case-heading) > .cards:has(> :last-child:nth-child(2)){
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

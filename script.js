@@ -810,6 +810,11 @@ draftFields.forEach((id) => {
   el.addEventListener("input", () => {
     localStorage.setItem(id, el.value);
     showSaveStatus("Saved ✓");
+    // Keep the preview card in step with what's being typed. It used to redraw
+    // only when you pressed Generate, so the "live preview" wasn't live - which
+    // matters more now that it sits beside the form on desktop instead of three
+    // screens below it.
+    if (typeof renderPreviewCard === "function") renderPreviewCard();
   });
 });
 
