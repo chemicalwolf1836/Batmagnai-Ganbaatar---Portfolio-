@@ -748,19 +748,24 @@ h1{
 
 
 .link{
-  /* inline-flex so the 44px floor applies without the underline growing with it */
+  /* inline-flex gives the link a 44px tap target. The underline is drawn with
+     text-decoration rather than border-bottom, because a border draws at the
+     bottom edge of that 44px box - 17px below the text - while text-decoration
+     tracks the letters themselves whatever the box height is. */
   display: inline-flex;
   align-items: center;
   min-height: var(--tap);
   font-family: var(--mono);
   font-size: 12px;
   color: var(--text);
-  border-bottom: 1px solid rgba(255,45,45,0.35);
-  padding-bottom: 2px;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
   margin-top: auto;
   font-weight: 500;
 }
-.link:hover{ border-bottom-color: var(--accent); }
+.link:hover{ text-decoration-color: var(--accent); }
 
 /* body > * must not shrink, or long pages get squeezed toward the viewport
    height. main takes the leftover space, and the footer inside it is pushed to
@@ -1609,6 +1614,17 @@ html[data-theme="dark"] .icon-dm-invert {
   padding-left: 0;
 }
 
+/* Divider between a project's name and its type. Scoped to .timeline-top so it
+   only hits the project entries - .timeline-org is also used for the location
+   lines under each job and for the university, where a divider makes no sense.
+   The rule lives on the type itself rather than being a separate element
+   between the two, so when a long name pushes the type onto its own line the
+   rule travels with it instead of being stranded at the end of the name. */
+.timeline-top .timeline-org {
+  border-left: 2px solid var(--accent);
+  padding-left: 10px;
+}
+
 .timeline-top {
   display: flex;
   flex-wrap: wrap;
@@ -1955,6 +1971,7 @@ html[data-theme="dark"] .icon-dm-invert {
   .resume-summary { color: #333; }
   .kicker, .skill-block-label, .timeline-period, .timeline-org { color: #666; }
   .timeline-entry { border-left-color: #ccc; }
+  .timeline-top .timeline-org { border-left-color: #999; }
   .timeline-entry::before { background: #999; }
 }
 
