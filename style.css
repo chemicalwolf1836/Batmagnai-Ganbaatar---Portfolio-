@@ -1593,6 +1593,16 @@ html[data-theme="dark"] .icon-dm-invert {
   letter-spacing: 0.04em;
 }
 
+/* The location sits on the period line rather than its own line under the role.
+   Beside the role it does not fit on a phone: "English Instructor · Yaruki
+   Switch Group" plus "Tokyo, Japan" needs 423px against the 326px available at
+   390px, so two of the three jobs would wrap while one stayed inline. On the
+   period line all three fit on one line from 320px up. */
+.timeline-loc {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 .timeline-role {
   margin: 0 0 4px;
   font-size: 18px;
