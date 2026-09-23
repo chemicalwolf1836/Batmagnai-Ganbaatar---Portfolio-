@@ -1705,6 +1705,20 @@ html[data-theme="dark"] .icon-dm-invert {
     height: 3px;
     clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
   }
+
+  /* Independent Developer has no company, so there is no .timeline-org to hang
+     the divider on and that entry read differently from the other two. Give a
+     row with no descriptor the same bar on the row itself. The role's 8px
+     bottom margin puts it at the same distance below the role as the bar on
+     the rows that do have one. */
+  .timeline-top:not(:has(.timeline-org))::after {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: var(--accent);
+    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
+  }
 }
 
 .timeline-tags {
@@ -2050,6 +2064,7 @@ html[data-theme="dark"] .icon-dm-invert {
   .kicker, .skill-block-label, .timeline-period, .timeline-org { color: #666; }
   .timeline-entry { border-left-color: #ccc; }
   .timeline-top .timeline-org::before { background: #999; }
+  .timeline-top:not(:has(.timeline-org))::after { background: #999; }
   .timeline-entry::before { background: #999; }
 }
 
