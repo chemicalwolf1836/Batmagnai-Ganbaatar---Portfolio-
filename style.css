@@ -1213,7 +1213,9 @@ p {
   .hero .btn,
   .hero .links a,
   .hero .actions a {
-    display: block;
+    /* flex (not block) so align-items centres the label vertically in the 44px button */
+    display: flex;
+    align-items: center;
     width: 100%;
     text-align: left;
     padding-left: 16px;
