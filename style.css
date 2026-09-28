@@ -2675,9 +2675,15 @@ h2.case-heading {
   color: var(--muted);
   max-width: 54ch;
 }
-/* Contact page, "// Send a message": the label has margin: 0, so the subtitle
-   sat flush against it. (0,3,0) beats .section .about-sub (0,2,0). */
-.section .contact-split .about-sub { margin-top: var(--space-3); }
+/* Contact page: the // label sat flush on the line under it (margin: 0), and on
+   phones, where the columns stack, the sub's 20px bottom margin and the form's
+   18px top margin piled onto the 40px row gap - 78px of empty space before the
+   form. Give the label room below it and let the row gap alone set the space
+   before the column content. (0,3,0) beats .section .about-sub (0,2,0). */
+.section .contact-split .about-sub {
+  margin: var(--space-3) 0 0;
+}
+.contact-split .formish { margin-top: 0; }
 .about-more {
   font-family: var(--mono);
   font-size: 12px;
