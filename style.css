@@ -2686,16 +2686,18 @@ h2.case-heading {
 .contact-split .formish { margin-top: 0; }
 /* Direct lines: no resting underline on the contact links (the row rules already
    frame them); the red underline returns on hover so they still read as links.
-   A faint dotted leader runs from each method to its value. The leader is the
-   row's ::after, moved between the two spans with order, so no extra markup. */
-.contact-split .skills-row::after {
-  content: "";
-  order: 1;
-  flex: 1 1 auto;
-  min-width: var(--space-4);
-  border-bottom: 1px dotted color-mix(in srgb, var(--muted) 60%, transparent);
+   A thin vertical rule separates each method from its value, and the values sit
+   left-aligned in one column. */
+.contact-split .skills-row { justify-content: flex-start; gap: 0; }
+.contact-split .skills-row span:first-child {
+  flex: 0 0 88px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding-right: var(--space-3);
+  border-right: 1px solid var(--line);
 }
-.contact-split .skills-row span:last-child { order: 2; }
+.contact-split .skills-row span:last-child { text-align: left; padding-left: var(--space-4); }
 .contact-split .skills-row .link { text-decoration: none; }
 .contact-split .skills-row .link:hover { text-decoration: underline; text-decoration-color: var(--accent); }
 .about-more {
