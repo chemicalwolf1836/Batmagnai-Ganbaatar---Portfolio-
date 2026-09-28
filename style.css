@@ -2633,10 +2633,26 @@ h2.case-heading {
   max-width: 62ch;
 }
 .project-tech {
-  display: block;
+  display: flex;
+  align-items: baseline;
+  margin-top: var(--space-1);
+  padding-top: var(--space-3);
+  border-top: 1px dashed var(--line);
   font-family: var(--mono);
   font-size: 11px;
   color: var(--muted);
+}
+/* "STACK" label + vertical rule, same pattern as the contact page's Direct lines */
+.project-tech::before {
+  content: "Stack";
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  font-weight: 500;
+  color: var(--text);
+  padding-right: var(--space-3);
+  margin-right: var(--space-3);
+  border-right: 1px solid var(--line);
 }
 .project-year {
   display: inline-flex;
