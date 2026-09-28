@@ -2603,19 +2603,23 @@ h2.case-heading {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow-x: clip; /* hides the tag divider if the tags wrap below the name */
 }
 .project-title-row {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 4px 12px;
+  gap: 4px 0;
   margin-bottom: 6px;
+  /* Pulled left by the divider's width so wrapped tags still line up */
+  margin-left: calc(-1 * var(--space-5));
 }
 .project-name {
   font-size: clamp(18px, 2.6vw, 21px);
   font-weight: 700;
   letter-spacing: -.015em;
   line-height: 1.15;
+  padding-left: var(--space-5);
 }
 .project-type {
   font-family: var(--mono);
@@ -2623,12 +2627,20 @@ h2.case-heading {
   font-weight: 500;
   letter-spacing: .06em;
   color: var(--accent);
+  position: relative;
+  padding-left: var(--space-5);
 }
-/* Thin red vertical rule between tags, e.g. AI | FULL-STACK */
-.project-type > span + span {
-  margin-left: var(--space-2);
-  padding-left: var(--space-2);
-  border-left: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+/* Angled red rule between the project name and its tags */
+.project-type::before {
+  content: "";
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  width: 1px;
+  height: 14px;
+  margin-top: -7px;
+  background: var(--accent);
+  transform: skewX(-20deg);
 }
 .project-blurb {
   display: block;
