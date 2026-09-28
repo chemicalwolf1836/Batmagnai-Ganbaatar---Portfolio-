@@ -2615,7 +2615,7 @@ h2.case-heading {
   margin-left: calc(-1 * var(--space-5));
 }
 .project-name {
-  font-size: clamp(18px, 2.6vw, 21px);
+  font-size: clamp(16px, 2vw, 18px);
   font-weight: 700;
   letter-spacing: -.015em;
   line-height: 1.15;
@@ -2630,17 +2630,16 @@ h2.case-heading {
   position: relative;
   padding-left: var(--space-5);
 }
-/* Angled red rule between the project name and its tags */
+/* Short grey vertical rule between the project name and its tags */
 .project-type::before {
   content: "";
   position: absolute;
   left: var(--space-3);
   top: 50%;
   width: 1px;
-  height: 14px;
-  margin-top: -7px;
-  background: var(--accent);
-  transform: skewX(-20deg);
+  height: 10px;
+  margin-top: -5px;
+  background: var(--line);
 }
 .project-blurb {
   display: block;
