@@ -193,17 +193,10 @@ header.site-header{
 .menu-btn{
   display:none;
   align-items: center;
-  justify-content: center;
   border: 1px solid var(--line);
   background: var(--surface);
-  color: var(--text);
-  /* Buttons don't inherit the page font by default — without this, Menu renders in the system font */
-  font: inherit;
-  font-size: 14px;
-  line-height: 1;
-  /* Pill shape so it matches the round theme toggle beside it */
-  border-radius: 999px;
-  padding: 0 var(--space-4);
+  border-radius: 12px;
+  padding: 10px 12px;
   min-height: var(--tap);
   cursor: pointer;
 }
@@ -1259,7 +1252,7 @@ p {
 
 @media (max-width: 860px) {
 
-  button:not(.primary):not(.theme-btn):not(.menu-btn):not(.back-to-top),
+  button:not(.primary):not(.theme-btn):not(.back-to-top),
   .btn:not(.primary) {
     text-align: left;
     padding-left: 16px;
@@ -1268,18 +1261,13 @@ p {
 }
 
 @media (max-width: 860px) {
-  /* Two rows: [mark] NAME on top, breadcrumb underneath lined up with the name.
-     A grid keeps the mark beside the name instead of on a line of its own. */
   .brand {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    column-gap: var(--space-2);
-    row-gap: 2px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
   }
 
-  .brand span:not(.brand-mark) {
-    grid-column: 2;
+  .brand span {
     font-size: 12px;
     line-height: 1.2;
   }
