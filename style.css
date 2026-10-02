@@ -1304,6 +1304,13 @@ p {
     line-height: 1.2;
   }
 
+  /* Line the mark up with the first line (BATMAGNAI) instead of the middle
+     of the two. It is still centred, but a bottom margin of one name line
+     (12px x 1.2) lifts its centre by half a line - onto the first line's. */
+  .brand-mark {
+    margin-bottom: calc(12px * 1.2);
+  }
+
   /* :not(.brand-mark) because the mark is a span too */
   .brand > span:not(.brand-mark) {
     display: none;
