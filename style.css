@@ -2700,13 +2700,18 @@ h2.case-heading {
   color: var(--muted);
   max-width: 54ch;
 }
+/* A // label followed straight by a description (About: Skills, Contact: both
+   columns) sat flush on the text under it. Give every label-plus-description
+   pair the same 16px gap the Background label gets from .about-lead.
+   (0,3,0) beats .section .about-sub (0,2,0). */
+.section .index-label + .about-sub { margin-top: var(--space-4); }
 /* Contact page: the // label sat flush on the line under it (margin: 0), and on
    phones, where the columns stack, the sub's 20px bottom margin and the form's
    18px top margin piled onto the 40px row gap - 78px of empty space before the
    form. Give the label room below it and let the row gap alone set the space
    before the column content. (0,3,0) beats .section .about-sub (0,2,0). */
 .section .contact-split .about-sub {
-  margin: var(--space-3) 0 0;
+  margin-bottom: 0;
 }
 .contact-split .formish { margin-top: 0; }
 /* Direct lines: no resting underline on the contact links (the row rules already
