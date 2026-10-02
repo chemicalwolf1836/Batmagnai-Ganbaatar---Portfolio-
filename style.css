@@ -1285,6 +1285,31 @@ p {
 
 }
 
+/* Phones: the mark sits beside the name, the name stacks onto two lines, and
+   the page label is hidden. Stacked under the mark (the tablet layout above),
+   the brand ran to three or four rows and grew with the label - 95-109px tall
+   at 320 - so the header changed height from page to page. This keeps it one
+   73px row everywhere; each page's own h1 already says where you are.
+   width: min-content makes the name's box only as wide as its longest word,
+   so it breaks between BATMAGNAI and GANBAATAR at every phone width. */
+@media (max-width: 560px) {
+  .brand {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;   /* same gap as the desktop lockup */
+  }
+
+  .brand strong {
+    width: min-content;
+    line-height: 1.2;
+  }
+
+  /* :not(.brand-mark) because the mark is a span too */
+  .brand > span:not(.brand-mark) {
+    display: none;
+  }
+}
+
 /* =========================================
    THEME TOGGLE BUTTON
    ========================================= */
