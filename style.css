@@ -2842,6 +2842,24 @@ h2.case-heading {
     letter-spacing: .04em;
     padding: 7px calc(6px - .04em) 7px 6px;
   }
+
+  /* CTA card: Get in touch / LinkedIn / GitHub share one row instead of
+     wrapping GitHub onto its own line. Slimmer card sides free up the width. */
+  .cta-card { padding-left: var(--space-5); padding-right: var(--space-5); }
+  .cta-actions { flex-wrap: nowrap; gap: var(--space-2); }
+  .cta-actions .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    padding: 10px var(--space-2);
+  }
+}
+/* the smallest phones (iPhone SE 1st gen, 320px) need a size step down */
+@media (max-width: 360px) {
+  .cta-card { padding-left: var(--space-4); padding-right: var(--space-4); }
+  .cta-actions { gap: var(--space-1); }
+  .cta-actions .btn { font-size: 12px; padding: 10px 5px; }
 }
 
 /* ── Dark mode: new components ── */
