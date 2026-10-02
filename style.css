@@ -1252,7 +1252,8 @@ p {
 
 @media (max-width: 860px) {
 
-  button:not(.primary):not(.theme-btn):not(.back-to-top),
+  /* filter chips are excluded: their labels sit centred, not left-aligned */
+  button:not(.primary):not(.theme-btn):not(.back-to-top):not(.filter-chip),
   .btn:not(.primary) {
     text-align: left;
     padding-left: 16px;
@@ -2554,8 +2555,15 @@ h2.case-heading {
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
-  padding: 8px 15px;
+  /* letter-spacing adds a trailing gap after the last letter, so the right
+     padding is trimmed by the same .08em to keep the label optically centred */
+  padding: 8px calc(15px - .08em) 8px 15px;
   min-height: var(--tap);
+  /* inline-flex centres the label both ways inside the 44px tap target */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
   border-radius: 2px;
   border: 1px solid var(--line);
   background: transparent;
@@ -2826,8 +2834,14 @@ h2.case-heading {
 }
 @media (max-width: 560px) {
   .hero-links { gap: 6px 18px; }
-  .filter-chips { gap: 6px; }
-  .filter-chip { font-size: 10px; padding: 7px 11px; }
+  /* one row on phones: chips share the width instead of wrapping */
+  .filter-chips { gap: var(--space-1); flex-wrap: nowrap; }
+  .filter-chip {
+    flex: 1 1 auto;
+    font-size: 10px;
+    letter-spacing: .04em;
+    padding: 7px calc(6px - .04em) 7px 6px;
+  }
 }
 
 /* ── Dark mode: new components ── */
