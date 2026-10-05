@@ -2960,20 +2960,6 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
    Below 861px this whole block does nothing and the source order — form,
    generated prompt, then preview — is what renders.
    ────────────────────────────────────────────────────────────────────────── */
-/* Intro: the description runs in two columns that line up with the form
-   and preview below (same tracks as .pk-split), instead of one narrow column
-   with the right half of the page empty. */
-@media (min-width: 861px){
-  .pk-intro{
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 0.85fr);
-    column-gap: var(--space-5);
-  }
-  .pk-intro-use{ grid-column: 3; }
-  .pk-intro p{ max-width: none; }
-  .pk-intro > div > :first-child{ margin-top: 0; }
-}
-
 /* The divider between the form and the preview only exists in the two-column
    view; on phones the sections stack and a vertical rule has nothing to split. */
 .pk-divider{ display: none; }
