@@ -2971,7 +2971,8 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
 }
 .pk-steps{
   list-style: none;
-  margin: var(--space-6) 0 0;
+  /* bottom margin gives the stepper room to breathe before the tool starts */
+  margin: var(--space-6) 0 var(--space-6);
   padding: 0;
   position: relative;
   display: grid;
@@ -3018,6 +3019,7 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
 
 @media (min-width: 861px){
   .pk-steps{
+    margin-bottom: var(--space-8);
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: var(--space-3);
   }
