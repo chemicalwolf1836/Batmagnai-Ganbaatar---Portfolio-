@@ -2954,9 +2954,11 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
    of a laptop screen sat empty, the page ran 4,070px tall, and the "live"
    preview was about three screens below the inputs driving it. Above 861px the
    form takes the left column and the generated prompt + preview stick to the
-   right, so the result is visible while you type.
-   Below 861px this whole block does nothing and the source order — form, then
-   prompt, then preview — is what renders.
+   right, so the result is visible while you type. Only the preview sits in
+   the sticky column; the generated prompt is in the left column under the
+   Generate button.
+   Below 861px this whole block does nothing and the source order — form,
+   generated prompt, then preview — is what renders.
    ────────────────────────────────────────────────────────────────────────── */
 @media (min-width: 861px){
   .pk-split{
@@ -2977,14 +2979,34 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
      height gives the sticky child the whole form's height to stick against. */
   .pk-aside{ align-self: stretch; }
 
+  /* The panel is a column that never scrolls as a whole. It used to
+     (overflow-y:auto), so once the preview card grew with real content the
+     panel became a second scroll area: the mouse wheel over it scrolled the
+     panel instead of the page and the Preview heading slid out of view.
+     Now the panel holds the preview alone (the generated prompt moved under
+     the Generate button, where the click happens), and only the card area
+     (#previewMount) shrinks and scrolls if a very long draft can't fit the
+     window. The Preview heading never moves. */
   .pk-aside-inner{
     position: sticky;
     /* clears the sticky site header */
     top: calc(var(--header-h) + var(--space-4));
     max-height: calc(100svh - var(--header-h) - var(--space-6));
+    display: flex;
+    flex-direction: column;
+  }
+  .pk-preview{
+    display: flex;
+    flex-direction: column;
+    /* min-height:0 lets a flex child shrink below its content height, the
+       vertical twin of the min-width:0 trick above */
+    min-height: 0;
+    flex: 0 1 auto;
+  }
+  .pk-preview #previewMount{
+    min-height: 0;
     overflow-y: auto;
-    /* room for the scrollbar so it doesn't sit on the text */
-    padding-right: var(--space-2);
+    overscroll-behavior: contain;
   }
 
   /* The sections inside the split already sit in a column, so their own top and
@@ -2993,7 +3015,6 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
   .pk-split .section{ padding-top: 0; }
   .pk-aside .section{ padding-top: 0; padding-bottom: var(--space-5); }
   .pk-aside .section:last-child{ padding-bottom: 0; }
-  .pk-aside #output{ min-height: 110px; }
 
   /* Fields fill their column here rather than holding the old fixed 640px. */
   .pk-split .formish input,

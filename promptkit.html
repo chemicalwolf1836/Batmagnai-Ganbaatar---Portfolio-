@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=40" />
+  <link rel="stylesheet" href="style.css?v=41" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -226,26 +226,8 @@
 
       </div>
     </section>
-      </div>
 
-      <aside class="pk-aside">
-        <div class="pk-aside-inner">
-    <section class="section">
-      <h2>Preview</h2>
-      <p>Preview of how your prompt will be structured.</p>
-
-      <div id="previewMount">
-  <div class="card">
-    <div class="badge" id="previewBadge">Front End</div>
-    <h3 id="previewTitle">Project title</h3>
-    <p id="previewProblem">What problem were you solving?</p>
-    <ul id="previewActions"></ul>
-    <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
-  </div>
-</div>
-   </section>
-
-    <section class="section">
+    <section class="section pk-output">
       <h2>Generated prompt</h2>
       <p>Copy this prompt and paste it into ChatGPT.</p>
 
@@ -261,6 +243,25 @@
         </div>
       </div>
     </section>
+      </div>
+
+      <aside class="pk-aside">
+        <div class="pk-aside-inner">
+    <section class="section pk-preview">
+      <h2>Preview</h2>
+      <p>Preview of how your prompt will be structured.</p>
+
+      <div id="previewMount">
+  <div class="card">
+    <div class="badge" id="previewBadge">Front End</div>
+    <h3 id="previewTitle">Project title</h3>
+    <p id="previewProblem">What problem were you solving?</p>
+    <ul id="previewActions"></ul>
+    <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
+  </div>
+</div>
+   </section>
+
         </div>
       </aside>
     </div>
