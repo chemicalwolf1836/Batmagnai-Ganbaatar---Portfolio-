@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="style.css?v=40" />
+  <link rel="stylesheet" href="style.css?v=44" />
   <script>if(localStorage.getItem("theme")==="dark"){document.documentElement.setAttribute("data-theme","dark");document.querySelector('meta[name="color-scheme"]').setAttribute("content","dark");}</script>
 </head>
 <body>
@@ -62,41 +62,26 @@
     <section class="page-title roomy">
       <h1>PromptKit</h1>
 
-  <p>
-  PromptKit is a browser-based workflow tool for turning rough ideas into
-  <span class="highlight">structured prompts</span> and portfolio-ready outputs.
-  It helps create clearer inputs that can be reused across AI platforms such as
-  <span class="highlight">ChatGPT</span> and <span class="highlight">Claude</span>.
-</p>
+      <p class="pk-lead">
+        PromptKit is a browser-based workflow tool for turning rough ideas into
+        <span class="highlight">structured prompts</span> and portfolio-ready outputs.
+        It helps create clearer inputs that can be reused across AI platforms such as
+        <span class="highlight">ChatGPT</span> and <span class="highlight">Claude</span>.
+        Instead of writing from scratch each time, PromptKit helps organize your goal,
+        problem, actions, result, and references into a more consistent format, so the
+        prompt is easier to review, refine, and reuse across different AI tools.
+        Structure your idea first, then send the generated prompt to the AI platform
+        of your choice.
+      </p>
 
-<p>
-  Instead of writing from scratch each time, PromptKit helps organize your goal,
-  problem, actions, result, and references into a more consistent format.
-</p>
-
-<p>
-  The result is a prompt that is easier to review, refine, and reuse across
-  different AI tools.
-</p>
-
-<p>
-  Use PromptKit to structure your idea first, then send the generated prompt to
-  the AI platform of your choice.
-</p>
-
-<h3>Workflow</h3>
-
-<p class="workflow">
-  <span class="step-highlight">Input</span>
-  <span class="arrow">→</span>
-  <span class="step-highlight">Generate</span>
-  <span class="arrow">→</span>
-  <span class="step-highlight">Review</span>
-  <span class="arrow">→</span>
-  <span class="step-highlight">Save</span>
-  <span class="arrow">→</span>
-  <span class="step-highlight">Use</span>
-</p>
+      <h2 class="sr-only">Workflow</h2>
+      <ol class="pk-steps">
+        <li><span class="pk-step-dot" aria-hidden="true">1</span><b>Input</b><span>Fill in your project details</span></li>
+        <li><span class="pk-step-dot" aria-hidden="true">2</span><b>Generate</b><span>Build the structured prompt</span></li>
+        <li><span class="pk-step-dot" aria-hidden="true">3</span><b>Review</b><span>Check it in the live preview</span></li>
+        <li><span class="pk-step-dot" aria-hidden="true">4</span><b>Save</b><span>Keep it in Saved Prompts</span></li>
+        <li><span class="pk-step-dot" aria-hidden="true">5</span><b>Use</b><span>Paste into ChatGPT or Claude</span></li>
+      </ol>
 
 
 </section>
@@ -226,26 +211,8 @@
 
       </div>
     </section>
-      </div>
 
-      <aside class="pk-aside">
-        <div class="pk-aside-inner">
-    <section class="section">
-      <h2>Preview</h2>
-      <p>Preview of how your prompt will be structured.</p>
-
-      <div id="previewMount">
-  <div class="card">
-    <div class="badge" id="previewBadge">Front End</div>
-    <h3 id="previewTitle">Project title</h3>
-    <p id="previewProblem">What problem were you solving?</p>
-    <ul id="previewActions"></ul>
-    <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
-  </div>
-</div>
-   </section>
-
-    <section class="section">
+    <section class="section pk-output">
       <h2>Generated prompt</h2>
       <p>Copy this prompt and paste it into ChatGPT.</p>
 
@@ -261,6 +228,29 @@
         </div>
       </div>
     </section>
+      </div>
+
+      <div class="pk-divider" aria-hidden="true">
+        <span class="pk-divider-label"><i></i>Input → Output</span>
+      </div>
+
+      <aside class="pk-aside">
+        <div class="pk-aside-inner">
+    <section class="section pk-preview">
+      <h2>Preview</h2>
+      <p>Preview of how your prompt will be structured.</p>
+
+      <div id="previewMount">
+  <div class="card">
+    <div class="badge" id="previewBadge">Front End</div>
+    <h3 id="previewTitle">Project title</h3>
+    <p id="previewProblem">What problem were you solving?</p>
+    <ul id="previewActions"></ul>
+    <p id="previewTools"><strong>Tools:</strong> HTML, CSS, JavaScript</p>
+  </div>
+</div>
+   </section>
+
         </div>
       </aside>
     </div>

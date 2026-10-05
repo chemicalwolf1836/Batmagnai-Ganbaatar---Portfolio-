@@ -2954,16 +2954,155 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
    of a laptop screen sat empty, the page ran 4,070px tall, and the "live"
    preview was about three screens below the inputs driving it. Above 861px the
    form takes the left column and the generated prompt + preview stick to the
-   right, so the result is visible while you type.
-   Below 861px this whole block does nothing and the source order — form, then
-   prompt, then preview — is what renders.
+   right, so the result is visible while you type. Only the preview sits in
+   the sticky column; the generated prompt is in the left column under the
+   Generate button.
+   Below 861px this whole block does nothing and the source order — form,
+   generated prompt, then preview — is what renders.
    ────────────────────────────────────────────────────────────────────────── */
+/* PromptKit intro: one paragraph across the full container width, then the
+   workflow as a numbered stepper. On desktop the five steps sit in a row
+   joined by a dashed line; on phones the row would be too cramped, so they
+   stack into a vertical list with the line running down the left. */
+.page-title .pk-lead{
+  max-width: none;
+  font-size: 17px;
+  line-height: 1.65;
+}
+.pk-steps{
+  list-style: none;
+  /* bottom margin gives the stepper room to breathe before the tool starts */
+  margin: var(--space-6) 0 var(--space-6);
+  padding: 0;
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+}
+/* the dashed line behind the dots (vertical on phones) */
+.pk-steps::before{
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 14px;
+  bottom: 14px;
+  border-left: 2px dashed color-mix(in srgb, var(--muted) 40%, transparent);
+}
+.pk-steps li{
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  column-gap: var(--space-3);
+  align-items: center;
+}
+.pk-steps b{ font-size: 15px; }
+.pk-steps li > span:last-child{
+  grid-column: 2;
+  font-size: 13px;
+  color: var(--muted);
+}
+.pk-step-dot{
+  grid-row: span 2;
+  position: relative;  /* sits above the dashed line */
+  width: 28px;
+  height: 28px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: var(--bg);
+  color: #dc2626;
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 861px){
+  .pk-steps{
+    margin-bottom: var(--space-8);
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+  .pk-steps::before{
+    /* from the centre of the first dot to the centre of the last one */
+    left: 10%;
+    right: 10%;
+    top: 13px;
+    bottom: auto;
+    border-left: 0;
+    border-top: 2px dashed color-mix(in srgb, var(--muted) 40%, transparent);
+  }
+  .pk-steps li{
+    grid-template-columns: 1fr;
+    /* keep every step's rows at the top, so a note that wraps to two lines
+       doesn't push its dot and name out of line with the others */
+    align-content: start;
+    justify-items: center;
+    row-gap: var(--space-2);
+    text-align: center;
+  }
+  .pk-step-dot{ grid-row: auto; }
+  .pk-steps li > span:last-child{ grid-column: auto; }
+}
+
+/* The divider between the form and the preview only exists in the two-column
+   view; on phones the sections stack and a vertical rule has nothing to split. */
+.pk-divider{ display: none; }
+
 @media (min-width: 861px){
   .pk-split{
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-    gap: var(--space-7);
+    /* form | divider | preview. Three columns means the gap appears twice,
+       so it is half the old single 48px gap. */
+    grid-template-columns: minmax(0, 1fr) 24px minmax(0, 0.85fr);
+    column-gap: var(--space-5);
     align-items: start;
+  }
+
+  /* Divider: a dashed rule down the full height of the form, with a small
+     vertical "Input → Output" label that sticks alongside the preview.
+     Stretching the column to the row height gives the rule its full length
+     and the sticky label room to travel (same trick as .pk-aside below). */
+  .pk-divider{
+    display: flex;
+    justify-content: center;
+    align-self: stretch;
+    position: relative;
+  }
+  .pk-divider::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    border-left: 1px dashed color-mix(in srgb, var(--muted) 45%, transparent);
+  }
+  .pk-divider-label{
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-4));
+    align-self: flex-start;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    writing-mode: vertical-rl;
+    /* the page colour behind the label hides the rule where they overlap */
+    background: var(--bg);
+    padding-block: var(--space-2);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  /* same red angular mark as .kicker i, turned to read down the label */
+  .pk-divider-label i{
+    width: 10px;
+    height: 10px;
+    background: #ff3b30;
+    border-radius: 2px;
+    flex-shrink: 0;
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 0 100%);
   }
   /* min-width:0 lets a grid child shrink below its content width; without it a
      long textarea or an unbroken URL would push the column wider than its
@@ -2977,14 +3116,34 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
      height gives the sticky child the whole form's height to stick against. */
   .pk-aside{ align-self: stretch; }
 
+  /* The panel is a column that never scrolls as a whole. It used to
+     (overflow-y:auto), so once the preview card grew with real content the
+     panel became a second scroll area: the mouse wheel over it scrolled the
+     panel instead of the page and the Preview heading slid out of view.
+     Now the panel holds the preview alone (the generated prompt moved under
+     the Generate button, where the click happens), and only the card area
+     (#previewMount) shrinks and scrolls if a very long draft can't fit the
+     window. The Preview heading never moves. */
   .pk-aside-inner{
     position: sticky;
     /* clears the sticky site header */
     top: calc(var(--header-h) + var(--space-4));
     max-height: calc(100svh - var(--header-h) - var(--space-6));
+    display: flex;
+    flex-direction: column;
+  }
+  .pk-preview{
+    display: flex;
+    flex-direction: column;
+    /* min-height:0 lets a flex child shrink below its content height, the
+       vertical twin of the min-width:0 trick above */
+    min-height: 0;
+    flex: 0 1 auto;
+  }
+  .pk-preview #previewMount{
+    min-height: 0;
     overflow-y: auto;
-    /* room for the scrollbar so it doesn't sit on the text */
-    padding-right: var(--space-2);
+    overscroll-behavior: contain;
   }
 
   /* The sections inside the split already sit in a column, so their own top and
@@ -2993,7 +3152,6 @@ html[data-theme="dark"] .cta-card { background: var(--surface); }
   .pk-split .section{ padding-top: 0; }
   .pk-aside .section{ padding-top: 0; padding-bottom: var(--space-5); }
   .pk-aside .section:last-child{ padding-bottom: 0; }
-  .pk-aside #output{ min-height: 110px; }
 
   /* Fields fill their column here rather than holding the old fixed 640px. */
   .pk-split .formish input,
